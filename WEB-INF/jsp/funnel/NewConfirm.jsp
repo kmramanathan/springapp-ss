@@ -1,4 +1,5 @@
 <%@taglib tagdir="/WEB-INF/tags" prefix="neon"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@include file="/WEB-INF/jsp/include.jsp" %>
 <% session.removeAttribute("charged");
 %>
@@ -8,11 +9,11 @@
 <script type="text/javascript">
 function showCriminalDelay()
 {
-	window.location.replace("CriminalStateDelay.do");
+	window.location.replace('${searchSSN ne null && fn:length(searchSSN) == 9 ? "AliasStateDelay.do" : "CriminalStateDelay.do"}');
 }
 function showCriminalNationalDelay()
 {
-	window.location.replace("CriminalNationalDelay.do");
+	window.location.replace('${searchSSN ne null && fn:length(searchSSN) == 9 ? "AliasNationalDelay.do" : "CriminalNationalDelay.do"}');
 }
 </script>
 
@@ -41,6 +42,9 @@ function showCriminalNationalDelay()
 		<tr><td><label><b>Your Search Request</b></label></td><td>&nbsp;</td></tr>
     	<tr><td><label>Name:</label></td><td><c:out value="${searchName}"/></td></tr>
 		<tr><td><label>Date of Birth:</label></td><td><c:out value="${searchDOB}"/></td></tr>
+		<c:if test="${searchSSN ne null && fn:length(searchSSN) == 9}">
+			<tr><td><label>SSN:</label></td><td><c:out value="${searchSSN}"/></td></tr>
+		</c:if>
 		<tr><td><label>Type:</label></td><td><c:out value="${searchType}"/></td></tr>
 		<tr><td><label>Price:</label></td><td>$<c:out value="${searchPrice}"/></td></tr>
 	</c:if>

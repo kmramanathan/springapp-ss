@@ -1,0 +1,8 @@
+Administrative Problem Report
+
+Username: ${username}
+CC Name: ${ccName}
+CC Last 4: ${ccLast4}
+
+Problem Description:
+${description}

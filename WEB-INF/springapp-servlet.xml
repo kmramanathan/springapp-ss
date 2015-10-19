@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd 
+           http://www.springframework.org/schema/lang 
+           http://www.springframework.org/schema/lang/spring-lang-2.5.xsd">
+
+	<!-- enable annotation-based config -->
+	<!-- 
+	WARNING: 
+	ONLY Controller should be included here. Including all the other component
+	types will cause them to override the inclusion from applicationContext.xml, which
+	will BREAK database transactions. Component is a superclass of all stereotypes, 
+	so don't include it here or it will pull everything in.
+	-->
+	<context:component-scan base-package="springapp" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan> 
+	
+	<!-- URL Handler Mappings -->
+	<!-- use the "order" field to prioritize these -->
+	<!-- 
+	once a mapping is handled by one mapping bean, it can't fall through to 
+	another. this means that only one interceptor chain will be hit, which means
+	that the login interceptor may not be hit if something grabs the url first.
+	 -->
+
+	<!-- beans mapped in this file get highest priority -->
+	<bean id="beanHandlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">	
+        <property name="order" value="1"/>
+	</bean>
+
+	<!-- map specific pages here to avoid interceptors -->
+  	<bean id="urlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="order" value="2"/>
+        <property name="mappings">
+        	<map>
+				<entry key="/registration/index.do" value-ref="indexController"/>
+				<entry key="/admin/test/groovyTest.do" value-ref="groovyTest"/>
+        	</map>
+        </property>
+    </bean>
+
+	<!-- "order" is sufficient to make this last so we can use other handlers -->	
+	<bean id="adminAnnotationMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="order" value="10"/>
+		<property name="interceptors">
+			<list>
+				<ref bean="adminLoginInterceptor" />
+				<ref bean="userLoginInterceptor"  />
+			</list>
+		</property>
+	</bean>
+  	
+  	<!-- Interceptors for handlers -->
+  	<bean id="adminLoginInterceptor" class="springapp.web.admin.AdminLoginInterceptor">
+  		<property name="includeUrls">
+			<list>
+				<value>/admin</value>
+				<value>/billing</value>
+				<value>/reports</value>
+			</list>
+		</property>
+  	</bean>
+  	
+  	<bean id="userLoginInterceptor" class="springapp.web.user.UserLoginInterceptor">
+  		<property name="includeUrls">
+			<list>
+				<value>/user</value>
+			</list>
+		</property>
+  	</bean>
+    
+    <!-- View resolver (used by ModelAndView) -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+	    <property name="prefix" value="/WEB-INF/jsp/"></property>
+	    <property name="suffix" value=".jsp"></property>        
+	</bean>
+	
+	<!-- Bean URL mappings for public pages -->
+	
+
+	<!-- Multi-action controller & name resolver -->
+	<bean id="methodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>	
+	
+	<!-- customized error pages -->
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView" value="ErrorApplication"/>
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.NullPointerException">Error</prop>
+				<prop key="javax.servlet.ServletException">Error</prop>
+				<prop key="org.apache.jasper.JasperException">Error</prop>
+
+				<prop key="java.lang.NumberFormatException">ErrorApplication</prop>
+
+				<prop key="org.springframework.beans.TypeMismatchException">ErrorApplication</prop>
+				<prop key="org.springframework.core.NestedRuntimeException">ErrorApplication</prop>
+			</props>
+		</property>
+		<property name="defaultStatusCode" value="200"/>
+	<!--
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">Error</prop>
+			</props>
+		</property>
+	 -->
+	</bean>
+		
+	<!-- ========================= DEFINITIONS OF PUBLIC CONTROLLERS ============================ -->	
+	<!-- all of these are done by Bean name handler -->
+
+	<!-- this is a very simple controller that maps "index.do" to "index.jsp" -->
+	<!-- @Controller doesn't seem to work for it but @RequestMapping does -->
+	<bean name="indexController" class="springapp.web.IndexController"/>
+
+	<bean name="/registration.do" class="springapp.web.registration.RegistrationFormController">
+	      <property name="sessionForm" value="true"/>
+	      <property name="commandName" value="registration"/>
+	      <property name="commandClass" value="springapp.service.registration.Registration"/>
+	      <property name="validator">
+	          <bean class="springapp.service.registration.RegistrationValidator"/>
+	      </property>
+	      <property name="formView" value="registration/form"/>
+	      <property name="successView" value="registration/thankyou"/>
+	      <property name="userManager" ref="userManager"/>
+	</bean>
+    
+    <!-- ========================= DEFINITIONS OF PROTECTED CONTROLLERS ========================= --> 
+    <!-- all of these are done by secure name handler --> 	
+	      <!-- 
+	<bean name="secure-search" class="springapp.web.SearchController">
+	      <property name="sessionForm" value="true"/>
+	      <property name="commandName" value="searchForm"/>
+	      <property name="commandClass" value="springapp.web.SearchForm"/>
+	      <property name="cancelView" value="hello.htm"/>
+	      <property name="validator">
+	          <bean class="springapp.web.SearchFormValidator"/>
+	      </property>
+	      <property name="pages">
+	          <list>
+	              <value>SelectSearchProduct</value>
+	              <value>EnterSearchTerms</value>
+	              <value>ConfirmSearch</value>
+	          </list>
+	      </property>
+	</bean>
+	       -->
+
+	<lang:groovy id="groovyTest"
+             refresh-check-delay="3000"
+             script-source="/WEB-INF/groovy/TestUserController.groovy">
+		<lang:property name="userManager" ref="userManager"/>
+	</lang:groovy>
+</beans>

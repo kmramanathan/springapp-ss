@@ -1,0 +1,131 @@
+@charset "utf-8";
+/* CSS Document */
+body {background:#fff url(/images/common/bg-body.gif) repeat-x; padding:0; margin:0;}
+
+h1,h2,h3,h4,h5,h6 {font-family:Tahoma, Arial, Helvetica, sans-serif; font-weight:normal; color:#036; }
+p,blockquote,cite,li,dt,dd,label,span,input,textarea,option,td {font-family:Arial, Helvetica, sans-serif; font-weight:normal; color: #000;}
+
+code {font-family:"Courier New", Courier, monospace; font-weight:normal;}
+
+h1 {font-size:1.6em; color:#036; margin:0.5em 0; font-weight: bold;}
+
+h2 {font-size:1.4em; color:#036; margin:0.5em 0; font-weight: bold;}
+
+h3 {font-size:1.3em; color:#036; margin:0.5em 0;}
+
+hr { 
+      border: 0;
+      width: 80%;
+      border-top: 1px dashed #999;
+      background: transparent;
+      height: 0px;
+      margin: 20px;
+ }
+
+p {font-size:0.9em; line-height:1.5em; margin:0.5em 0;}
+
+    #colone p {padding-top:1em;}
+    #colone .twocol p {margin:0.5em 1em;}
+    
+    p.note {float:right;}
+
+    #testimonials p {font-size:0.8em; color:#666; margin:0.35em 0;}
+    #testimonials p.credit {font-size:0.75em; color:#999; font-style:italic; text-align:right;}
+
+li {font-size:0.9em;}
+    #colone .list li {padding-top:1em;}
+    #colone .twocol li {font-size:1em; background:url(/images/common/bullet-yellow-check.gif) no-repeat center left; padding:6px 2px 6px 37px; list-style-type:none; display:block;}
+    #options li {list-style-type:none;}
+    
+ul {}
+
+    .twocol ul {padding:0; margin:0;}
+    #options ul {padding:0 15px 20px 40px; margin:0; display:block;}
+    ul.ccdetails {background:url(/images/common/bg-credit-card-info.gif) no-repeat top right; display:block;}
+
+a {}
+    a img {border:none;}
+    a:hover {text-decoration:none;}
+    #colone a {color:#369;}
+    #coltwo a {color:#369;}
+
+label {font-size:0.9em;}
+
+    #options label strong {color:#c60;}
+    
+span {}
+
+    span.req {font-size:1.2em; color:#c30;}
+
+/*form elements*/
+form {padding:0; margin:0;}
+input {font-size:0.9em; padding:2px;}
+input.formfield, select.formfield {background:#fafafa url(/images/common/bg-form-fields.gif) repeat-x; border:1px solid #d6d6d6;}
+
+#formwrapper {padding:10px 50px;}
+#formwrapper p {margin:0;}
+#formwrapper h3 {margin:0;}
+#formwrapper li {padding-bottom:10px; list-style-type:none; display:block;}
+#formwrapper #submit li {height:auto; margin:0em 0.5em; float:left;}
+#formwrapper li.checkbox {font-size:0.7em;}
+#formwrapper li label {width:155px; text-align:right; padding:2px 2px; display:block; float:left;}
+#formwrapper .checkbox strong {color:#c63;}
+#formwrapper .small {font-size: 0.7em; margin: 3px;}
+#formwrapper input.go {color:#050;font-size: 1.5em;}
+
+/* form errors */
+#error { color:#FF0000;padding: 10px 50px; }
+#error div { background-color: #eee; border:1px dashed #bbb;}
+#error .error-box { padding: 5px; }
+
+/*site body*/
+.bodywrap {background:url(/images/common/bg-body-grey.gif) repeat-x bottom left;}
+
+#owrap {width:950px; text-align: left;}
+        
+        #masthead {height:51px; text-align:left;}
+        
+        #maintable {background:#fff url(/images/common/bg-dash-vert.jpg) repeat-y right;}
+        
+            #colone {background:url(/images/common/bg-col-one.gif) no-repeat top left;}
+            
+                #colone .wrap {background:url(/images/common/bg-col-one-wrap.gif) no-repeat bottom right;}
+                #colone .wrap .innerwrap {background:url(/images/common/bg-dash-vert.jpg) repeat-y left; padding: 40px 75px;}
+                
+                #options {border-bottom:1px dashed #ccc; padding:1px;}
+                    #options .wrapper {background:url(/images/common/bg-options.gif) no-repeat bottom; }
+                
+                .buttons {padding:10px 30px; clear:left;}
+                                
+                .arrow {background:url(/images/common/bg-twocol-arrow.gif) no-repeat center bottom; padding-bottom:70px;}
+                
+                #security {border-bottom:1px dashed #ccc; padding:1px;}
+            
+                #colone .divider {height:1px; font-size:0.1em; border-top:1px dashed #ccc;}
+            
+                #photo {border-bottom:1px dashed #ccc; text-align:center; padding:1px;}
+                
+                #testimonials {background:url(/images/common/bg-testimonials.gif) no-repeat top right; padding:78px 25px 30px 25px;}
+    
+
+/* borders */
+.rightborder {border-right:1px dashed #ccc;}
+
+/*clearing elements*/
+.cleft {clear:left;}
+.cright {clear:both;}
+.cboth {clear:both;}
+
+/*footer navigation*/
+#footer {background:url(/images/common/bg-footer.gif) repeat-x top; padding:15px 0; background-color: #ddd; border-bottom:1px dashed #bbb;}
+#footer .wrap {width:920px; text-align:left;}
+#footer ul.security {padding:0; margin:0;}
+#footer ul {padding:0; margin:0.3em 0;}
+#footer ul.secondary {padding:0; margin:0;}
+#footer li {font-size:0.75em; color:#777; display:inline;}
+#footer .security li {display:block; float:right;}
+#footer a {color:#777;}
+	
+/* dashed table class */
+.dashed-table { border-top: 1px dashed #999999; border-left: 1px dashed #999999; border-right: 1px dashed #999999; }
+.dashed-table td { border-bottom: 1px dashed #999999; }

@@ -1,0 +1,448 @@
+/* general */
+body {
+    color:            #000000;
+    background-color: #EAEAEA;
+    font-family:      verdana, arial, helvetica, sans-serif;
+    font-size:        76%;
+    font-style:       normal;
+    font-weight:      normal;
+    voice-family:     "\"}\"";
+    voice-family:     inherit;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FF0000;
+    text-decoration: underline;
+}
+
+p {
+    font-size: 1.1em;
+}
+
+p a {
+    color: #0000CC;
+}
+
+p a:link {
+    color: #0000CC;
+}
+
+p a:visited {
+    color: #000066;
+}
+
+p a:active {
+    color: #FF0000;
+}
+
+p.visitor {
+    font-family: arial, helvetica, sans-serif; 
+    font-size: 1.2em; 
+    font-weight: bold;
+    white-space: nowrap; 
+    border-width: 1px; 
+    border-color: #999999; 
+    border-style: solid; 
+    background-color: #EAEAEA;
+    padding: 3px;
+}
+
+/* inputs */
+/* general settings, form-box overrides some of them for width */
+input, textarea, select {
+    font-family: arial, helvetica, sans-serif; 
+    background-color: #FFFFFF;
+    color : #000000;
+    border: 1px;
+    border-style: solid;
+    padding: 2px;
+}
+
+/* this makes cool buttons */
+input.submit, input.reset {
+    border: 3px double #999999;
+    border-top-color: #CCCCCC;
+    border-left-color: #CCCCCC;
+    background-image: url('/images/bg-button.gif');
+    background-repeat: repeat-x;
+    font-size: 1em;
+    font-weight: bold;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    cursor: pointer;
+}
+
+input.radio {
+    border-style: none;
+    border-color: transparent;
+    background-color: transparent;
+}
+
+/* headers */
+h1, h2, h3, h4, h5, h6 {
+    font-family:    verdana, arial, helvetica, sans-serif;
+    color:          #000066;
+    font-weight:    bold;
+}
+/* odd numbers have rule line underneath */
+h1, h3, h5 {
+    border-bottom:  1px solid #666666;
+}
+h2, h4, h6 {
+    border-bottom:  0px solid #666666;
+}
+/* 3 different font sizes */
+h1, h2 {
+    font-size:      1.4em;
+}
+h3, h4 {
+    font-size:      1.2em;
+}
+h5, h6 {
+    font-size:      1.0em;
+}
+
+/* lists */
+ul {
+    list-style-type: disc;
+    margin-top: 0px;
+    margin-left: 10px;
+    padding-left: 5px;
+}
+
+/* layout classes */
+/* menu at very top of screen */
+.top-menu { 
+    border-width: 0px;
+    border-style: solid; 
+    border-color: transparent;
+    font-weight: bold;
+    background-color: #EAEAEA;
+    white-space: nowrap;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 4px 0px 5px 0px;
+}
+.top-menu a {
+    color: #000099;
+}
+.top-menu a:hover {
+    color: #FF0000;
+    text-decoration: underline;
+}
+
+/* this div is opened in header, closed in footer */
+.main-content { 
+    text-align: left;
+    border-style: solid;
+    background-color: #FFFFFF;
+    font-family: arial, helvetica, sans-serif;  
+    padding: 10px 20px 10px 20px; 
+    border-style: solid;
+    border-width: 0px 1px 1px 1px; 
+    border-color: #000000;
+    margin: 10px 10% 10px 10%;
+    margin-top: 0px;
+}
+.main-content a { 
+    color: #000099;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.main-content a:hover { 
+    color: #FF0000;
+}
+
+/* top level banner with site name */
+.main-banner { 
+    border-style: solid;
+    border-width: 1px 1px 0px 1px; 
+    border-color: #000000;
+    color: #336699;
+    background-image: url('/images/bg-bluegrad-mini.jpg');
+    background-repeat: repeat-x; 
+    background-color: #336699; 
+    height: 60px; 
+    padding: 10px 0px 0px 0px; 
+    margin-left: 10%; 
+    margin-right: 10%; 
+}
+.main-banner a {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+.main-banner a:hover {
+    color: #FFCC00;
+}
+
+/* page nav menu */
+.page-nav { 
+    text-align: center;
+    border-width: 0px;
+    border-style: solid; 
+    border-color: transparent;
+    font-size: 1.4em;
+    font-weight: bold;
+    background-color: #EAEAEA;
+    white-space: nowrap;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 4px 0px 5px 0px;
+}
+.page-nav div.nav-option {
+    white-space: nowrap;
+}
+.page-nav a {
+    color: #000099;
+}
+.page-nav a:hover {
+    color: #FF0000;
+    text-decoration: underline;
+}
+
+/* login */
+.login-box {
+    border-style: solid;
+    border-width: 10px 1px 1px 1px; 
+    border-color: #000066;
+    background-color: #EAEAEA;
+    padding: 10px;
+    width: 420px;
+    margin: 2em auto 3em auto; 
+}
+.login-box input.input-text {
+    width: 100px;
+    margin: 2px;
+}
+.login-box label, input.input-submit {
+    font-weight: bold;
+    margin: 2px;
+}
+
+/* general form layout */
+.form-box {
+    border-style: solid;
+    border-width: 10px 1px 1px 1px; 
+    border-color: #000066;
+    background-color: #EAEAEA;
+    padding: 10px;
+    margin: 1em 5% 3em 5%; 
+    border: 1px solid #000000; 
+}
+/* sub-form draws boxes inside main form */
+.form-box div.sub-form {
+/*    border: 1px solid #000000; */
+}
+.form-box div.instructions-flags {
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #000000;
+    background-color: #FFFFFF;
+    width: 50%;
+    margin: .5em auto .5em auto;
+    padding: 3px;
+}
+.form-box div.instructions {    
+    text-align: left;
+    vertical-align: top;
+    width: 80%;
+    margin: .5em auto .5em auto;
+    padding: 2px;
+}
+.form-box div.instructions p {    
+    font-size: 0.9em;
+}
+.form-box div.sub-form-inputs {
+    text-align: left;
+    width: 90%;
+    padding: 1em auto 1em auto;
+    margin: 1em auto 1em auto;
+}
+.form-box div.sub-form-inputs table {
+    text-align: left;
+    background-color: #EAEAEA;
+    border: 1px solid #000000;
+    width: 90%;
+    margin: .5em auto .5em auto;
+    padding: .5em auto .5em auto;
+/*
+    margin-left: auto;
+    margin-right: auto;
+*/
+}
+.form-box div.sub-form-inputs td {
+    border: 0px;
+    padding: 4px;
+}
+.form-box div.sub-form-inputs td.label, td.nowrap {
+    white-space: nowrap;
+}
+.form-box div.sub-form-inputs td.button-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+.form-box div.sub-form-inputs td.label {
+    font-weight: bold;
+    width: 25%;
+}
+.form-box div.sub-form-inputs input.short {
+    width: 10em;
+}
+.form-box div.sub-form-inputs input.long {
+    width: 20em;
+}
+.form-box div.form-submit {
+    text-align: center;
+    padding: 0.5em;
+}
+
+
+td.index a{
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #000066;
+    text-decoration: none;
+}
+td.index a:hover {
+    color: #FF0000;
+    text-decoration: underline;
+}
+
+/* divs */
+div.index {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size:      1.4em;
+    font-weight: bold;
+    border-bottom:  1px solid #666666;
+    margin-top:     0px;
+    padding-bottom: 5px;
+}
+
+div.index a{
+    color: #000066;
+    text-decoration: none;
+}
+
+div.index a:hover {
+    color: #FF0000;
+    text-decoration: underline;
+}
+
+/* misc classes */
+.anchor {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 1.1em;
+    color: #000000;
+}
+
+.anchor a{
+    color: #0000CC;
+}
+
+.anchor a:link {
+    color: #0000CC;
+}
+
+.anchor a:visited {
+    color: #000066;
+}
+
+.anchor a:active {
+    color: #FF0000;
+}
+
+
+/* copied from pdindex */
+.cost {
+    color:       #185F18;
+    font-weight: bold;
+}
+
+.info-box {
+    background-color: #FFFFC6;
+    border:           1px solid #000000;
+    margin:           1em 10% 1em 10%;
+    padding:          0.5em;
+}
+
+.note-box {
+    background-color: #EDEDFF;
+    border:           1px solid #00009C;
+    margin:           1em 0 0 0;
+    padding:          0.5em;
+}
+
+.sub-header {
+    color:       #020057;
+    font-size:   1.2em;
+    font-weight: bold;
+}
+
+
+/* error box */
+.error-box {
+    background-color: #FFEDED;
+    border:           1px solid #9C0000;
+    padding:          0;
+    margin:           1em auto 1em auto;
+    width: 85%;
+}
+
+.error-box table {
+    background-color: #505050;
+    margin:           1em;
+    font-size:        1.1em;
+    width: auto;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.error-box td {
+    background-color: #FFC000;
+    font-size:        1.1em;
+    padding:          0.35em;
+}
+
+.error-box th {
+    background-color: #FFC000;
+    color:            #000000;
+    font-size:        1.1em;
+    font-weight:      bold;
+    padding:          0.35em;
+}
+
+#my-account-options {
+    width: auto;
+    border: 1px solid #000000;
+    background-color: #ADD8E6;
+}
+
+#my-account-options table {
+    width: 75%;
+    border: 1px solid #000000;
+/*
+    border-style: solid;
+    border-width: 1px 4px 6px 8px; 
+    border-color: #000000;
+*/
+    margin: 10px auto 50px auto;
+    background-color: #FFF;
+}
+
+#my-account-options td.td-image {
+    background-color: #FFF;
+    padding: 5px;
+    margin: 5px;
+    text-align: right;
+}
+
+#my-account-options td.td-text {
+    background-color: #FFF;
+    padding: 5px;
+    margin: 5px;
+    text-align: left;
+}

@@ -1,0 +1,289 @@
+<?xml version="1.0"?>
+<strings>
+<!-- this handles only views? -->
+<!-- 
+<string name="tableName">ss_rates</string>
+<string name="seqName">ss_rates_seq</string>
+ -->
+ 
+<!-- select: expects single row -->
+<string name="sqlSelect">
+<![CDATA[
+SELECT * 
+FROM show_transactions
+WHERE create_date > (current_timestamp - interval '7 days')
+ORDER BY create_date DESC
+LIMIT 100
+]]>
+</string>
+
+<string name="sqlSelectUsername">
+<![CDATA[
+SELECT * 
+FROM show_transactions
+WHERE create_date < (current_timestamp - interval ':daysToSearch days')
+  AND username = :username
+ORDER BY create_date DESC
+]]>
+</string>
+
+<string name="sqlSelectOrdersLimit">
+<![CDATA[
+SELECT * 
+FROM show_transactions
+WHERE create_date > :cutoffDate 
+  AND username = :username
+ORDER BY create_date DESC
+]]>
+</string>
+
+<string name="getTransactions">
+<![CDATA[
+SELECT * 
+FROM ss_transactions
+WHERE create_date > :cutoffDate 
+ORDER BY create_date DESC
+]]>
+</string>
+
+<string name="getBJLSearch">
+<![CDATA[
+SELECT * FROM bjl_searches WHERE transaction_id = ? 
+]]>
+</string>
+
+<string name="getFreeBGRusers">
+<![CDATA[
+select ss.username, ss.email, bgr.create_date, bgr.modify_date, bgr.free_bgr 
+	from free_bgr_users bgr join ss_users ss using (user_id) order by bgr.create_date DESC;
+]]>
+</string>
+
+<string name="getTracker">
+<![CDATA[
+select * from fp_user_tracker;
+]]>
+</string>
+
+<string name="getFreeBGRbyUser">
+<![CDATA[
+select ss.username, ss.email, bgr.create_date, bgr.modify_date, bgr.free_bgr 
+	from free_bgr_users bgr join ss_users ss using (user_id) where ss.username = ? 
+	order by bgr.create_date;
+]]>
+</string>
+
+<string name="getCorporateInvoiceCriminalMonth">
+<![CDATA[
+select R.bgc_request_id, U.username, R.date_created, 
+  P.bgc_product_name, P.bgc_product_desc, R.price, RES.quantity_returned, 
+  R.first_name, R.last_name, R.reference_code
+from bgc_requests R
+join bgc_responses RES using (bgc_request_id)
+join bgc_products P using (bgc_product_id)
+join ss_users U using (user_id)
+join ss_corporate_account_users CU using (user_id)
+where CU.corporate_account_id = :corporateAccountId
+  and date_part('year', R.date_created) = :year
+  and date_part('month', R.date_created) = :month
+order by R.date_created
+]]>
+</string>
+<!--  Doing a job for National Security Search -->
+<string name="getCorporateInvoiceNSSMonth">
+<![CDATA[
+select R.nss_request_id, U.username, R.date_created, 
+  P.bgc_product_name, P.bgc_product_desc, R.price, RES.quantity_returned, 
+  R.first_name, R.last_name, R.reference_code
+from nss_requests R
+join nss_responses RES using (nss_request_id)
+join bgc_products P using (bgc_product_id)
+join ss_users U using (user_id)
+join ss_corporate_account_users CU using (user_id)
+where CU.corporate_account_id = :corporateAccountId
+  and date_part('year', R.date_created) = :year
+  and date_part('month', R.date_created) = :month
+order by R.date_created
+]]>
+</string>
+
+
+
+<string name="getCorporateInvoiceCriminal">
+<![CDATA[
+select R.bgc_request_id, U.username, R.date_created, 
+  P.bgc_product_name, P.bgc_product_desc, R.price, RES.quantity_returned, 
+  R.first_name, R.last_name, R.reference_code
+from bgc_requests R
+join bgc_responses RES using (bgc_request_id)
+join bgc_products P using (bgc_product_id)
+join ss_users U using (user_id)
+join ss_corporate_account_users CU using (user_id)
+where CU.corporate_account_id = :corporateAccountId
+  and R.date_created >= CAST((:startDate) AS timestamp)
+  and R.date_created < CAST((:endDate) AS timestamp)
+order by R.date_created
+]]>
+</string>
+
+<string name="getCorporateInvoiceBJLMonth">
+<![CDATA[
+select US.user_search_id, U.username, US.create_date, SSC.price, 
+  SC.title as category, SSC.title as subcategory, SS.title as status, US.match_count, 
+  BS.name, BS.defendant_ssn_tax_id, BS.defendant, BS.reference_code
+from ss_user_searches US 
+join ss_users U on US.user_id = U.user_id
+join ss_corporate_account_users CU on U.user_id = CU.user_id
+join ss_search_categories SC on US.search_category_id = SC.search_category_id
+join ss_search_sub_categories SSC on US.search_sub_category_id = SSC.search_sub_category_id
+join ss_search_statuses SS on US.search_status_id = SS.search_status_id
+join bjl_searches BS on US.user_search_id = BS.user_search_id
+where CU.corporate_account_id = :corporateAccountId
+  and date_part('year', US.create_date) = :year
+  and date_part('month', US.create_date) = :month
+  and US.search_category_id = 1
+  and US.invoiced = false
+order by US.create_date
+]]>
+</string>
+<!-- Doing for Tenant Screening -->
+<string name="getCorporateInvoiceTSMonth">
+<![CDATA[
+select US.user_search_id, U.username, US.create_date, SSC.price, 
+  SC.title as category, SSC.title as subcategory, SS.title as status, US.match_count, 
+  ES.name, ES.defendant_ssn_tax_id, ES.defendant, ES.reference_code
+from ss_user_searches US 
+join ss_users U on US.user_id = U.user_id
+join ss_corporate_account_users CU on U.user_id = CU.user_id
+join ss_search_categories SC on US.search_category_id = SC.search_category_id
+join ss_search_sub_categories SSC on US.search_sub_category_id = SSC.search_sub_category_id
+join ss_search_statuses SS on US.search_status_id = SS.search_status_id
+join eviction_searches ES on US.user_search_id = ES.user_search_id
+where CU.corporate_account_id = :corporateAccountId
+  and date_part('year', US.create_date) = :year
+  and date_part('month', US.create_date) = :month
+  and US.search_category_id = 1
+  and US.invoiced = false
+order by US.create_date
+]]>
+</string>
+
+<!-- Doing for findpeople -->
+<string name="getCorporateInvoiceFPMonth">
+<![CDATA[
+select fpr.request_id, U.username, fpr.product, fpr.created_date,
+ fpr.first_name, fpr.last_name, fpr.state, fpr.price
+from fp_request fpr 
+join ss_users U on fpr.user_id = U.user_id
+join ss_corporate_account_users CU on U.user_id = CU.user_id
+where CU.corporate_account_id = :corporateAccountId
+  and date_part('year', fpr.created_date) = :year
+  and date_part('month', fpr.created_date) = :month
+order by fpr.created_date
+]]>
+</string>
+
+<!-- Doing for Flat Rate -->
+<string name="getCorporateInvoiceFlatRate">
+<![CDATA[
+select fr.subscriptionid, U.username, ra.rate_name, ra.rate_description, 
+ fr.startdate, fr.enddate, ra.recurring_price, fr.createdate
+from fr_subscriptions fr 
+join ss_users U on fr.userid = U.user_id
+join ss_rates ra on fr.planid = ra.rate_id
+join ss_corporate_account_users CU on U.user_id = CU.user_id
+where CU.corporate_account_id = :corporateAccountId
+  and date_part('year', fr.createdate) = :year
+  and date_part('month', fr.createdate) = :month
+order by fr.createdate
+]]>
+</string>
+
+<string name="getCorporateInvoiceBJL">
+<![CDATA[
+select US.user_search_id, U.username, to_char(US.create_date,'YYYY-MM-DD'), SSC.price, 
+  SC.title as category, SSC.title as subcategory, SS.title as status, US.match_count, 
+  BS.name, BS.defendant_ssn_tax_id, BS.defendant, BS.reference_code
+from ss_user_searches US 
+join ss_users U on US.user_id = U.user_id
+join ss_corporate_account_users CU on U.user_id = CU.user_id
+join ss_search_categories SC on US.search_category_id = SC.search_category_id
+join ss_search_sub_categories SSC on US.search_sub_category_id = SSC.search_sub_category_id
+join ss_search_statuses SS on US.search_status_id = SS.search_status_id
+join bjl_searches BS on US.user_search_id = BS.user_search_id
+where CU.corporate_account_id = :corporateAccountId
+  and US.create_date >= '2008-07-01'
+  and US.create_date < '2008-08-01'
+  and US.search_category_id = 1
+  and US.invoiced = false
+order by US.create_date
+]]>
+</string>
+
+
+<!--  Flat Rate Invoice -->
+
+<string name="getFRInvoiceCriminalMonth">
+<![CDATA[
+select R.bgc_request_id, U.username, R.date_created, 
+  P.bgc_product_name, P.bgc_product_desc, R.price, RES.quantity_returned, 
+  R.first_name, R.last_name, R.reference_code
+from bgc_requests R
+join bgc_responses RES using (bgc_request_id)
+join bgc_products P using (bgc_product_id)
+join ss_users U using (user_id)
+where R.user_id = :userId
+  and date_part('year', R.date_created) = :year
+  and date_part('month', R.date_created) = :month
+order by R.date_created
+]]>
+</string>
+
+<string name="getFRInvoiceBJLMonth">
+<![CDATA[
+select US.user_search_id, U.username, US.create_date, SSC.price, 
+  SC.title as category, SSC.title as subcategory, SS.title as status, US.match_count, 
+  BS.name, BS.defendant_ssn_tax_id, BS.defendant, BS.reference_code
+from ss_user_searches US 
+join ss_users U on US.user_id = U.user_id
+join ss_search_categories SC on US.search_category_id = SC.search_category_id
+join ss_search_sub_categories SSC on US.search_sub_category_id = SSC.search_sub_category_id
+join ss_search_statuses SS on US.search_status_id = SS.search_status_id
+join bjl_searches BS on US.user_search_id = BS.user_search_id
+where US.user_id = :userId
+  and date_part('year', US.create_date) = :year
+  and date_part('month', US.create_date) = :month
+  and US.search_category_id = 1
+  and US.invoiced = false
+order by US.create_date
+]]>
+</string>
+
+<string name="getFRInvoiceFPMonth">
+<![CDATA[
+select fpr.request_id, U.username, fpr.product, fpr.created_date,
+ fpr.first_name, fpr.last_name, fpr.state, fpr.price
+from fp_request fpr 
+join ss_users U on fpr.user_id = U.user_id
+where fpr.user_id = :userId
+  and date_part('year', fpr.created_date) = :year
+  and date_part('month', fpr.created_date) = :month
+order by fpr.created_date
+]]>
+</string>
+
+<string name="getFRInvoiceFlatRate">
+<![CDATA[
+select fr.subscriptionid, U.username, ra.rate_name, ra.rate_description, 
+ fr.startdate, fr.enddate, ra.recurring_price, fr.createdate
+from fr_subscriptions fr 
+join ss_users U on fr.userid = U.user_id
+join ss_rates ra on fr.planid = ra.rate_id
+where fr.userid = :userId
+  and date_part('year', fr.createdate) = :year
+  and date_part('month', fr.createdate) = :month
+order by fr.createdate
+]]>
+</string>
+
+</strings>

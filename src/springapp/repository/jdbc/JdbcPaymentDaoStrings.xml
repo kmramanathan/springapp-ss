@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<strings>
+
+<!-- table metadata -->
+<string name="tableName">ss_payments</string>
+<string name="seqName">ss_payments_payment_id_seq</string>
+
+<!-- select: expects single row -->
+<!-- uses ? place holder to simplify java code -->
+<string name="selectPaymentByPaymentIdSimple">
+<![CDATA[
+SELECT * FROM ss_payments WHERE payment_id = ?
+]]>
+</string>
+
+<!-- 0+ rows -->
+<string name="selectPaymentsByUserIdSimple">
+<![CDATA[
+SELECT * FROM ss_payments WHERE user_id = ?
+]]>
+</string>
+
+<string name="selectPaymentDetailsByPaymentIdSimple">
+<![CDATA[
+SELECT * FROM ss_payment_details WHERE payment_id = ?
+]]>
+</string>
+
+<string name="getUnappliedPaymentsForUser">
+<![CDATA[
+SELECT *
+FROM ss_payments
+WHERE (amount_paid - amount_applied > 0)
+  AND user_id = ?
+ORDER BY payment_id
+]]>
+</string>
+
+<string name="findUsersForApplyPayments">
+<![CDATA[
+SELECT DISTINCT I.user_id
+FROM ss_invoices I
+JOIN ss_payments P on I.user_id = P.user_id
+WHERE P.amount_paid - P.amount_applied > 0
+  AND I.amount_billed - I.amount_paid > 0
+ORDER BY I.user_id
+]]>
+</string>
+
+</strings>

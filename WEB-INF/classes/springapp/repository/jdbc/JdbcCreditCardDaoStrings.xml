@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<strings>
+
+<!-- table metadata -->
+<string name="tableName">ss_credit_cards</string>
+<!-- this table uses user_id as PK -->
+<!-- 
+<string name="seqName">ss_rates_seq</string>
+ -->
+
+<!-- select: expects single row -->
+<string name="sqlSelect">
+<![CDATA[
+SELECT * FROM ss_credit_cards WHERE user_id = ?
+]]>
+</string>
+
+<string name="sqlUpdate">
+<![CDATA[
+UPDATE ss_credit_cards 
+SET 
+  country_id = :countryId,
+  name = :name,
+  company = :company,
+  address1 = :address1,
+  address2 = :address2,
+  city = :city,
+  state = :state,
+  postal_code = :postalCode,
+  phone = :phone,
+  fax = :fax,
+  number = :number,
+  exp_month = :expMonth,
+  exp_year = :expYear,
+  last_digits = :lastDigits,
+  verified = :verified,
+  modified = :cardModified,
+  suspended = :suspended   
+WHERE 
+  user_id = :userId
+]]>
+</string>
+
+<!-- multiple rows -->
+<string name="getModifiedCards">
+<![CDATA[
+SELECT U.user_id, U.username, U.first_name, U.last_name, U.email, 
+  CC.exp_month, CC.exp_year
+FROM ss_users U
+JOIN ss_credit_cards CC USING (user_id)
+WHERE U.sub_directory_user = true
+  AND CC.modified = true
+]]>
+</string>
+
+<string name="getExpiredCards">
+<![CDATA[
+SELECT u.user_id, u.username, u.first_name, u.last_name, u.email, cc.exp_month, cc.exp_year
+FROM ss_users u
+JOIN ss_credit_cards cc USING (user_id)
+WHERE U.sub_directory_user = true
+  AND U.inactive = false
+  AND U.disabled = false
+AND (
+  cc.exp_year < :expYear OR 
+  (cc.exp_year = :expYear AND cc.exp_month < :expMonth)
+  )
+]]>
+</string>
+
+</strings>

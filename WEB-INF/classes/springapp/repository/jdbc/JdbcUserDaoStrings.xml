@@ -1,0 +1,389 @@
+<?xml version="1.0"?>
+<strings>
+
+<!-- table metadata -->
+<string name="tableName">ss_users</string>
+<string name="seqName">ss_users_seq</string>
+<string name="IPtableName">users_ip</string>
+
+<!-- select: expects single row -->
+<!-- uses ? place holder to simplify java code -->
+
+<!-- Mexico user count -->
+<string name="selectTeaserCount">
+<![CDATA[
+SELECT teaser_visit FROM mexican_user_count
+]]>
+</string>
+<string name="selectSalesCount">
+<![CDATA[
+SELECT sales_visit FROM mexican_user_count
+]]>
+</string>
+<!--       -->
+
+<!-- Free BGR Users -->
+<string name="selectFreeBgrUser">
+<![CDATA[
+SELECT free_bgr FROM free_bgr_users where user_id = ?
+]]>
+</string>
+<!--  -->
+
+<!-- Users IP address for Usr-->
+<string name="selectUserIPByUserId">
+<![CDATA[
+SELECT * FROM users_ip WHERE user_id = ?
+]]>
+</string>
+
+<string name="selectUserByUserIdSimple">
+<![CDATA[
+SELECT * FROM ss_users WHERE user_id = ?
+]]>
+</string>
+<string name="selectUserByUsernameSimple">
+<![CDATA[
+SELECT * FROM ss_users WHERE username = ?
+]]>
+</string>
+<string name="selectUserByUsernameSimpleIlike">
+<![CDATA[
+SELECT * FROM ss_users WHERE username ILIKE ?
+]]>
+</string>
+<string name="selectUserByEmailSimple">
+<![CDATA[
+SELECT * FROM ss_users WHERE email = ?
+]]>
+</string>
+
+<!-- select: any number of rows -->
+<!-- uses named params (object or map) -->
+<!-- include above queries for completeness -->
+<string name="selectUserByUserId">
+<![CDATA[
+SELECT * FROM ss_users WHERE user_id = :userId
+]]>
+</string>
+<string name="selectUserByUsername">
+<![CDATA[
+SELECT * FROM ss_users WHERE username = :username
+]]>
+</string>
+<string name="selectUsersByFirstName">
+<![CDATA[
+SELECT * FROM ss_users WHERE first_name = :firstName
+]]>
+</string>
+<string name="selectUsersByLastName">
+<![CDATA[
+SELECT * FROM ss_users WHERE last_name = :lastName
+]]>
+</string>
+
+<!-- searches: allow partial match with LIKE -->
+<!-- uses ? place holder because bean will not include modifiers like % -->
+<string name="findUsersByUsernameLike">
+<![CDATA[
+SELECT * FROM ss_users WHERE username ILIKE :username
+]]>
+</string>
+<string name="findUsersByFirstNameLike">
+<![CDATA[
+SELECT * FROM ss_users WHERE first_name ILIKE :firstName
+]]>
+</string>
+<string name="findUsersByLastNameLike">
+<![CDATA[
+SELECT * FROM ss_users WHERE last_name ILIKE :lastName
+]]>
+</string>
+<string name="findUsersByEmailLike">
+<![CDATA[
+SELECT * FROM ss_users WHERE email ILIKE :email
+]]>
+</string>
+
+<!-- this is just a partial string, find user code will add to it -->
+<string name="findUsersGeneric">
+<![CDATA[
+SELECT U.username, U.first_name, U.last_name, U.email, 
+  CC.last_digits, CC.name AS billing_name, CC.address1, CC.phone,
+  U.disabled, U.inactive, U.sub_directory_user, U.sub_exported,
+  CC.suspended 
+FROM ss_users U 
+LEFT JOIN ss_credit_cards CC USING (user_id)
+]]>
+</string>
+
+
+<string name="getPassQuestionsActive">
+<![CDATA[
+SELECT * FROM ss_pass_questions WHERE active = true ORDER BY pass_question_id
+]]>
+</string>
+<string name="getPassQuestionsAll">
+<![CDATA[
+SELECT * FROM ss_pass_questions ORDER BY pass_question_id
+]]>
+</string>
+
+<string name="getCountryCodes">
+<![CDATA[
+SELECT * FROM ss_countries ORDER BY code
+]]>
+</string>
+
+<string name="getUSStatesOnly">
+<![CDATA[
+SELECT * FROM ss_us_states WHERE territory = false ORDER BY territory, code
+]]>
+</string>
+<string name="getUSStatesAndTerritories">
+<![CDATA[
+SELECT * FROM ss_us_states ORDER BY territory, code
+]]>
+</string>
+
+<!-- updates -->
+
+<!-- mexico user count -->
+<string name="updateTeaserCount">
+<![CDATA[
+UPDATE mexican_user_count SET teaser_visit = ? ,
+last_updated = (select CURRENT_TIMESTAMP(0))
+]]>
+</string>
+<string name="updateSalesCount">
+<![CDATA[
+UPDATE mexican_user_count SET sales_visit = ?  ,
+last_updated = (select CURRENT_TIMESTAMP(0))
+]]>
+</string>
+
+<!--       -->
+
+<!--  Find People User tracker -->
+<string name="updateFPTeaserCount">
+<![CDATA[
+UPDATE fp_user_tracker t set teaser_count=t.teaser_count+1 ,
+last_updated = (select CURRENT_TIMESTAMP(0))
+]]>
+</string>
+<string name="updateFPSalesCount">
+<![CDATA[
+UPDATE fp_user_tracker t set fp_detail_count=t.fp_detail_count+1 ,
+last_updated = (select CURRENT_TIMESTAMP(0))
+]]>
+</string>
+<string name="updateBGSalesCount">
+<![CDATA[
+UPDATE fp_user_tracker t set bg_detail_count=t.bg_detail_count+1 ,
+last_updated = (select CURRENT_TIMESTAMP(0))
+]]>
+</string>
+<string name="updateFreeBGCount">
+<![CDATA[
+UPDATE fp_user_tracker t set free_bg_count=t.free_bg_count+1 ,
+last_updated = (select CURRENT_TIMESTAMP(0))
+]]>
+</string>
+<!--            -->
+
+<!--  Free BGR User -->
+<string name="modifyFreeBgrUser">
+<![CDATA[
+UPDATE free_bgr_users SET free_bgr = ?  ,
+modify_date= (select CURRENT_TIMESTAMP(0)) 
+where user_id = ? 
+]]>
+</string>
+<!--  -->
+
+<string name="updateUser">
+<![CDATA[
+UPDATE ss_users
+SET 
+  first_name = :firstName,
+  last_name = :lastName,
+  email = :email,
+  pass_question_id = :passQuestionId,
+  pass_answer = :passAnswer,
+  
+  newsletter = :newsletter,
+  confirmed = :confirmed,
+  custom_account = :customAccount,
+  disabled = :disabled,
+  disabled_date = :disabledDate,
+  disabled_reason = :disabledReason,
+  
+  inactive = :inactive,
+  no_credit_card = :noCreditCard,
+  no_premium = :noPremium,
+  sub_directory_user = :subDirectoryUser,
+  argon_user = :argonUser,
+  internal_user = :internalUser
+  
+WHERE user_id = :userId
+]]>
+</string>
+
+<string name="changeUsername">
+<![CDATA[
+UPDATE ss_users
+SET   username = :username
+WHERE user_id = :userId
+]]>
+</string>
+<string name="changeUserPassword">
+<![CDATA[
+UPDATE ss_users
+SET   password = :password
+WHERE user_id = :userId
+]]>
+</string>
+<string name="deleteUserTransactions">
+<![CDATA[
+DELETE FROM ss_transactions
+WHERE user_id = :userId
+]]>
+</string>
+<string name="deleteUserSubscriptions">
+<![CDATA[
+DELETE FROM ss_subscriptions
+WHERE user_id = :userId
+]]>
+</string>
+<string name="deleteUserCreditCards">
+<![CDATA[
+DELETE FROM ss_credit_cards
+WHERE user_id = :userId
+]]>
+</string>
+<string name="deleteUser">
+<![CDATA[
+DELETE FROM ss_users
+WHERE user_id = :userId
+]]>
+</string>
+
+<string name="getTestUsersForCleanup">
+<![CDATA[
+select U.user_id, U.create_date, U.username, U.first_name, U.last_name, S.subscription_id
+from ss_users U
+join ss_subscriptions S using (user_id)
+WHERE
+  create_date > '2008-09-01' AND
+  create_date < '2008-10-27'
+order by U.user_id
+]]>
+</string>
+
+
+<!-- select: expects single row -->
+<!-- uses ? place holder to simplify java code -->
+<string name="getCorporateAccountById">
+<![CDATA[
+SELECT * FROM ss_corporate_accounts WHERE corporate_account_id = ?
+]]>
+</string>
+
+<string name="getAllCorporateAccounts">
+<![CDATA[
+SELECT * FROM ss_corporate_accounts ORDER BY corporate_name
+]]>
+</string>
+
+<string name="getCorporateAccountByUserId">
+<![CDATA[
+SELECT * FROM ss_corporate_accounts CA 
+JOIN ss_corporate_account_users CU ON CA.corporate_account_id = CU.corporate_account_id 
+WHERE CU.user_id = ?
+]]>
+</string>
+
+<string name="getCorporateAccountUsers">
+<![CDATA[
+SELECT U.* 
+FROM ss_users U
+JOIN ss_corporate_account_users CU ON U.user_id = CU.user_id
+WHERE CU.corporate_account_id = ?
+]]>
+</string>
+<string name="getCorporateAccountUserByUserId">
+<![CDATA[
+SELECT U.* 
+FROM ss_users U
+JOIN ss_corporate_account_users CU ON U.user_id = CU.user_id
+WHERE CU.corporate_account_id = ?
+  AND CU.user_id = ?  
+]]>
+</string>
+
+<!-- updates -->
+<string name="removeUserFromCorporateAccount">
+<![CDATA[
+DELETE FROM ss_corporate_account_users
+WHERE user_id = :userId
+  AND corporate_account_id = :corporateAccountId
+]]>
+</string>
+
+<string name="deleteCorporateAccount">
+<![CDATA[
+DELETE FROM ss_corporate_accounts
+WHERE corporate_account_id = :corporateAccountId
+]]>
+</string>
+
+<string name="updateCorporateAccount">
+<![CDATA[
+UPDATE ss_corporate_accounts
+SET 
+  corporate_name = :corporateName,
+  contact_person = :contactPerson,
+  phone = :phone,
+  fax = :fax,
+  address1 = :address1,
+  address2 = :address2,
+  city = :city,
+  state = :state,
+  zip = :zip,
+  accounts_authorized = :accountsAuthorized,
+  accounts_inuse = :accountsInuse
+WHERE corporate_account_id = :corporateAccountId
+]]>
+</string>
+<string name="getNewCustomerByDate">
+<![CDATA[
+SELECT * 
+FROM ss_users u 
+ WHERE u.create_date > (current_timestamp - interval '1 days')
+ORDER BY u.create_date DESC
+]]>
+</string>
+
+<string name="getNewCustomerBy7Days">
+<![CDATA[
+
+SELECT * 
+FROM ss_users u 
+ WHERE u.create_date > (current_timestamp - interval '7 days')
+ORDER BY u.create_date DESC
+
+]]>
+</string>
+
+<string name="getNewCustomerBy30Days">
+<![CDATA[
+
+SELECT *
+FROM ss_users u 
+ WHERE u.create_date > (current_timestamp - interval '30 days')
+ORDER BY u.create_date DESC
+LIMIT 100
+
+]]>
+</string>
+</strings>

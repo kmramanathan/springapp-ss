@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<strings>
+
+<!-- table metadata -->
+<string name="tableName">ss_transactions</string>
+<string name="seqName">ss_transactions_seq</string>
+
+<!-- select: 1 row -->
+<!-- uses ? place holder to simplify java code -->
+<string name="sqlSelect">
+<![CDATA[SELECT * FROM ss_transactions WHERE transaction_id = ?]]>
+</string>
+
+<!-- select: expects single row -->
+<!-- uses ? place holder to simplify java code -->
+<string name="sqlUpdate">
+<![CDATA[
+UPDATE ss_transactions
+SET 
+    cost = :cost,
+	transaction_status_id = :transactionStatusId ,
+	bank_response_code = :bankResponseCode ,
+	bank_response_reason_code = :bankResponseReasonCode ,
+	bank_response_reason_text = :bankResponseReasonText ,
+	bank_response_subcode = :bankResponseSubcode ,
+	bank_approval_code = :bankApprovalCode ,
+	bank_avs_result_code = :bankAvsResultCode ,
+	bank_transaction_code = :bankTransactionCode ,
+	bank_cavv_response_code = :bankCavvResponseCode ,
+	bank_cvv_response_code = :bankCvvResponseCode 
+WHERE transaction_id = :transactionId
+]]>
+</string>
+
+</strings>

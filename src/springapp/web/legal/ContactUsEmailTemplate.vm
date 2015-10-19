@@ -1,0 +1,5 @@
+Message from: ${from}
+Email: ${email}
+Subject: ${subject}
+Message:
+${message}

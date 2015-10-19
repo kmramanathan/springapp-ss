@@ -1,0 +1,139 @@
+/* basic settings for form */
+body {
+    color: #000000;
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 0.8em;
+}
+a       { text-decoration: none; }
+a:hover { text-decoration: underline; color: #FF0000; }
+p a         { color: #0000CC; }
+p a:link    { color: #0000CC; }
+p a:visited { color: #000066; }
+p a:active  { color: #FF0000; }
+
+/* can do css for different object types */
+td.label { font-weight: bold; }
+.input { color: #224466; white-space: nowrap; }
+.error { color: #FF0000; }
+.errorBox { color: #FF0000; }
+
+/* general page layout */
+#header {
+	margin: 5px;
+	padding: 5px;
+	background-color: #dddddd;
+	border: 1px solid #000000;
+}
+#nav {
+	/* do not remove float: left */
+	float: left;
+	margin-left: 5px;
+	width: 200px;
+	/*
+	text-align: left;
+	vertical-align: top;
+	*/
+	padding: 5px;
+	background-color: #eecccc;
+	border: 1px solid #000000;
+}
+#content {
+	/* set margin-left greater then .nav width */
+	/* do not set float: left; */
+	margin: 0px 5px 5px 222px;
+	background-color: #ddeeff;
+	border: 1px solid #000000;
+	padding: 5px;
+	/*	
+	vertical-align: top;
+	text-align: left;
+	*/
+}
+#container {
+	float: left;
+	width: 100%;
+	border: 1px solid #000000;
+}
+#footer {
+	float: left;
+	margin-top: 0.5em;
+	width: 100%;
+	clear: left;
+	text-align: center;
+	border-top: 0.0625em solid gray;
+	background-color: #aaddaa;
+	padding: 0.5em 0  0.5em 0;
+}
+
+/* results table */
+table.user    { border: 1px solid #000000;  padding: 2px; }
+table.user td { border: 1px dotted #000000; padding: 2px; }
+table.user tr.disabled { background-color:#ff0000; }
+table.user tr.inactive { background-color:#ff7700; }
+
+table.autoLayout    { border: 1px solid  #000000; padding: 1px; width: auto; font-size: 0.8em; }
+table.autoLayout td { border: 1px dotted #000000; padding: 1px; }
+table.autoLayout td.nowrap { border: 1px dotted #000000; padding: 1px; }
+
+.subscriptions, .invoices, .payments { border: 1px solid #000000;  padding: 2px; }
+.nowrap { white-space: nowrap; }
+
+table.userList    { border: 1px solid  #000000; padding: 2px; }
+table.userList td { border: 1px dotted #000000; padding: 2px; }
+
+/* used by table.js */
+/* Striping */
+table.userList th { background-color:#ddeeff; }
+
+table.userList tr            { background-color:#cccccc; }
+table.userList tr.alternate  { background-color:#cccccc; }
+table.userList tr.disabled   { background-color:#ff0000; }
+table.userList tr.inactive   { background-color:#ff7700; }
+table.userList tr.directPass { background-color:#ddffff; }
+table.userList tr.flatrate { background-color:#99ccff; }
+table.userList tr.dpandfr { background-color:#ff99ff; }
+
+table.userListKey { font-size: 85%; }
+table.userListKey td.normal     { background-color:#cccccc; }
+table.userListKey td.disabled   { background-color:#ff0000; }
+table.userListKey td.inactive   { background-color:#ff7700; }
+table.userListKey td.directPass { background-color:#ddffff; }
+table.userListKey td.flatrate { background-color:#99ccff; }
+table.userListKey td.dpandfr { background-color:#ff99ff; }
+
+/* Sorting */
+/*
+th.table-sortable    { 
+	background-image:url("icons/01_unsorted.gif");
+}
+th.table-sorted-asc  { background-image:url("icons/01_ascending.gif");  }
+th.table-sorted-desc { background-image:url("icons/01_descending.gif"); }
+*/
+/* a couple of these icons need padding-left:16px instead of 12px */
+th.table-sortable {
+	cursor:pointer;
+	background-image:url("icons/01_unsorted.gif"); 
+	background-position:center left;
+	background-repeat:no-repeat;
+	padding-left:12px;
+}
+th.table-sorted-asc {
+	background-image:url("icons/06_ascending.gif");
+	background-position:center left;
+	background-repeat:no-repeat;	
+}
+th.table-sorted-desc {
+	background-image:url("icons/06_descending.gif");
+	background-position:center left;
+	background-repeat:no-repeat;
+}
+/*
+th.table-filtered {
+	background-image:url("filter.gif");
+	background-position:center left;
+	background-repeat:no-repeat;
+}
+select.table-autofilter {
+	font-size:smaller;
+}
+*/

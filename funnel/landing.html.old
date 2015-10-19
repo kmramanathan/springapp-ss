@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SearchSystems.net</title>
+<link href="/springapp/css/landing.css" rel="stylesheet" type="text/css" media="screen" />
+</head>
+
+
+
+<body>
+<center>
+<div id="owrap">
+<div id="iwrap">
+
+<div id="instantaccess">
+
+<div><img
+	src="images/common/get-instant-acess-to-300-million-criminal-records.jpg"
+	alt="Get Instant Access to Over 300 Million Criminal Records" /></div>
+
+<div><img src="images/common/very-easy-to-use.gif"
+	alt="Very Easy To Use" /></div>
+<div><img src="images/common/instant-access-to-detailed-reports.gif"
+	alt="Instant Access to Detailed Reports" /></div>
+<div><img src="images/common/largest-most-complete-database.gif"
+	alt="Largest Most Complete Database" /></div>
+<div><img src="images/common/results-can-be-printed-or-pasted.gif"
+	alt="" /></div>
+<div><img src="images/common/aaa-rating-with-better-business-bureau.gif"
+	alt="AAA Rating with Better Business Bureau" /></div>
+
+</div>
+
+<table cellpadding="0" cellspacing="0" border="0" width="952">
+	<tr valign="top">
+
+		<td width="400" id="freedownload">
+
+		<div><img src="images/common/learn-how-to-search-criminal-records.gif"
+			alt="Learn how to Search Criminal Records" /></div>
+
+		<div class="wrap">
+
+		<h2><span>Free</span> Guide</h2>
+
+		<p>Take advantage of our expertise and use our <strong>FREE</strong>
+		guide to find your way through the maze of county, state, national and
+		international criminal records sources like a seasoned pro!</p>
+
+		<p align="right" style="margin-right: 2em;"><a href="criminalRecordsGuide.do"
+			target="_blank" alt="View Guide"><strong>View Guide</strong></a></p>
+		</div>
+
+		<div><img src="images/common/thawte-bbb.gif" alt="" /></div>
+		</td>
+
+		<td width="563" id="access">
+
+		<div><img src="images/common/let-our-system-do-the-work-for-you.gif"
+			alt="Let our system do the work for you!" /></div>
+
+		<div id="acrossusa">
+
+		<div><img
+			src="images/common/instant-access-to-criminal-records-across-usa.gif"
+			alt="Instant Access to Criminal Records across the USA" /></div>
+
+		<div class="wrap">
+
+		<div class="price"><img src="images/common/2995.gif" alt="$29.95" /></div>
+		<div class="button"><a href="valueProposition.do?nationwide=1"
+			title="Start Your Search - Search Nation Wide Now!"><img
+			src="images/common/start-search-nation-wide.gif"
+			alt="Start Your Search - Search Nation Wide Now!" /></a></div>
+		<a class="sample"><a href="sampleReport.do"><img
+			src="images/common/download-sample-top.gif"
+			alt="Download Sample Report*" /></a></div>
+
+		</div>
+
+		</div>
+
+		<div id="statewide">
+
+		<div><img
+			src="images/common/instant-access-to-criminal-records-by-state.gif"
+			alt="Instant Access to Criminal Records by State" /></div>
+
+		<div class="wrap">
+
+		<div class="price"><img src="images/common/1795.gif" alt="$17.95"
+			width="166" height="63" /></div>
+		<div class="button"><a href="valueProposition.do?nationwide=0"
+			title="Start Your Search - Search your local state Now!"><img
+			src="images/common/start-search-of-local-state.gif"
+			alt="Start Your Search - Search your local state Now!" /></a></div>
+		<a class="sample"><a href="sampleReport.do"><img
+			src="images/common/download-sample-report.gif"
+			alt="Download Sample Report*" /></a></div>
+
+		</div>
+
+		</div>
+
+		</td>
+	</tr>
+</table>
+
+<div id="footer">
+
+<p>Copyright © 2003-2008 Pacific Information Resources, Inc. All rights
+reserved.</p>
+<p><a href="/springapp/legal/contactUs.do" target="_blank" tabindex="Contact Us">Contact Us</a> | 
+<a href="/springapp/legal/showAgreement.do?version=disclaimer" target="_blank" title="Disclaimer">Disclaimer</a> |
+<a href="/springapp/legal/showAgreement.do?version=privacy" target="_blank" title="Privacy Policy">Privacy Policy</a>
+</p>
+
+</div>
+
+</div>
+</div>
+
+</center>
+</body>
+</html>

@@ -1,0 +1,267 @@
+/*
+ * styles for registration/signup pages
+ */
+
+body {
+    color: #000000;
+    background-color: #EAEAEA;
+    font-family:      verdana, arial, helvetica, sans-serif;
+    font-size:        76%;
+    font-style:       normal;
+    font-weight:      normal;
+    margin:           1em;
+    voice-family:     "\"}\"";
+    voice-family:     inherit;
+    margin: 0px 0px 0px 0px; 
+}
+a { text-decoration: none; }
+a:hover { color: #FF0000; text-decoration: underline; }
+
+p { font-size: 1.1em; }
+p a { color: #0000CC; }
+p a:link { color: #0000CC; }
+p a:visited { color: #000066; }
+p a:active { color: #FF0000;
+}
+/* page level container */
+#page {
+	background-color: #AAAAAA;
+}
+
+/* header container */
+/* margin, width, padding need to match up with -content */
+#header {
+	margin: auto;
+	width: 750px;
+	border: 1px dashed;
+}
+
+#header .links {
+	text-align: center;
+	white-space: nowrap;
+	padding: 4px 0px 5px 0px;
+	border: 1px dotted; 
+    font-weight: bold;
+    font-size: 0.8em;
+    background-color: #EAEAEA;
+}
+
+#header .locator {
+	background-image: url('../img/bg-bluegrad-mini.jpg');
+	background-repeat: repeat-x;
+	background-color: #336699;
+	width: 750px;
+	height: 60px;
+	margin: auto;
+	border: 1px dashed;
+	padding: 12px 0px 0px 0px;
+}
+
+#header .padding {
+	padding: 20px;
+	border-width: 1px;
+	border-color: #FFFFFF #000000 #000000 #000000;
+	border: 1px dashed;
+}
+
+/* content container */
+/* margin, width, padding need to match up with -header */
+#content {
+	margin: auto;
+	width: 750px;
+	
+	background-color: #FFFFFF;
+	border: 2px solid #000000;
+}
+/* headers */
+#content h1, #content h2, #content h3 {
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-weight: bold;
+	color: #020057;
+	margin: 1em 0 1em 0;
+	padding: 0;
+	border-bottom: 1px solid #CCCCCC;
+}
+#content h1 { font-size: 1.40em; }
+#content h2 { font-size: 1.30em; }
+#content h3 { font-size: 1.20em; }
+
+
+/* actual content goes in sections like this */
+#content-info {
+	margin: 1em;
+	border: 1px dotted #000000;
+}
+
+/* main section */
+#content-main {
+	margin: 0.2em;	
+	border: 1px dotted #000000;
+}
+
+#content-main .blurb {
+}
+#content-main .comparison {
+	margin-top: 0.5em;
+	font-size: 0.8em;
+}
+#content-main .picture-right {
+	margin-left: 11.5em;
+	padding-right: 0.5em;
+}
+
+/* general font size */
+/* this cannot be done at the div level, it will mess up headers */
+/* apparently gets applied twice for subtables */
+#content-main table.info {
+	font-size: 0.8em;
+}
+
+/* feature comparison table */
+#content-main table.comparison {
+	font-size: 1em;
+	margin: 1em;
+}
+#content-main table.comparison th {
+	background-color: #888888; 
+	color: #FFFFFF;
+	white-space: nowrap;
+	font-weight: bold;
+	text-align: center;
+}
+#content-main table.comparison th, #content-main table.comparison td {
+	margin: 1px;
+	padding: 4px;
+	border: 1px;
+}
+
+
+#content .cost {
+	background-color: #336699;
+	color: #185F18;
+	font-weight: bold;
+}
+#content .info-box {
+	background-color: #FFFFC6;
+	border: 1px solid #000000;
+	margin: 1em 0 1em 0;
+	padding: 0.5em;
+}
+
+#content .note-box {
+	background-color: #EDEDFF;
+	border: 1px solid #00009C;
+	margin: 1em 0 1em 0;
+	padding: 0.5em;
+}
+
+#content .error-box {
+	background-color: #FFEDED;
+	border: 1px solid #9C0000;
+	margin: 1em 0 1em 0;
+	padding: 0.5em;
+}
+
+#content .error-table {
+	background-color: #505050;
+	margin: 1.5em 0 1.5em 0;
+	font-size: 1.1em;
+}
+
+#content .error-table td {
+	background-color: #FFC000;
+	font-size: 1.1em;
+	padding: 0.35em;
+}
+
+#content .error-table th {
+	background-color: #FFC000;
+	color: #000000;
+	font-size: 1.1em;
+	font-weight: bold;
+	padding: 0.35em;
+}
+
+#content .italic-note {
+	color: #606060;
+	font-style: italic;
+	font-weight: bold;
+	padding-left: 1em;
+}
+
+#content .indent-left {
+	padding-left: 3em;
+}
+
+#content .sub-header {
+	color: #020057;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+/* misc */
+#content form {
+	display: inline;
+	font-family: verdana, arial, helvetica, sans-serif;
+}
+
+#content form label {
+	font-weight: bold;
+}
+
+#content li {
+	padding-bottom: 0.5em;
+}
+
+#content pre {
+	font-family: "courier new", courier;
+	font-size: 1em;
+}
+
+
+
+/* tables */
+/*
+#content table {
+	background-color: #EAEAEA;
+	font-size: 1em;
+	width: 96%;
+}
+#content td {
+	font-size: 1.1em;
+	padding: 0.5em;
+}
+*/
+
+#content td.button-center {
+	padding: 0.5em 1em 1em 1em;
+	text-align: center;
+}
+
+#content td.fill {
+	width: 100%;
+}
+
+#content td.first {
+	padding-left: 1em;
+}
+
+#content td.full {
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+#content td.last {
+	padding-right: 1em;
+}
+
+#content tr.bar td {
+	background-color: #020057;
+	font-size: 1px;
+	line-height: 1px;
+	padding: 8px 0 0 0;
+}
+
+#content tr.bottom td {
+	padding: 0.5em 1em 1em 1em;
+}

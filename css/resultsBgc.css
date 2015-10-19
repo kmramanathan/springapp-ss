@@ -1,0 +1,168 @@
+/* search form */
+.bgc-search {
+    border: 1px solid #000000;
+    width: auto;
+    background-color: #EEEEEE;
+}
+.bgc-search-title {
+    border: 1px solid #000000;
+    background-color: #888888;
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 2px;
+}
+.bgc-search-subtitle {
+    color:       #020057;
+    background-color: #CCCCCC;
+    font-size:   1.2em;
+    font-weight: bold;
+    padding: 2px;    
+}
+.bgc-search-note {
+    color:       #606060;
+    font-size:   1.1em;
+    font-style:  italic;
+    font-weight: bold;
+    padding: 2px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.bgc-search-section {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.italic-note {
+    color:        #606060;
+    font-style:   italic;
+    font-weight:  bold;
+    padding-left: 1em;
+}
+.bgc-search table {
+    width: auto;
+    background-color: #EEEEEE;
+    padding: 2px;
+    margin-left: 50px;   
+}
+
+.bgc-search td { padding: 5px; border: 0px dotted #000000; }
+.bgc-search td.left   { white-space: nowrap; text-align: right; font-weight: bold; }
+.bgc-search td.center { white-space: nowrap; text-align: left; }
+.bgc-search td.right  { white-space: nowrap; text-align: left; }
+
+.bgc-search-button {
+    padding:    0.5em 1em 1em 1em;
+    text-align: center;
+}
+.bgc-search-button input.submit {
+    border: 3px double #999999;
+    border-top-color: #CCCCCC;
+    border-left-color: #CCCCCC;
+    font-size: 1em;
+    font-weight: bold;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    cursor: pointer;
+}
+.sub-header {
+    color:       #020057;
+    font-size:   1.2em;
+    font-weight: bold;
+}
+
+
+/* show bgc results */
+#bgc-results {
+    border-width: 1px solid #7596B9;
+    padding:      0.5em;
+    font-family: verdana, arial, helvetica, sans-serif;
+}
+#bgc-results label {
+    font-weight: bold;
+}
+#bgc-results table {  
+	border-width: 1px solid #7596B9;  
+    padding:        3px;
+    font-size: 0.9em;
+    width: 100%;
+}
+#bgc-results .result-headers {
+    background-color: #cccccc;    
+    font-weight: bold;
+}
+#bgc-results .result-row-even {
+    background-color: #FFFFFF;
+}
+#bgc-results .result-row-odd {
+    background-color: #EEEEEE;
+}
+#bgc-results td {
+    padding:        3px;
+    white-space: nowrap;
+}
+#bgc-results td.separator {
+    font-size: 1px; 
+    line-height: 1px;
+}
+
+
+/* results page */
+.result table {
+    font-size:        0.9em;
+    width:            224px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #000000;
+}
+.result table td { padding: 0 0 0.5em 0; }
+.result td.k { font-weight: bold; }
+
+.result-details-main { border: 0px solid gray; }
+
+/* offender table */
+.offender {
+    font-size:    0.9em;
+    border: 1px solid #000000;
+    padding: 2px;
+    width: auto;
+}
+.offender table { width: 100%; }
+
+/* alias table */
+.aliases {
+    font-size:    0.9em;
+    border: 1px solid #000000;
+    padding: 2px;
+    width: auto;
+}
+.offender table { width: 100%; }
+
+/* offenses section */
+.offenses { width: auto; padding: 0px; }
+
+/* offense tables */
+.offense { width: auto; font-size: 0.9em; padding: 0px; }
+.offense table {
+    border: 1px solid #000000;
+    padding: 2px;
+    width: 100%;
+    text-align: left;
+}
+.offense td.k {
+    width: 25%;
+    text-align: right;
+    vertical-align: top;
+    white-space: nowrap;
+    font-weight: bold;
+}
+.offense td.v {
+    width: 75%;
+    text-align: left;
+    vertical-align: top;
+}
+
+/* bottom of page */
+.disclaimer {
+	margin-top: 10px;
+    padding: 2px;
+    width: auto;
+    border: 0px solid #000000;
+}

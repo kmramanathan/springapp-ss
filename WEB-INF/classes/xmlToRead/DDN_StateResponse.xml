@@ -1,0 +1,208 @@
+<OrderXML>
+    <Method>SEND ORDER</Method>
+    <Authentication>
+        <Username>tjkoster</Username>
+        <Password>tksearch2014</Password>
+    </Authentication>
+    <Status>SUCCESS</Status>
+ <ReferenceNumber>127493</ReferenceNumber>
+ 	<Order>
+	
+			    <Subject>
+			      <FirstName>John</FirstName>
+			      <MiddleName></MiddleName>
+			      <LastName>Smith</LastName>
+			      <Suffix></Suffix>
+			      <DOB>5/15/1950</DOB>
+				  <SSN></SSN>
+			    </Subject>
+								
+				<ReportLink><![CDATA[https://secure.datadirectnow.com/webservice/getreport.cfm?ReportID=127493&ReportKey=1B24BBD1-CBD8-4BA6-A022-F4F63D38535D]]></ReportLink>
+				
+	<OrderDetail ServiceCode="State Instant" OrderId="25802554013" CRAorderId="130990">
+		<Status>RECORD</Status>
+		<State>AZ</State> <RecordsRequested><![CDATA[Felony & Misdemeanor]]></RecordsRequested> 
+	          <Result>
+	              <OffenderCount>6</OffenderCount> 
+	              <Record>                  
+	                  <OnFileDetail>
+	                      <FirstName>JOHN</FirstName> <LastName>SMITH--001</LastName> <MiddleName>T</MiddleName> <DOB>05/15/1976</DOB> <Sex>Male</Sex> <Address>4111 N DRINKWATER BLVD
+# F305
+SCOTTSDALE, AZ 85257</Address> 
+	                  </OnFileDetail>    
+					  <VerifiedBy>Exact Name And Partial DOB Match</VerifiedBy> 						  
+	                  <Count>
+	                      <Offense>LOCAL CHARGE</Offense> <CaseNum>J-1307-TR-23950</CaseNum> <FileDate>10/18/2002</FileDate> <Disposition>DEFENSIVE DRIVING/DISM NO MVD</Disposition> <DispositionDate>11/27/2002</DispositionDate> <OffenseCounty>YAVAPAI</OffenseCounty> <SourceofRecord>Arizona Administrative Office of Courts</SourceofRecord> 
+									<OffenseData>
+										<OffenseDetail title="Citation">2823631</OffenseDetail>
+										<OffenseDetail title="Count">1</OffenseDetail>
+										<OffenseDetail title="Court Number">11</OffenseDetail>
+										<OffenseDetail title="Drivers License State">AZ</OffenseDetail> 
+									</OffenseData>	
+									<CourtData>
+										<CourtDetail title="Case Type">Misdemeanor</CourtDetail>
+										<CourtDetail title="Court Address">22591 Lookaway Yarnell, AZ 85362</CourtDetail>
+										<CourtDetail title="Court Name">Yarnell Justice</CourtDetail> 
+									</CourtData>					
+									
+									<IncarcerationData>
+										<IncarcerationDetail title="Facility County">YAVAPAI</IncarcerationDetail> 
+									</IncarcerationData>					
+									           
+	                  </Count>            
+					                                                               
+	              </Record>
+				 
+	              <Record>                  
+	                  <OnFileDetail>
+	                      <FirstName>JOHN</FirstName> <LastName>SMITH--002</LastName> <MiddleName>BARTEL</MiddleName> <DOB>05/30/1950</DOB> <Sex>Male</Sex> <Address>1311 NORTH HIGHWY 89 TR 23
+MOUNT PLEASANT, UY 84647</Address> 
+	                  </OnFileDetail>    
+					  <VerifiedBy>Exact Name And Partial DOB Match</VerifiedBy> 						  
+	                  <Count>
+	                      <Offense>OPERATION WITH EXCESS WEIGHT</Offense> <CaseNum>J-0801-TR-20005784</CaseNum> <FileDate>09/18/2000</FileDate> <Disposition>BAIL/DEPOSIT GIVEN/FORFEITED</Disposition> <DispositionDate>11/01/2000</DispositionDate> <OffenseCounty>MOHAVE</OffenseCounty> <SourceofRecord>Arizona Administrative Office of Courts</SourceofRecord> 
+									<OffenseData>
+										<OffenseDetail title="Citation">33638</OffenseDetail>
+										<OffenseDetail title="Count">1</OffenseDetail>
+										<OffenseDetail title="Court Number">138</OffenseDetail>
+										<OffenseDetail title="Drivers License State">UT</OffenseDetail> 
+									</OffenseData>					
+									
+									<CourtData>
+										<CourtDetail title="Court Address">524 W. Beale Street
+kingman, AZ 86402</CourtDetail>
+										<CourtDetail title="Court Name">Kingman Justice</CourtDetail> 
+									</CourtData>					
+									
+									<IncarcerationData>
+										<IncarcerationDetail title="Facility County">MOHAVE</IncarcerationDetail> 
+									</IncarcerationData>					
+									           
+	                  </Count>            
+					                                                               
+	              </Record>
+				 
+	              <Record>                  
+	                  <OnFileDetail>
+	                      <FirstName>JOHN</FirstName> <LastName>SMITH--003</LastName> <MiddleName>T</MiddleName> <DOB>05/15/1976</DOB> <Sex>Male</Sex> <Address>7120 N 22ND ST
+PHOENIX, AZ 85020</Address> 
+	                  </OnFileDetail>    
+					  <VerifiedBy>Exact Name And Partial DOB Match</VerifiedBy> 						  
+	                  <Count>
+	                      <Offense>LOCAL CHARGE</Offense> <CaseNum>R-0751-PR-2011023448</CaseNum> <FileDate>08/02/2011</FileDate> <Disposition>COMPL DISMISSED BY COURT</Disposition> <DispositionDate>12/01/2011</DispositionDate> <OffenseCounty>MARICOPA</OffenseCounty> <SourceofRecord>Arizona Administrative Office of Courts</SourceofRecord> 
+									<OffenseData>
+										<OffenseDetail title="Count">1</OffenseDetail>
+										<OffenseDetail title="Court Number">137</OffenseDetail>
+										<OffenseDetail title="Drivers License State">AZ</OffenseDetail> 
+									</OffenseData>					
+									
+									<CourtData>
+										<CourtDetail title="Case Type">Traffic</CourtDetail>
+										<CourtDetail title="Court Address">3700 N. 75th St
+Scottsdale, AZ 85251</CourtDetail>
+										<CourtDetail title="Court Name">Scottsdale City Court</CourtDetail> 
+									</CourtData>					
+									
+									<IncarcerationData>
+										<IncarcerationDetail title="Facility County">MARICOPA</IncarcerationDetail> 
+									</IncarcerationData>					
+									           
+	                  </Count>            
+					                                                               
+	              </Record>
+				 
+	              <Record>                  
+	                  <OnFileDetail>
+	                      <FirstName>JOHN</FirstName> <LastName>SMITH--004</LastName> <MiddleName>T</MiddleName> <DOB>05/15/1976</DOB> <Sex>Male</Sex> <Address>7623  E LOS GATOS DRIVE
+SCOTTSDALE, AZ 85255</Address> 
+	                  </OnFileDetail>    
+					  <VerifiedBy>Exact Name And Partial DOB Match</VerifiedBy> 						  
+	                  <Count>
+	                      <Offense>LOCAL CHARGE</Offense> <CaseNum>R-0751-PR-2012021489</CaseNum> <FileDate>06/18/2012</FileDate> <Disposition>COMPL DISMISSED BY COURT</Disposition> <DispositionDate>10/17/2012</DispositionDate> <OffenseCounty>MARICOPA</OffenseCounty> <SourceofRecord>Arizona Administrative Office of Courts</SourceofRecord> 
+									<OffenseData>
+										<OffenseDetail title="Count">1</OffenseDetail>
+										<OffenseDetail title="Court Number">137</OffenseDetail>
+										<OffenseDetail title="Drivers License State">AZ</OffenseDetail> 
+									</OffenseData>					
+									
+									<CourtData>
+										<CourtDetail title="Case Type">Traffic</CourtDetail>
+										<CourtDetail title="Court Address">3700 N. 75th St
+Scottsdale, AZ 85251</CourtDetail>
+										<CourtDetail title="Court Name">Scottsdale City Court</CourtDetail> 
+									</CourtData>					
+									
+									<IncarcerationData>
+										<IncarcerationDetail title="Facility County">MARICOPA</IncarcerationDetail> 
+									</IncarcerationData>					
+									           
+	                  </Count>            
+					                                                               
+	              </Record>
+				 
+	              <Record>                  
+	                  <OnFileDetail>
+	                      <FirstName>JOHN</FirstName> <LastName>SMITH--005</LastName> <MiddleName>T</MiddleName> <DOB>05/15/1976</DOB> <Sex>Male</Sex> <Address>7623 E LOS GATOS DRIVE
+SCOTTSDALE, AZ 85255</Address> 
+	                  </OnFileDetail>    
+					  <VerifiedBy>Exact Name And Partial DOB Match</VerifiedBy> 						  
+	                  <Count>
+	                      <Offense>LOCAL CHARGE</Offense> <CaseNum>R-0751-PR-2014022630</CaseNum> <FileDate>06/23/2014</FileDate> <OffenseCounty>MARICOPA</OffenseCounty> <SourceofRecord>Arizona Administrative Office of Courts</SourceofRecord> 
+									<OffenseData>
+										<OffenseDetail title="Count">1</OffenseDetail>
+										<OffenseDetail title="Court Number">137</OffenseDetail>
+										<OffenseDetail title="Drivers License State">AZ</OffenseDetail> 
+									</OffenseData>					
+									
+									<CourtData>
+										<CourtDetail title="Case Type">Traffic</CourtDetail>
+										<CourtDetail title="Court Address">3700 N. 75th St
+Scottsdale, AZ 85251</CourtDetail>
+										<CourtDetail title="Court Name">Scottsdale City Court</CourtDetail> 
+									</CourtData>					
+									
+									<IncarcerationData>
+										<IncarcerationDetail title="Facility County">MARICOPA</IncarcerationDetail> 
+									</IncarcerationData>					
+									           
+	                  </Count>            
+					                                                               
+	              </Record>
+				 
+	              <Record>                  
+	                  <OnFileDetail>
+	                      <FirstName>JOHN</FirstName> <LastName>SMITH--006</LastName> <MiddleName>BARTEL</MiddleName> <DOB>05/30/1950</DOB> <Sex>Male</Sex> <Address>1311 N HWY 89
+#23
+MT PLEASANT, UT 84647</Address> 
+	                  </OnFileDetail>    
+					  <VerifiedBy>Exact Name And Partial DOB Match</VerifiedBy> 						  
+	                  <Count>
+	                      <Offense>LOCAL CHARGE</Offense> <CaseNum>J-0305-TR-96001725</CaseNum> <FileDate>10/23/1996</FileDate> <Disposition>BAIL/DEPOSIT GIVEN/FORFEITED</Disposition> <DispositionDate>10/28/1996</DispositionDate> <OffenseCounty>COCONINO</OffenseCounty> <SourceofRecord>Arizona Administrative Office of Courts</SourceofRecord> 
+									<OffenseData>
+										<OffenseDetail title="Citation">877098</OffenseDetail>
+										<OffenseDetail title="Count">1</OffenseDetail>
+										<OffenseDetail title="Court Number">7</OffenseDetail>
+										<OffenseDetail title="Drivers License State">UT</OffenseDetail> 
+									</OffenseData>					
+									
+									<CourtData>
+										<CourtDetail title="Case Type">Traffic</CourtDetail>
+										<CourtDetail title="Court Address">547 Vista Avenue
+Page, AZ 86040</CourtDetail>
+										<CourtDetail title="Court Name">Page Justice</CourtDetail> 
+									</CourtData>					
+									
+									<IncarcerationData>
+										<IncarcerationDetail title="Facility County">COCONINO</IncarcerationDetail> 
+									</IncarcerationData>					
+									           
+	                  </Count>            
+					                                                               
+	              </Record>
+				 
+	          </Result> 
+	          
+	</OrderDetail>
+			
+	</Order>
+</OrderXML>

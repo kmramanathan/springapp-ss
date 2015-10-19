@@ -1,0 +1,27 @@
+
+Dear SearchSystems.net Customer,
+
+Thank you for purchasing a Flat Rate search plan.  We hope it was useful for you.
+
+Username:  ${username}
+Plan Type:  ${plan}
+Price:  $${amount}
+Start Date:  ${startDate}
+End Date:  ${endDate}
+
+Now that your plan has expired, you may want to review the options for purchasing a new plan.  We offer Flat Rate plans for our Find People database and our Criminal Records database.  We also offer a combined plan if you want to do both types of searches.
+
+Click https://www.searchsystems.net/springapp/flatrate/FRSignup.do to purchase a new Flat Rate plan.
+
+#if($member)
+Your basic SearchSystems.net membership is still active.  You may log in https://www.searchsystems.net/login.php and use our other services, such as our public records Directory of over 47,000 free databases, and our Premium single-search databases for Criminal Records, Bankruptcies, Judgment & Tax Liens, Find People and Background Reports.
+
+#{else}
+Don’t forget that SearchSystems.net membership provides you with other services, including our public records Directory of over 47,000 free databases, and our Premium single-search databases for Criminal Records, Bankruptcies, Judgment & Tax Liens, Find People and Background Reports.
+
+To reactivate your SearchSystems.net account for an entire year, without obligation to purchase Flat Rate plans, click https://members.searchsystems.net/login.php.
+#end
+
+If you have questions about your account or SearchSystems.net services, simply reply to this message or call us at 1-800-350-2232.
+
+

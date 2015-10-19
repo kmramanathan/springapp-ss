@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<strings>
+
+
+<!-- table metadata -->
+<string name="tableName">ss_invoices</string>
+<string name="seqName">ss_invoices_invoice_id_seq</string>
+
+<string name="tableNameDetails">ss_invoice_details</string>
+<string name="seqNameDetails">ss_invoice_details_invoice_detail_id_seq</string>
+
+<!-- select: expects single row -->
+<!-- uses ? place holder to simplify java code -->
+<string name="selectInvoiceByInvoiceIdSimple">
+<![CDATA[
+SELECT * FROM ss_invoices WHERE invoice_id = ?
+]]>
+</string>
+
+<!-- 0+ rows -->
+<string name="selectInvoicesByUserIdSimple">
+<![CDATA[
+SELECT * FROM ss_invoices WHERE user_id = ?
+]]>
+</string>
+
+<string name="selectInvoiceDetailsByInvoiceIdSimple">
+<![CDATA[
+SELECT * FROM ss_invoice_details WHERE invoice_id = ?
+]]>
+</string>
+
+<string name="selectUnpaidInvoicesByUserIdSimple">
+<![CDATA[
+SELECT * 
+FROM ss_invoices 
+WHERE (amount_billed - amount_paid > 0)
+  AND user_id = ?
+ORDER BY invoice_id
+]]>
+</string>
+
+<string name="selectUnpaidInvoiceDetailsByUserIdSimple">
+<![CDATA[
+SELECT ID.*
+FROM ss_invoice_details ID
+JOIN ss_invoices I on ID.invoice_id = I.invoice_id
+WHERE (ID.total_price - ID.amount_paid > 0)
+  AND I.user_id = ?
+ORDER BY ID.invoice_detail_id
+]]>
+</string>
+
+<string name="selectUnpaidInvoiceDetailsByInvoiceIdSimple">
+<![CDATA[
+SELECT *
+FROM ss_invoice_details
+WHERE (total_price - amount_paid > 0)
+  AND invoice_id = ?
+ORDER BY invoice_detail_id
+]]>
+</string>
+
+<!--
+figure out something for auto-pay preference
+
+ I.invoice_due_date < now()
+  AND
+  -->
+<string name="getUserIdsWithUnpaidInvoices">
+<![CDATA[
+SELECT DISTINCT U.user_id
+FROM ss_users U
+JOIN ss_invoices I on U.user_id = I.user_id
+WHERE I.amount_billed - I.amount_paid > 0
+ORDER BY U.user_id
+]]>
+</string>
+
+
+<string name="updateInvoiceAmountBilled">
+<![CDATA[
+UPDATE ss_invoices
+SET 
+  amount_billed = ( SELECT SUM(total_price) FROM ss_invoice_details WHERE invoice_id = :invoiceId ),
+  amount_paid = ( SELECT SUM(amount_paid) FROM ss_invoice_details WHERE invoice_id = :invoiceId )
+WHERE invoice_id = :invoiceId
+]]>
+</string>
+
+</strings>

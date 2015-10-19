@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<strings>
+
+
+<string name="getSubscription">
+<![CDATA[
+SELECT *
+FROM ss_subscriptions
+WHERE subscription_id = ?
+]]>
+</string>
+
+<string name="selectRate">
+<![CDATA[
+SELECT subscription_id, user_id, rate_id, prev_bill_date, next_bill_date
+FROM ss_subscriptions
+WHERE next_bill_date < current_timestamp
+]]>
+</string>
+
+<string name="advanceSubBillDatesForPreBill">
+<![CDATA[
+UPDATE ss_subscriptions
+SET 
+  prev_bill_date = next_bill_date,
+  next_bill_date = next_bill_date + ?
+WHERE subscription_id = ?
+]]>
+</string>
+
+<string name="advanceSubBillDatesForPostBill">
+<![CDATA[
+UPDATE ss_subscriptions
+SET 
+  prev_bill_date = next_bill_date,
+  next_bill_date = next_bill_date + ?
+WHERE subscription_id = ?
+]]>
+</string>
+
+<string name="getInvoice">
+<![CDATA[
+SELECT *
+FROM ss_invoices
+WHERE invoice_id = ?
+]]>
+</string>
+
+<string name="addInvoice">
+<![CDATA[
+INSERT INTO ss_invoices
+  (invoice_id, user_id, invoice_bill_date, invoice_due_date, amount_billed, amount_paid)
+VALUES
+  (?, ?, ?, ?, ?, ?)
+]]>
+</string>
+
+<string name="addInvoiceDetail">
+<![CDATA[
+INSERT INTO ss_invoice_details
+(
+  invoice_detail_id, invoice_id, item_price, item_quantity, total_price, 
+  item_name, item_description, item_start_date, item_end_date
+)
+VALUES
+(
+  ?, ?, ?, ?, ?, 
+  ?, ?, ?, ?
+)
+]]>
+</string>
+
+<string name="addPayment">
+<![CDATA[
+INSERT INTO ss_payments
+  (payment_id, user_id, payment_date, amount_paid, amount_applied)
+VALUES
+  (?, ?, ?, ?, ?)
+]]>
+</string>
+
+<string name="linkCCPayment">
+<![CDATA[
+INSERT INTO ss_cc_payments
+  (payment_id, transaction_id)
+VALUES
+  (?, ?)
+]]>
+</string>
+ 
+<string name="getInvoiceDetail">
+<![CDATA[
+SELECT *
+FROM ss_invoice_details
+WHERE invoice_detail_id = ?
+]]>
+</string>
+
+<string name="applyPaymentToInvoiceDetail">
+<![CDATA[
+INSERT INTO ss_payment_details
+(
+  payment_detail_id, payment_id, invoice_detail_id, applied_date, applied_amount
+)
+VALUES
+(
+  ?, ?, ?, ?, ?
+)
+]]>
+</string>
+
+<string name="updateInvoiceAmountBilled">
+<![CDATA[
+UPDATE ss_invoices
+SET amount_billed = 
+(
+  SELECT SUM(total_price)
+  FROM ss_invoice_details
+  WHERE invoice_id = ?
+    AND disputed = false
+)
+WHERE invoice_id = ?
+]]>
+</string>
+
+<string name="updateInvoiceAmountPaid">
+<![CDATA[
+UPDATE ss_invoices
+SET amount_paid = 
+(
+  SELECT SUM(PD.applied_amount)
+  FROM ss_payment_details PD
+  JOIN ss_invoice_details ID on PD.invoice_detail_id = ID.invoice_detail_id
+  JOIN ss_invoices I on ID.invoice_id = I.invoice_id
+  WHERE I.invoice_id = ?
+)
+WHERE invoice_id = ?
+]]>
+</string>
+
+<string name="updateInvoiceDetailAmountPaid">
+<![CDATA[
+UPDATE ss_invoice_details
+SET amount_paid = ?
+WHERE invoice_detail_id = ?
+]]>
+</string>
+
+<string name="updatePaymentAmountApplied">
+<![CDATA[
+UPDATE ss_payments
+SET amount_applied = 
+(
+  SELECT SUM(applied_amount)
+  FROM ss_payment_details
+  WHERE payment_id = ?
+)
+WHERE payment_id = ?
+]]>
+</string>
+
+
+
+
+
+
+
+
+
+</strings>

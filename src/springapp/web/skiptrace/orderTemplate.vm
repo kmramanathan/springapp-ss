@@ -1,0 +1,96 @@
+<html>
+<body>
+<table width="700" height="100%" align="center">
+	<tr>
+		<td colspan="2">
+			<h2 align="left" style="font-family: Verdana, Arial, Helvetica, sans-serif;color: #003366;">Subject Details</h2>
+	    </td> 
+	</tr>
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Reason for Search:</span></td> 
+		<td width="536" > <strong>${skiptrace.reason} </strong></td>
+	</tr>  
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Subject's First Name:</span></td> 
+		<td width="536" > <strong>${skiptrace.firstName} </strong></td>
+	</tr>  
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Middle Initial:</span></td> 
+		<td width="536" > <strong>${skiptrace.middleName} </strong></td>
+	</tr>  
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Last Name:</span></td> 
+		<td width="536" > <strong>${skiptrace.lastName} </strong></td>
+	</tr>  
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Date of Birth or Approximate Age:</span></td> 
+		<td width="536" > <strong>${skiptrace.dob} </strong></td>
+	</tr>  
+	<tr>
+		<td width="252">
+				<span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Is this person a police officer, officer of 
+									the court, elected official, or celebrity?:</span>
+		</td> 
+		<td width="536" ><strong>
+					#if($skiptrace.specialPerson)
+         					Yes
+         			#else
+         					No
+         			#end  
+		    </strong></td>
+	</tr>  
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Last-Known  Address:</span></td> 
+		<td width="536" > <strong>${skiptrace.lastAddress} </strong></td>
+	</tr>  
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Social Security Number:</span></td> 
+		<td width="536" > <strong>${skiptrace.ssn} </strong></td>
+	</tr>  
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">City:</span></td> 
+		<td width="536" > <strong>${skiptrace.city} </strong></td>
+	</tr>  
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Spouse  Name:</span></td> 
+		<td width="536" > <strong>${skiptrace.spouseName} </strong></td>
+	</tr>  
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">State:</span></td> 
+		<td width="536" > <strong>${skiptrace.state} </strong></td>
+	</tr>  
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Zip Code:</span></td> 
+		<td width="536" > <strong>${skiptrace.zip} </strong></td>
+	</tr>  
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Address Date:</span></td> 
+		<td width="536" > <strong>${skiptrace.addressDate} </strong></td>
+	</tr> 
+	<tr><td colspan="2">&nbsp;</td></tr>
+	<tr><td colspan="2">&nbsp;</td></tr>
+	<tr>
+		<td colspan="2"><h2 align="left" style="font-family: Verdana, Arial, Helvetica, sans-serif;color: #003366;">Contact Information</h2></td>
+	</tr> 
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Name:</span></td> 
+		<td width="536" > <strong>${skiptrace.contactName} </strong></td>
+	</tr> 
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Company Name:</span></td> 
+		<td width="536" > <strong>${skiptrace.company} </strong></td>
+	</tr> 
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Phone:</span></td> 
+		<td width="536" > <strong>${skiptrace.phone} </strong></td>
+	</tr> 
+	<tr>
+		<td width="252"><span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366;font-weight: bold;">Email Address:</span></td> 
+		<td width="536" > <strong>${skiptrace.email} </strong></td>
+	</tr> 	
+	<tr><td colspan="2">&nbsp;</td></tr>
+	<tr><td colspan="2">&nbsp;</td></tr>
+	<tr><td colspan="2">&nbsp;</td></tr>
+</table>
+</body>
+</html>

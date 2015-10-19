@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE urlrewrite
+        PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite3.2.dtd">
+<urlrewrite>
+
+    <!-- // Inbound rules -->
+    <rule>
+        <from>^/criminal-records-search$</from>
+        <to>/funnel/newSearch.do</to>
+    </rule>
+    <rule>
+    <from>^/donation$</from>
+    <to>/funnel/Donation.do</to>
+    </rule>
+    <rule>
+        <from>^/funnel/mexico/searchMexicanRecord.do$</from>
+        <to type="redirect">http://publicrecords.searchsystems.net/</to>
+    </rule> 
+	 <rule>
+        <from>^/funnel/searchMexicanRecord.do$</from>
+        <to type="redirect">http://publicrecords.searchsystems.net/</to>
+    </rule> 
+	 <rule>
+        <from>^/funnel/BestResultsGuide.html$</from>
+        <to type="redirect">http://publicrecords.searchsystems.net/free-criminal-guide-best-results.html</to>
+    </rule>
+	<rule>
+        <from>^/funnel/NewBusinessSearch.do$</from>
+        <to type="redirect">https://www.searchsystems.net/springapp/funnel/newSearch.do</to>
+    </rule>
+
+   <!--  <rule>
+        <from>^/sprocket/([a-z0-9]+)/$</from>
+        <to>/sprocket/display.do?sprocketId=$1</to>
+    </rule>
+    <rule>
+        <from>^/sprocket/([a-z0-9]+)/edit$</from>
+        <to>/sprocket/edit.do?sprocketId=$1</to>
+    </rule>
+ -->
+  <!-- // Outbound rules  --> 
+    <outbound-rule>
+        <from>^/funnel/newSearch.do$</from>
+        <to>/criminal-records-search</to>
+    </outbound-rule>
+    <outbound-rule>
+    <from>^/funnel/Donation.do$</from>
+    <to>/donation</to>
+    </outbound-rule>
+    <!--  <outbound-rule>
+        <from>^/sprocket/display.do\?sprocketId=([a-z0-9]+)$</from>
+        <to>/sprocket/$1/</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sprocket/edit.do\?sprocketId=([a-z0-9]+)$</from>
+        <to>/sprocket/$1/edit</to>
+    </outbound-rule>
+-->
+    <!-- Hide the jsessionid from Google and other search engines
+    <outbound-rule>
+        <name>Strip URL Session ID's</name>
+        <condition name="user-agent">googlebot</condition>
+        <from>^(.*?)(?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?$</from>
+        <to>$1$2$3</to>
+    </outbound-rule>
+ -->
+</urlrewrite>

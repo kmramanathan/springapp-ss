@@ -1,0 +1,83 @@
+body{margin:0; padding:0; background: url(springapp/images/findpeople/fill_top.gif) top repeat-x #FFFCF2;}
+form, td, p, textarea, ul {margin:0; padding:0;}
+table, td {border-collapse:collapse;}
+table, td, img {border:0;}
+
+input, textarea, select{font:11px Tahoma, Arial, Geneva, sans-serif; color:#000000; vertical-align:top; border:1px solid #E6E3E1;}
+input{ width:234px; height:19px;}
+.inp_h{ height:27px; margin:0 0 0 0;}
+textarea{width:227px; height:73px; overflow:auto;}
+td, tr {vertical-align:top; text-align:left}
+/**/
+.left_top{background:url(springapp/images/findpeople/left_top.jpg) left top no-repeat;}
+.left_bot{background:url(springapp/images/findpeople/left_bot.jpg) left bottom no-repeat;}
+.right_top{background:url(springapp/images/findpeople/right_top.jpg) right top no-repeat;}
+.right_bot{background:url(springapp/images/findpeople/right_bot.jpg) right bottom no-repeat;}
+.fill_top{background:url(springapp/images/findpeople/fill_top_1.gif) top repeat-x;}
+.fill_bot{background:url(springapp/images/findpeople/fill_bot.gif) bottom repeat-x}
+.side_right{background:url(springapp/images/findpeople/side_right.gif) top right repeat-y #FAF6B3;}
+/**/
+.left_top_1{background:url(springapp/images/findpeople/left_top_1.jpg) left top no-repeat;}
+.left_bot_1{background:url(springapp/images/findpeople/left_bot_1.jpg) left bottom no-repeat;}
+.right_top_1{background:url(springapp/images/findpeople/right_top_1.jpg) right top no-repeat;}
+.right_bot_1{background:url(springapp/images/findpeople/right_bot_1.jpg) right bottom no-repeat;}
+.fill_top_1{background:url(springapp/images/findpeople/fill_top_1.jpg) top repeat-x;}
+.fill_bot_1{background:url(springapp/images/findpeople/fill_bot_1.jpg) bottom repeat-x;}
+.side_right_1{background:url(springapp/images/findpeople/side_right_1.jpg) top right repeat-y;}
+.side_left_1{background:url(springapp/images/findpeople/side_left_1.jpg) top left repeat-y;}
+/**/
+
+
+.content_1{
+	font:13px/18px arial, helvetica, sans-serif;
+	color:#4B4B4B;
+}
+.content_1 a{text-decoration:none;}
+.content_1 a:hover{text-decoration:underline;}
+
+.content_1 .txt_2{ line-height:20px;}
+.content_1 .txt_1{color:#710000;}
+.content_1 .link{color:#4B4B4B; font-weight:bold; background:url(springapp/images/findpeople/arr.gif) 0 0 no-repeat; padding:0 0 0 27px;}
+.content_1 .link_1{ font-weight:bold; color:#4B4B4B;}
+.content_1 ul {list-style:none;}
+.content_1 li{font:11px/18px arial, helvetica, sans-serif;}
+.content_1 li a {
+	font-size:11px;
+	color:#4B4B4B;
+	text-decoration:underline;
+}
+.content_1 li a:hover { 
+	text-decoration:none;
+}
+.content{
+	font:11px/14px arial, helvetica, sans-serif;
+	color:#4B4B4B;
+}
+.content .txt_1{ color:#710000;}
+.content .txt_2{ font-size:13px;}
+.content a{ color:#4B4B4B; text-decoration:underline;}
+.content a:hover{text-decoration:none;}
+
+
+
+
+.footer{
+	font:13px/14px arial, helvetica, sans-serif;
+	color:#454444;
+}
+.footer a{
+	color:#454444;
+	text-decoration:none;
+}
+.footer a:hover{
+	text-decoration:underline;
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,2 @@
+<p align="left">Includes all 50 U.S. States and the District of Columbia. Updated Monthly.</p>
+                          <p align="left"><img src="/springapp/images/common/results-include.png" alt="results include" width="584" height="113" /></p>   

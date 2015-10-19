@@ -1,0 +1,28 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+ "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+ "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+   <session-factory>  
+      <mapping class="springapp.domain.CorpXMLParser"/>
+      <mapping class="springapp.domain.CorpResponses"/>
+      <mapping class="springapp.domain.CorpNameInfo"/>
+      <mapping class="springapp.domain.CorpAddress"/>
+      <mapping class="springapp.domain.CorpHistory"/>
+      <mapping class="springapp.domain.BGCRequestBean"/>
+      <mapping class="springapp.domain.CriminalPurposesBean"/>
+      <mapping class="springapp.domain.NSS.NssProductBean"/>
+      <mapping class="springapp.domain.NSS.NSSRequestBean"/>
+      <mapping class="springapp.domain.NSS.NssResponseBean"/>
+      <mapping class="springapp.domain.NSS.NSSOffenderBean"/>
+      <mapping class="springapp.domain.NSS.NssOffenseBean"/>
+      <mapping class="springapp.domain.NSS.NssOffenseSupplementBean"/>
+      <mapping class="springapp.domain.RealProperty.RealPropRequestBean"/>
+      <mapping class="springapp.domain.RealProperty.RealPropResponseBean"/>      
+      <mapping class="springapp.domain.CriminalSSN.CriminalSSNRequestBean"/>
+      <mapping class="springapp.domain.CriminalSSN.CriminalSSNResponseBean"/>
+      <mapping class="springapp.domain.AdminUserIPBean"/>
+      
+   </session-factory>
+</hibernate-configuration>
+

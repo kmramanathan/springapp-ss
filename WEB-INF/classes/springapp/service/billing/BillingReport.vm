@@ -1,0 +1,6 @@
+Search Systems
+Daily Billing Report
+
+Report ID: ${r.reportId}
+Started at: ${startTime}
+Ended at: ${endTime}

@@ -1,0 +1,24 @@
+Thank you for using SearchSystems.net. Below is your receipt. This transaction
+was processed using secure communications and data encryption.
+
+========= ORDER INFORMATION =========
+
+Invoice : ${invoiceNumber}
+Description : ${description}
+Amount : $${amount} (USD)
+
+========= BILLING INFORMATION =========
+
+Customer Name : ${customerName}
+E-Mail : ${customerEmail}
+Payment Method : Credit Card
+
+-----------------
+Please do not reply to this email.  If you have any questions or problems you
+can contact us here:
+http://www.searchsystems.net/webmaster.php
+
+Pacific Information Resources, Inc. DBA Search Systems
+1-800-350-2232 (toll free in the U.S.) or
++1-805-375-4041 (outside the U.S.)
+-----------------

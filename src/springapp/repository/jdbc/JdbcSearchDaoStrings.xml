@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<strings>
+
+<!-- table metadata -->
+<!-- this doesn't support multiple tables in 1 dao -->
+<!-- 
+<string name="tableName">bgc_requests</string>
+<string name="seqName">ss_invoices_invoice_id_seq</string>
+-->
+
+<!-- select: expects single row -->
+<!-- uses ? place holder to simplify java code -->
+<string name="selectBgcRequest">
+<![CDATA[
+SELECT * FROM bgc_requests WHERE bgc_request_id = ?
+]]>
+</string>
+
+<string name="selectBgcResponse">
+<![CDATA[
+SELECT * FROM bgc_responses WHERE bgc_response_id = ?
+]]>
+</string>
+
+<string name="selectBgcResponseForRequest">
+<![CDATA[
+SELECT * FROM bgc_responses WHERE bgc_request_id = ?
+]]>
+</string>
+
+
+<string name="">
+<![CDATA[
+SELECT * FROM bgc_responses WHERE bgc_request_id = ?
+]]>
+</string>
+
+
+</strings>

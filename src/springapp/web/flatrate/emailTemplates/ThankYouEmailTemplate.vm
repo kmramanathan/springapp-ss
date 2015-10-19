@@ -1,0 +1,27 @@
+${customerName}, 
+
+Thank you for registering a Flat Rate member account. Your account
+information is listed below.
+ 
+When logging into our system, please make sure you enter your username and 
+password exactly as you did in the signup form. The password is case-sensitive, 
+which means entering a password of ABCDXYZ is not the same as abcdxyz. 
+
+   Username: ${username} 
+
+For access to Flat Rate Plan 
+login here:  https://www.searchsystems.net/springapp/flatrate/FRLogin.do
+
+If you have any questions about your account or our services, our contact information is posted below.
+
+Thank you, 
+Search Systems 
+
+----------------- 
+Please do not reply to this email.  If you have any questions or problems you can contact us here: 
+http://www.searchsystems.net/webmaster.php 
+
+Pacific Information Resources, Inc. DBA Search Systems 
+1-800-350-2232 (toll free in the U.S.) or 
++1-805-375-4041 (outside the U.S.) 
+-----------------

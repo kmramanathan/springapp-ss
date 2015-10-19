@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<strings>
+
+
+<!-- table metadata -->
+<string name="tableName">ss_rates</string>
+<string name="seqName">ss_rates_seq</string>
+
+<!-- select: expects single row -->
+<!-- uses ? place holder to simplify java code -->
+<string name="selectRateByRateIdSimple"><![CDATA[SELECT * FROM ss_rates WHERE rate_id = ?]]></string>
+
+<string name="selectAllRates"><![CDATA[SELECT * FROM ss_rates ORDER BY rate_id]]></string>
+<string name="selectActiveRates"><![CDATA[SELECT * FROM ss_rates WHERE active = true ORDER BY rate_id]]></string>
+
+<string name="selectAllTimePeriods"><![CDATA[SELECT * FROM ss_time_periods ORDER BY time_period_id]]></string>
+<string name="selectTimePeriod"><![CDATA[SELECT * FROM ss_time_periods WHERE time_period_id = ?]]></string>
+
+<!-- update -->
+<string name="updateRate">
+<![CDATA[
+UPDATE ss_rates
+SET rate_name = :rateName,
+  rate_description = :rateDescription,
+  rate_internal_description = :rateInternalDescription,
+  initial_period = :initialPeriod,
+  initial_units = :initialUnits,
+  initial_price = :initialPrice,  
+  recurring_period = :recurringPeriod,
+  recurring_units = :recurringUnits,
+  recurring_price = :recurringPrice,
+  active = :active,
+  allow_new = :allowNew,
+  require_approval = :requireApproval,
+  bill_in_advance = :billInAdvance
+WHERE rate_id = :rateId
+]]>
+</string>
+
+<string name="deleteRate">
+<![CDATA[
+DELETE FROM ss_rates
+WHERE rate_id = :rateId
+]]>
+</string>
+
+</strings>

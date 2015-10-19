@@ -1,0 +1,202 @@
+body{margin:0; padding:0; background: url(/springapp/images/BJL/fill_top_05.jpg) top repeat-x #FFFCF2;}
+
+
+form, td, p, textarea, ul {margin:0; padding:0;}
+
+table, td {border-collapse:collapse;}
+
+table, td, img {
+	border-top-color: #FFFFFF;
+	border-right-color: #FFFFFF;
+	border-bottom-color: #FFFFFF;
+	border-left-color: #FFFFFF;
+	padding: 2px;
+}
+
+/*
+input, textarea, select{font:11px Tahoma, Arial, Geneva, sans-serif; color:#000000; vertical-align:top; border:1px solid #E6E3E1;}
+input{ width:234px; height:19px;}
+.inp_h{ height:27px; margin:0 0 0 0;}
+textarea{width:227px; height:73px; overflow:auto;}
+*/
+td, tr {vertical-align:top; text-align:left}
+/**/
+.left_top{background:url(/springapp/images/BJL/left_top_tan_05.jpg) left top no-repeat;}
+.left_bot{background:url(/springapp/images/BJL/left_bot_tan_05.jpg) left bottom no-repeat;}
+.right_top{background:url(/springapp/images/BJL/right_top_tan_05.jpg) right top no-repeat;}
+.right_bot{background:url(/springapp/images/BJL/right_bot_tan_05.jpg) right bottom no-repeat;}
+.fill_top{background:url(/springapp/images/BJL/fill_top_tan_05.jpg) top repeat-x;}
+.fill_bot{background:url(/springapp/images/BJL/fill_bot_tan_05.jpg) bottom repeat-x}
+.side_right{background:url(/springapp/images/BJL/side_right_tan_05.jpg) top right repeat-y #FAF6B3;}
+/**/
+.left_top_1{background:url(/springapp/images/BJL/left_top_1.jpg) left top no-repeat;}
+.left_bot_1{background:url(/springapp/images/BJL/left_bot_1.jpg) left bottom no-repeat;}
+.right_top_1{background:url(/springapp/images/BJL/right_top_1.jpg) right top no-repeat;}
+.right_bot_1{background:url(/springapp/images/BJL/right_bot_1.jpg) right bottom no-repeat;}
+.fill_top_1{background:url(/springapp/images/BJL/fill_top_1.jpg) top repeat-x;}
+.fill_bot_1{background:url(/springapp/images/BJL/fill_bot_1.jpg) bottom repeat-x;}
+.side_right_1{background:url(/springapp/images/BJL/side_right_1.jpg) top right repeat-y;}
+.side_left_1{background:url(/springapp/images/BJL/side_left_1.jpg) top left repeat-y;}
+/**/
+
+
+.content_1{
+	font:13px/18px arial, helvetica, sans-serif;
+	color:#4B4B4B;
+}
+.content_1 a{text-decoration:none;}
+.content_1 a:hover{text-decoration:underline;}
+
+.content_1 .txt_2{ line-height:20px;}
+.content_1 .txt_1{color:#710000;}
+.content_1 .link{color:#4B4B4B; font-weight:bold; background:url(/springapp/images/BJL/arr.gif) 0 0 no-repeat; padding:0 0 0 27px;}
+.content_1 .link_1{ font-weight:bold; color:#4B4B4B;}
+.content_1 ul {list-style:bullet; padding: 0 15px 15px 15px;}
+.content_1 li{font:13px/18px arial, helvetica, sans-serif;}
+.content_1 li a {
+	font-size:13px;
+	color:#4B4B4B;
+	text-decoration:underline;
+}
+.content_1 li a:hover { 
+	text-decoration:none;
+}
+.content_1 p {
+	padding-bottom: 15px;
+	vertical-align: middle;
+}
+.content{
+	font:11px/14px arial, helvetica, sans-serif;
+	color:#4B4B4B;
+}
+.content .txt_1{ color:#710000;}
+.content .txt_2{ font-size:13px;}
+.content a{ color:#4B4B4B; text-decoration:underline;}
+.content a:hover{text-decoration:none;}
+
+
+
+
+.footer{
+	font:13px/14px arial, helvetica, sans-serif;
+	color:#454444;
+}
+.footer a{
+	color:#454444;
+	text-decoration:none;
+}
+.footer a:hover{
+	text-decoration:underline;
+}
+
+
+.menu {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #ffffff;
+	float: right;
+	width: 450px;
+	text-align: right;
+	margin-top: 25px;
+	margin-right: 25px;
+	margin-bottom: 0;
+	margin-left: 0;
+}
+.menu a {
+	color: #ffffff;
+	text-decoration: underline;
+}
+
+.style24 {color: #FF0000}
+.style28 {font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px; }
+.style30 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	font-style: italic;
+}
+.style31 {font-size: x-small}
+.style60 {font-size: 14px; font-family: Arial, Helvetica, sans-serif;}
+.style15 {font-size: 0.8em}
+.style61 {
+	font-size: 18px;
+	font-weight: bold;
+}
+.style64 {color: #FFFCF2}
+.style18 {
+	font-size: x-small;
+	font-weight: bold;
+	color: #FF0000;
+}
+.style22 {
+	font-size: x-small;
+	font-weight: bold;
+	color: #000000;
+}
+.style67 {color: #FF0000; font-size: 10px; }
+.style60a {
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FF0000;
+}
+.style68 {
+	font-size: 16px;
+	color: #FF0000;
+}
+.style30 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	font-style: italic;
+}
+.style100 {font-size: 12px}
+.style27 {color: #000000}
+.style28a {font-size: small}
+.style101 {
+	font-size: 14px;
+	font-weight: bold;
+}
+.style102 {
+	font-size: 13px;
+	font-weight: bold;
+}
+.style13 {color: #FF0000}
+.style16 {color: #000000; font-weight: bold; }
+.style102a {font-family: Arial, Helvetica, sans-serif}
+.style32 {font-family: Arial, Helvetica, sans-serif; color: #003366; }
+.style105 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+}
+.style106 {font-family: Arial, Helvetica, sans-serif; font-size: 12px; }
+.style107 {font-family: Arial, Helvetica, sans-serif}
+.style108 {color: #000099; font-family: Arial, Helvetica, sans-serif; }
+.style109 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	font-weight: bold;
+}
+.style110 {font-family: Arial, Helvetica, sans-serif; color: #003366; }
+.style30 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	font-style: italic;
+}
+.style31{ font-size:11px;}
+
+.style107 {font-family: Arial, Helvetica, sans-serif}
+.style108a {font-family: Arial, Helvetica, sans-serif; color: #003366; }
+.style109a {
+	color: #003366;
+	font-weight: bold;
+}
+.style111 {font-family: Arial, Helvetica, sans-serif; font-size:13px;  }
+.style112 {font-size: small}
+.style113 {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #003366;
+	
+	
+
+}
+.style114 {font-family: Arial, Helvetica, sans-serif; color: #003366; }

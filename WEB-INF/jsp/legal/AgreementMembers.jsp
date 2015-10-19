@@ -1,0 +1,128 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib tagdir="/WEB-INF/tags" prefix="neon"%>
+<%@include file="/WEB-INF/jsp/include.jsp"%>
+
+<neon:funnelPage title="User Agreement" rightSidebar="GenericSidebar.jsp">
+<jsp:attribute name="stylesheet">funnel.css</jsp:attribute>
+
+<jsp:body>
+
+<a href="${closeWindowUrl}"><img src="images/common/bt-back-small.png" alt="Return" /></a>
+
+<c:url value="/funnel/ourDatabases.do" var="ourDatabasesUrl"/>
+<c:url value="http://www.ftc.gov/os/statutes/fcra.htm" var="fcraUrl"/>
+<c:url value="http://www.ftc.gov/os/statutes/2summary.htm" var="consumerRightsUrl"/>
+<c:url value="http://www.searchsystems.net/webmaster.php" var="webmasterUrl"/>
+
+<style type="text/css">
+<!--
+.style1 {
+    color: #003366;
+    font-weight: bold;
+}
+-->
+</style>
+
+            <h1 class="style1">SearchSystems.net Member User Agreement</h1>
+            <p>Pacific Information Resources,  Inc. is pleased to be able to provide SearchSystems.net membership  subscription, which provides unlimited access  to the  public records directory on the SearchSystems.net Website  (&quot;SearchSystems.net&quot; or the &quot;Website&quot;), and fee-based  access to and discounts on their proprietary criminal record, sex  offender, bankruptcy, judgment, and tax lien databases to those who accept the  terms of this Registration Agreement (the &quot;Agreement&quot;) and make  applicable payment. By reading the agreement and checking the box next to “I  have read &amp; agree to the User Agreement” at the bottom of this page and  pressing the 'Make your payment &amp; Start Searching' button, you agree to be  bound by this Agreement; doing so constitutes your acceptance of all of the  terms contained therein. If you do not agree with any term or condition of the  Agreement, you are not authorized to become a registered subscriber to  SearchSystems.net's services. Should you provide information for the credit  card that you wish to use to pay for unlimited  access to our  Public Records Directory and  databases, you will be allowed unlimited  access  to the public records directory found on  SearchSystems.net and access to our fee-per-search  databases located at  https://premium.searchsystems.net/.</p>
+            <h3>User Agreement</h3>
+            <p>PART 1. I, the subscriber, accept liability for all payments  charged to my account by me or by anyone else using my &quot;Username&quot; and  &quot;Password&quot; to access any part of SearchSystems.net, whether or not  that person does so with my authorization. I understand that it is my  responsibility to keep my &quot;Username&quot; and &quot;Password&quot; in a  secure place, and that I am fully responsible for all charges incurred by usage  thereof. <br />
+              <br />
+PART 2. I understand that my membership is a single user account and that the  service that I am purchasing is the right for the subscriber to search  SearchSystems.net's public records directory on an &quot;unlimited&quot; basis,  a term that, when used in this document, means access to SearchSystems.net  database of hyperlinks to public records websites without an interstitial delay  between end-user activation of any hyperlink (ordinarily effectuated by  clicking the left mouse button while the cursor is suspended over the  hyperlink) to any other page on the Website containing hyperlinks to public  records websites or to the public records website itself and access to that  SearchSystems.net website page or public records website. I further understand that I am  responsible for any expenses incurred by Pacific Information Resources, Inc.  for the collection of charges accrued by any individual utilizing my  &quot;Username&quot; and &quot;Password&quot; to search SearchSystems.net's  databases, including, but not limited to, reasonable attorney's fees,  regardless of the quantity or quality of the response received from searches  conducted on public records websites accessed through SearchSystems.net or any  other factor. <br />
+<br />
+PART 3. I understand that my &quot;Username&quot; and &quot;Password&quot; will  only provide access to the searchsystems.net directory website and the Search Systems  databases at <a href="${ourDatabasesUrl}">http://premium.searchsystems.net/</a> and that it will not provide access to any other web site, service, or any  hyperlink contained in SearchSystems.net's public records database that  requires its own username and password. <br />
+<br />
+PART 4. Subscriptions 
+
+            <p>Annual Recurring Billing or One-Year Subscription. I  understand that, unless otherwise agreed to in a document signed by a duly  authorized representative of Pacific Information Resources, Inc., I will be  charged as follows: I understand that if I choose the annual recurring billing  option, then I will be charged $19.95 at the beginning of each twelve-calendar  month period for my SearchSystems.net membership subscription. I understand  that my subscription will continue unless I cancel my annual recurring billing  subscription within 48 hours of the subscription's termination at the end of  the twelfth billing month through the specific process of clicking on My  Account at the top of the home page and then Cancel my Account and completing  the form, filling in my username and password, and pressing Continue to  complete the process. I understand that I may alternatively provide notice by  emailing SearchSystems.net at <a href="http://www.searchsystems.net/webmaster.php">http://www.searchsystems.net/webmaster.php</a>,  or by calling SearchSystems.net at 800-350-2232 (U.S.) or +1-805-375-4041  (International) during regular business hours (Pacific Standard Time) and  providing the name, username, and email address used for the subscription. <br />
+                <br />
+              If I choose Annual billing, but do not select the Annual  Recurring Billing option, then I will be charged $19.95 for my  SearchSystems.net twelve-month membership subscription.  I understand that my subscription will expire  at the end of the twelfth calendar month, but that I can contact  SearchSystems.net by email at <a href="http://www.searchsystems.net/webmaster.php">http://www.searchsystems.net/webmaster.php</a>,  or by calling SearchSystems.net at 800-350-2232 (U.S.) or +1-805-375-4041  (International) during regular business hours (Pacific Standard Time) to extend  my subscription through a monthly or annual subscription program.</p>
+            <p>I understand that once the $19.95 Annual Recurring Billing  membership or One-Year Subscription fee is charged to my checking or credit  card account, unless evidence satisfactory to SearchSystems.net is presented to  the Website that the charges were incurred as the result of identity  theft/credit card fraud by a person other than the actual cardholder, no refund  will be granted for part or all of that fee. I understand that if I try to  circumvent either of these policies via the use of a credit card &quot;chargeback&quot;,  legal proceeding or other means, I will be liable for the full value of the  disputed membership fee, as well as attorney's fees, and reasonable costs. I  also understand that one-year or annual recurring billing subscriptions may be  canceled by me at any time, but no refund will be made for unused subscription  periods.<br />
+                <br />
+              PART 5. Access to Search Systems  databases. I understand that the one-year, or annual recurring billing subscription fee provides me with access  to the public records directory portion of the website, and to the nationwide and statewide databases of the website located at <a href="http://premium.searchsystems.net">http://premium.searchsystems.net/</a>,  through which criminal, sex offender, bankruptcy, tax lien and judgment record  searches may be purchased on an individual basis at the following rates per search: Criminal Records by State $6.95; Nationwide Criminal Record  Search $14.95; Statewide or Nationwide Bankruptcy, Judgment &amp; Tax Lien  searches $5.00. <br />
+  <br />
+              PART 6. I understand that all the websites whose hyperlinks are contained in  SearchSystems.net's public records databases are provided from unaffiliated  third companies and may not be 100% complete or accurate. I also understand  that the websites whose hyperlinks are contained in SearchSystems.net's public  records databases with a green &quot;Pay Site&quot; indicator on the right side  of the hyperlink are provided from unaffiliated third companies and may not be  100% complete or accurate, unless they direct me to the SearchSystems.net  nationwide and statewide databases site, in which case the terms of the User Agreement to the nationwide and statewide databases portion of the Website applies. <br />
+  <br />
+              PART 7. I have reviewed the Website as a SearchSystems.net Membership Subscription  user to the extent that I understand the general extent of SearchSystems.net's  categorization and content and wish to obtain unlimited access to the Website. <br />
+  <br />
+              PART 8. I understand that some or all of the information reported by  SearchSystems.net or obtainable from SearchSystems.net's databases may  constitute personal data that may be regulated by the Fair Credit Reporting Act  (FCRA), the full text of which can be found at <a href="http://www.ftc.gov/os/statutes/fcra.htm">http://www.ftc.gov/os/statutes/fcra.htm</a>.  As SearchSystems.net may in fact fit the definition of a &quot;consumer  reporting agency&quot; (CRA), it seeks to comply with pertinent provisions of  the FCRA. I therefore certify that I have read and understand the foregoing and  that any consumer report that receive from websites accessed through  SearchSystems.net will be utilized in strict compliance with the foregoing, as  well as with any and all other applicable federal or state laws. I hereby  provide the following certifications as part and parcel of my acceptance of  this User Agreement: <br />
+  <br />
+              A. I certify that no report shall be ordered except in connection with one or  more of the following Permissible Purposes: </p>
+            <ol start="1" type="1">
+              <li>As ordered by a court or a       federal grand jury subpoena. FCRA Section 604(a)(1)</li>
+              <li>As instructed by the consumer       in writing. FCRA Section 604(a)(2)</li>
+              <li>For the extension of credit       as a result of an application from a consumer, or the review or collection       of a consumer's account. FCRA Section 604(a)(3)(A)</li>
+              <li>For employment purposes,       including hiring and promotion decisions, where the consumer has given       written permission. FCRA Sections 604 (a)(3)(B) and 604(b)</li>
+              <li>For the underwriting of       insurance as a result of an application from a consumer. FCRA Section       604(a)(3)(C)</li>
+              <li>When there is a legitimate       business need, in connection with a business transaction that is initiated       by the consumer. FCRA Section 604(a)(3)(F)(i)</li>
+              <li>To review a consumer's       account to determine whether the consumer continues to meet the terms of       the account. FCRA Section 604(a)(3)(F)(ii)</li>
+              <li>To determine a consumer's       eligibility for a license or other benefit granted by a governmental       instrumentality required by law to consider an applicant's financial       responsibility or status. FCRA Section 604(a)(3)(D)</li>
+              <li>For use by a potential       investor or servicer, or current insurer, in a valuation or assessment of       the credit or prepayment risks associated with an existing credit       obligation. FCRA Section 604(a)(3)(E)</li>
+              <li>For use by state and local       officials in connection with the determination of child support payments,       or modifications and enforcement thereof. FCRA Sections 604(a)(4) and       604(a)(5)</li>
+            </ol>
+            <p>B. If the consumer report information being obtained is to  be used for employment purposes, and I am the end user of the report, I further  certify pursuant to the FCRA Section 604(b) that: </p>
+            <ol start="1" type="1">
+              <li>I have provided the consumer       a clear and conspicuous disclosure in writing (unless the consumer applies       for employment by mail, telephone, or computer, in which case the       disclosure may be made by oral, written, or electronic means) that a       consumer report may be obtained.</li>
+              <li>I have obtained prior written       authorization (unless the consumer applies for employment by mail,       telephone, or computer, in which case the authorization may be made by       oral, written, or electronic means) from the consumer. If adverse action       is taken against the consumer, I will provide a copy of the report and a       Summary of Consumer's Rights to the consumer prior to such adverse action       being taken.</li>
+              <li>The information obtained will       not be used in violation of any federal or state equal opportunity law or       regulation.</li>
+              <li>I will ensure that the       consumer is informed of the existence of the Summary of Consumer's Rights,       which is accessible on the Internet at <a href="http://www.ftc.gov/os/statutes/2summary.htm">http://www.ftc.gov/os/statutes/2summary.htm</a>.</li>
+            </ol>
+            <p>C. If I am going to re-sell the consumer information report,  I shall take the following steps pursuant to Section 607(e) of the FCRA: </p>
+            <ol start="1" type="1">
+              <li>Disclose the identity of the       end-user to the source consumer reporting agency.</li>
+              <li>Disclose to the source       consumer-reporting agency each permissible purpose for which the report       will be furnished to the end-user.</li>
+              <li>Establish and follow       reasonable procedures to ensure that reports are resold only for       permissible purposes, including procedures to obtain: </li>
+              <ul type="circle">
+                <li>the identity of all        end-users;</li>
+                <li>certifications from        all users of each purpose for which the report will be used;</li>
+                <li>and certifications        that the report will not be used for any purpose other than the allowable        purpose(s) specified, using reasonable efforts to verify this information        before selling the report.</li>
+              </ul>
+            </ol>
+            <p>PART 9. I agree not to publish, sell or otherwise provide  access to a &quot;deep link&quot; on SearchSystems.net (defined as any page on  the SearchSystems.net site other than the home page). I agree not to use SearchSystems.net  to sell a product or service, or to increase traffic to my Web site for  commercial reasons, such as advertising sales. I agree not to modify, reformat,  publish, license or create derivative works from any information, links,  products or services obtained from SearchSytems.net or mirror the  SearchSystems.net home. I understand that if I utilize SearchSystems.net for  any commercial purpose defined above without a prior agreement,  SearchSystems.net will pursue all available civil and criminal penalties  against me. <br />
+                <br />
+              PART 10. I understand that SearchSystems.net may modify or terminate its  services (including canceling an individual's account) for any reason and  without notice, without liability to me, any other user, or any third party. I  understand that SearchSystems.net reserves the right to modify this  Registration Agreement from time to time without notice, and that I am advised  to review this Registration Agreement from time to time so that I will be kept  informed of any changes. <br />
+  <br />
+              PART 11. I understand that SearchSystems.net reserves the right to change its  prices for unlimited access to its public records databases at any time and for  any reason. <br />
+  <br />
+              PART 12. I understand and agree with all of the following provisions: <br />
+  <br />
+              All contents of SearchSystems.net (c) 2003-2008 Pacific Information Resources,  Inc. All rights reserved. <br />
+  <br />
+              SearchSystems.net's logo, trademarks and other marks that appear throughout  SearchSystems.net belong to Pacific Information Resources, Inc., and are  protected by U.S.  and international trademark laws. I am prohibited from using any of the marks  appearing throughout SearchSystems.net, except for banners expressly made  available for download as otherwise outlined in this User Agreement, without  express written consent from Pacific Information Resources, Inc., as permitted  by applicable laws. <br />
+  <br />
+              SearchSystems.net provides banner links to its Website for free download and  publication on other Websites. These images are created and distributed by  SearchSystems.net and must be used only as described on SearchSystems.net. I  may not change or delete the code or the comment tags in the code provided,  except for the image location tag if I am hosting the image on my own server. I  am also prohibited from creating or using any images or banners other than the  ones provided to link or otherwise refer to SearchSystems.net. If I decide to  place our banners on my site, I will email SearchSystems.net with the URL of my  site and notify SearchSystems.net of the link. SearchSystems.net reserves the right  to request any web site to remove any or all SearchSystems.net banners, images,  or any other intellectual property at any time. <br />
+  <br />
+              Downloading, publication or other usage of our banners creates no reciprocal  duties on SearchSystems.net's part whatsoever, including, but not limited to,  the duty to recompense the subscriber for any damage caused through the  download, publication or other usage of those links, the duty to recompense the  subscriber for any damage caused by your viewer's activating, tampering with or  otherwise accessing those banners, or the duty to pay the subscriber for any  traffic or business sent to our site via those banners. <br />
+  <br />
+              SearchSystems.net disclaims any and all responsibility or liability for the  accuracy, content, completeness, legality, reliability, or operability or  availability of information or material found in websites listed on  SearchSystems.net. The Website disclaims any responsibility for the deletion,  failure to store, mis-delivery, or untimely delivery of any information or  material. SearchSystems.net disclaims any responsibility for any harm resulting  from downloading or accessing any information or material on the Internet  through the Website. <br />
+  <br />
+              SearchSystems.net is provided &quot;as is,&quot; with no warranties whatsoever.  SearchSystems.net expressly disclaims to the fullest extent permitted by law  all express, implied, and statutory warranties, including, without limitation,  the warranties of merchantability, durability and fitness for a particular  purpose, quality, satisfactory quality, title and non-infringement of  proprietary rights. SearchSystems.net disclaims any warranties regarding the  security, reliability, timeliness, and performance of the Website  SearchSystems.net disclaims any warranties for any information or advice obtained  through the SearchSystems.net. SearchSystems.net disclaims any warranties for  services or goods received through or advertised on the Website or received  through any links provided by the Website, as well as for any information or  advice received through any links provided in the Website. <br />
+  <br />
+              I understand and agree that I download or otherwise obtain material or data  through the use of SearchSystems.net at my own discretion and risk, and that I  will be solely responsible for any damages to my computer system or loss of  data that results in the download of such material or data. If my state does  not allow the exclusion of implied warranties, then I understand that this  above exclusion may not apply to me. <br />
+  <br />
+              Under no circumstances shall SearchSystems.net be liable to any user on account  of that user's use or misuse of or reliance on the Website. Arising from any  claim relating to this agreement or the subject matter hereof such limitation  of liability shall apply to prevent recovery of direct, indirect, incidental,  consequential, special, exemplary, and punitive damages whether such claim is  based on warranty, contract, tort (including negligence), or otherwise, even if  SearchSystems.net has been advised of the possibility of such damages. Such  limitation of liability shall apply whether the damages arise from use or  misuse of and reliance on SearchSystems.net, from inability to use  SearchSystems.net, or from the interruption, suspension, or termination of  SearchSystems.net (including such damages incurred by third parties). This  limitation shall also apply with respect to damages incurred by reason of other  services or goods received through or advertised on SearchSystems.net or  received through any links provided in the Website, as well as by reason of any  information or advice received through or advertised on the Website or received  through any links provided in the Website. This limitation shall also apply,  without limitation, to the costs of procurement of substitute goods or  services, lost profits, or lost data. Such limitation shall further apply with  respect to the performance or non-performance of SearchSystems.net or any  information or merchandise that appears on, or is linked or related in any way  to, SearchSystems.net. Such limitation shall apply notwithstanding any failure  of an essential purpose of any limited remedy and to the fullest extent  permitted by law. <br />
+  <br />
+              Some states or other jurisdictions do not allow the exclusion or limitation of  liability for incidental or consequential damages, so the above limitations and  exclusions may not apply to me. <br />
+  <br />
+              Without limiting the foregoing, under no circumstances shall SearchSystems.net  be held liable for any delay or failure in performance resulting directly or  indirectly from acts of nature, forces, or causes beyond its reasonable  control, including, without limitation, Internet failures, computer equipment  failures, telecommunication equipment failures, other equipment failures,  electrical power failures, strikes, labor disputes, riots, insurrections, civil  disturbances, shortages of labor or materials, fires, floods, storms,  explosions, acts of God, war, governmental actions, orders of domestic or  foreign courts or tribunals, non-performance of third parties, or loss of or  fluctuations in heat, light, or air conditioning. <br />
+  <br />
+              This User Agreement will be governed by and construed in accordance with the  laws of the State of California,  without giving effect to its conflict of laws provisions or my actual state or  country of residence. If for any reason a court of competent jurisdiction finds  any provision or portion of the Registration Agreement to be unenforceable, the  remainder of the Registration Agreement will continue in full force and effect. <br />
+  <br />
+              This User Agreement constitutes the entire agreement between the parties with  respect to the subject matter hereof and supersedes and replaces all prior or  contemporaneous understandings or agreements, written or oral, regarding such  subject matter. Any waiver of any provision of the User Agreement will be effective  only if in writing and signed by SearchSystems.net. <br />
+  <br />
+              PART 13. I agree to implement and maintain reasonable security procedures and  practices appropriate to the nature of the personal information I will receive  from SearchSystems.net, and to protect that personal information from  unauthorized access, destruction, use, modification, or disclosure. <br />
+  <br />
+              PART 14. I make each of the above statements and certifications with respect to  myself personally, as well as on behalf of my employer and any other person or  entity to which I provide reports or information based on data obtained from  SearchSystems.net's databases. I have the authority to act on behalf of all  such other persons or entities in making these statements and certifications. <br />
+  <br />
+              PART 15. I understand that official correspondence must be sent via postal mail  to Pacific Information Resources, Inc., Attn: Customer Service, PO Box 544, Newbury    Park, California 91319. <br />
+  <br />
+              FAILURE TO COMPLY WITH ANY PROVISION OF THIS AGREEMENT BY ANY SUBSCRIBER WILL  RESULT IN IMMEDIATE TERMINATION OF THAT INDIVIDUAL'S ACCOUNT!</p>
+
+<p align="center">
+<a href="${closeWindowUrl}"><img src="images/common/bt-back-small.png" alt="Return" /></a>
+</p>
+
+</jsp:body>
+
+</neon:funnelPage>
+            

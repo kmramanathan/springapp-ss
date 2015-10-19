@@ -1,0 +1,49 @@
+@charset "utf-8";
+/* CSS Document */
+body {background:#d1d1d1 url(../funnel/images/landing/bg-body.jpg) repeat-x top; padding:0; margin:0;}
+
+h1,h2,h3,h4,h5,h,p,li {font-family:Verdana, Arial, Helvetica, sans-serif; font-weight:normal;}
+
+h2 {}
+	#freedownload h2 {font-size:1.1em; color:#116879; font-weight:bold; margin:0; padding:0;}
+	
+p {}
+	#freedownload p {font-size:0.9em; margin:0.25em 0;}
+	#footer p {font-size:0.7em; color:#888; margin:0.25em 0;}
+
+ul {padding:0; margin:0; list-style:none;}
+
+li {list-style-type:none;}
+
+a {}
+	a img {border:none;}
+	#freedownload a {color:#e27703;}
+	#footer a {color:#888;}
+	a:hover {text-decoration:none;}
+
+span {}
+	#freedownload span {color:#e27703;}
+	#freedownload a span {color:#106a7a;}
+
+/* body structure */
+#owrap {background:url(../funnel/images/landing/bg-owrap.jpg) no-repeat top center;}
+	
+	#iwrap {width:950px;}
+	
+	#instantaccess {text-align:left; padding:33px 0 18px 383px;}
+	
+	#freedownload {background:url(../funnel/images/landing/vertical-divider.gif) repeat-y top right;}	
+	
+	#freedownload .wrap {background:url(../funnel/images/common/bg-learn-how-to.png) no-repeat top left; padding:10px 10px 35px 140px;}
+	
+	#acrossusa .wrap {height:82px;}
+		
+		#acrossusa .wrap div, #statewide .wrap div {float:left; display:block;}
+		
+		.price {width:166px;}
+		.button {width:232px;}
+		.sample {width:152px;}
+	
+	#statewide .wrap {height:97px;}
+	
+	#footer {text-align:left; padding:10px 20px;}

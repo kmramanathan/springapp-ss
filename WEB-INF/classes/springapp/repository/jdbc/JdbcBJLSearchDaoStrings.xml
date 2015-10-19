@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<strings>
+
+<!-- table metadata -->
+<string name="tableName">new_bjl_results</string>
+<!-- this table uses user_id as PK -->
+<!-- 
+<string name="seqName">ss_rates_seq</string>
+ -->
+
+<!-- select: expects single row -->
+<string name="sqlSelect">
+<![CDATA[
+SELECT firstname,lastname, FROM new_bjl_results WHERE user_id = ?
+]]>
+</string>
+
+</strings>

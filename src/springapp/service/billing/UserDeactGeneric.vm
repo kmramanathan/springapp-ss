@@ -1,0 +1,32 @@
+Notice of Account Status
+
+Dear Customer,
+
+Your SearchSystems.net account has been suspended.
+
+Account Information:
+
+User ID: ${u.userId}
+Username: ${u.username}
+First Name: ${u.firstName}
+Last Name: ${u.lastName}
+
+We will not attempt to charge your credit card again, so your account 
+will remain inactive until you reactivate it.
+
+If you would like to reactivate your account, please reactivate here 
+https://members.searchsystems.net/change_billing_isUS.php or contact us at the 
+phone number provided below.
+
+Thank you, 
+Search Systems 
+
+----------------- 
+Please do not reply to this email.  If you have any questions or problems 
+you can contact us here: 
+http://www.searchsystems.net/webmaster.php 
+
+Pacific Information Resources, Inc. DBA Search Systems 
+1-800-350-2232 (toll free in the U.S.) or 
++1-805-375-4041 (outside the U.S.) 
+-----------------

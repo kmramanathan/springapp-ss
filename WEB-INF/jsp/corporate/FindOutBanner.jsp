@@ -1,0 +1,2 @@
+<p><img src="/springapp/images/common/ban-access-more.png" alt="access more" width="840" height="155" border="0" usemap="#Map" />
+<map name="Map" id="Map"><area shape="rect" coords="693,94,824,138" href="#" /></map></p>

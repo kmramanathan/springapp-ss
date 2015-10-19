@@ -1,0 +1,174 @@
+
+<%@taglib tagdir="/WEB-INF/tags" prefix="neon"%>
+<%@include file="/WEB-INF/jsp/include.jsp" %>
+
+<neon:PropertyFunnel title="Sample Mail Test" >
+<jsp:attribute name="stylesheet">funnel.css,new-funnel.css,style_02.css</jsp:attribute>
+<jsp:body>
+<script type="text/javascript">
+ 
+	function showCity()
+	{
+		document.getElementById("cityShow").style.display="block";
+		document.getElementById("cityShow1").style.display="block";
+	}
+</script>
+<script type="text/javascript" src="/springapp/js/jquery-1.3.2.min.js"></script>
+<style type="text/css">
+#button2
+{
+	font-size:14px;
+}
+.formfield
+{
+	height: 24px;
+}
+.formfield1
+{
+	height:23px;
+}
+.formfield1 option
+{
+	margin:0;padding:0;
+}
+.style113 {
+color: #FF0000;
+font-size: 10px;
+}
+.style59 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #003366;
+	margin: 0;
+	padding: 0;
+}
+.style721
+	{
+	font-family: Arial, Helvetica, sans-serif;color:black!important;paddibg:0!important;margin:0!important;
+	font-size: 14px;
+	}
+.style71 {font-family: Arial, Helvetica, sans-serif;color:black!important;paddibg:0!important;margin:0!important;
+}
+ .style71 label{ font-size: 13px!important;font-weight: bold}
+.style61 {font-family: Arial, Helvetica, sans-serif; font-size: 12px;color:#000;paddibg:0!important;margin:0!important;}
+.style72 {color: #FF0000!important}
+.style75 {font-size: 14px}
+.style76 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14;
+}
+.style15 {font-size: 0.8em}
+.style77 {font-size: 14}
+.style81 {color: #003366}
+.style83 {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #006633;
+	font-weight: bold;
+}
+.style86 {font-size: 12px}
+.style88 {color: #000000}
+.style90 {font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #FF0000; }
+.style91 {font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #FF0000; }
+.style818{color:#003366!important;margin:0!important;padding:10px 0 10px 9px!important;}
+
+.style819{margin:0!important;padding:0!important;font-size: 12px; color: #000!important;}
+#refdiv{display:none;color:red;position:absolute;width:250px;text-align:justify;font-size: 12px;margin-left:5px;margin-top:-30px;}
+@-moz-document url-prefix() { 
+  #refdiv {
+     margin-left:450px;
+  }
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    #refdiv{ margin-left:445px;}
+}
+
+</style>
+ 
+  <form:form name="crimeForm" method="post">
+    <form:errors path="*" element="div" id="error" cssClass="error-box" />
+<tr valign="top"><td >
+  <table border="0" width="100%" cellpadding="0" cellspacing="0">
+            	<tr>
+            		<td valign="top">
+            			<h1 class="style59">Real Property Search</h1>
+            		</td>
+             		<td>
+             			<p class="style818 style71" ><strong>Search property records by name and get instant results for just $5.</strong></p>
+			  
+			  		</td>
+			   	</tr>
+			   </table>
+<table width="86%" border="0" cellpadding="0" cellspacing="0" align="center">
+          <tr valign="top">
+            <td width="100%" >
+          
+			   
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tr valign="top">
+                    <td width="100%">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td width="182" bgcolor="#B4DDFE"><p class="style721" style="margin:0;padding:0 0 0 8px">
+                        <strong>Search by Name</strong></p></td>
+                        <td width="20" bgcolor="#FFFFFF">&nbsp;</td>
+                        <td width="223" bgcolor="#FFFF99" class="style721"><div align="left">
+                        <a href="/springapp/funnel/realpropAddressSearch.do"><strong>Search by Property Address</strong></a></div></td>
+                      </tr>
+                    </table>
+                      <table width="100%" bgcolor="#B4DDFE" border="0" cellpadding="0" cellspacing="0">
+                       <tr>
+                          <td><span class="style71"><label>To Email Address<strong class="style72">*</strong>:</label>
+                            </span></td>
+                            <td>
+                            <form:input path="toEmail" cssClass="formfield" size="20" maxlength="20" />
+                            </td>
+                           
+                        </tr>
+                       
+                       
+                        <tr>
+                          <td valign="bottom" style="color:red;font-size:11px">
+                                                    
+                            <p>&nbsp;</p>
+                            <td colspan="2" valign="top">
+                            
+                              <input type="submit" name="button2" id="button2" value="Proceed">
+                              
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td colspan="4">&nbsp;</td>
+                        </tr>
+                      </table>
+                    
+                    </td>
+                  </tr>
+                </table>
+             
+            
+              </td>
+            
+          </tr>
+        </table>	
+
+</td></tr>
+</form:form>
+ <script>
+					  $(document).ready(function(){
+							$("#datediv").hide();
+							$("#datebtn").show();
+							$("#datebtn").click(function () {
+							$("#datediv").slideToggle();
+							});
+						});
+						$(document).ready(function(){
+							$("#refdiv").hide();
+							$("#refbtn").show();
+							$("#refbtn").click(function () {
+							$("#refdiv").slideToggle();
+							});
+						});
+
+
+					  </script>
+</jsp:body>
+</neon:PropertyFunnel>

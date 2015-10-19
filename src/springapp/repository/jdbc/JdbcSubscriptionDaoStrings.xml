@@ -1,0 +1,348 @@
+<?xml version="1.0"?>
+<strings>
+
+<!-- table metadata -->
+<string name="tableName">ss_subscriptions</string>
+<string name="seqName">ss_subscriptions_subscription_id_seq</string>
+
+<!-- Flat Rate Subscriptions starts here-->
+<string name="FRtableName">FR_subscriptions</string>
+<string name="FRseqName">FR_subscriptions_seq</string>
+
+<string name="selectFRSubscriptionsByUserId">
+<![CDATA[SELECT * FROM fr_subscriptions WHERE userid = ?]]>
+</string>
+
+<string name="isFRUser">
+<![CDATA[SELECT count(*) FROM fr_subscriptions WHERE userid = ?]]>
+</string>
+
+<string name="isActiveFRUser">
+<![CDATA[SELECT count(*) FROM fr_subscriptions WHERE userid = ? and status != 3]]>
+</string>
+
+<string name="isFRExpired">
+<![CDATA[SELECT status FROM fr_subscriptions WHERE subscriptionid = ?]]>
+</string>
+
+<string name="selectFRSubscriptionByTxnId">
+<![CDATA[SELECT * FROM fr_subscriptions WHERE transactionid = ?]]>
+</string>
+
+<string name="selectFRSubscriptionBySubId">
+<![CDATA[SELECT * FROM fr_subscriptions WHERE subscriptionid = ?]]>
+</string>
+
+<string name="deleteFRSubscription">
+<![CDATA[delete FROM fr_subscriptions WHERE subscriptionid = ?]]>
+</string>
+
+<string name="selectValidFRSubsByUserId">
+<![CDATA[SELECT * FROM fr_subscriptions WHERE daysavailable > 0 and status != 3 and userid = ?]]>
+</string>
+
+<string name="selectFPAvailableSearch">
+<![CDATA[SELECT findpeoplesearches FROM fr_subscriptions WHERE subscriptionid = ?]]>
+</string>
+
+<string name="selectBGCAvailableSearch">
+<![CDATA[SELECT criminalsearches FROM fr_subscriptions WHERE subscriptionid = ?]]>
+</string>
+
+<string name="selectPlanTypeIdBySubId">
+<![CDATA[SELECT plantypeid FROM fr_subscriptions WHERE subscriptionid = ?]]>
+</string>
+
+<string name="selectFRMonthlySubscriptions">
+<![CDATA[
+SELECT fr.userid, ss.username FROM fr_subscriptions fr 
+JOIN ss_users ss ON fr.userid = ss.user_id WHERE fr.transactionid = ?
+GROUP BY fr.userid, ss.username;
+]]>
+</string>
+
+<string name="selectOnExpireySubscriptions">
+<![CDATA[
+SELECT * 
+FROM fr_subscriptions 
+WHERE enddate < now() and status = 1
+]]>
+</string>
+
+<string name="selectFRDailyExpireySubscriptions">
+<![CDATA[
+SELECT * 
+FROM fr_subscriptions 
+WHERE nextdate < now() and status = 1
+]]>
+</string>
+
+<string name="selectActiveFRSubsByUserId">
+<![CDATA[
+SELECT * FROM fr_subscriptions f1 
+JOIN (SELECT plantypeid, MIN(createdate) as mdate 
+FROM fr_subscriptions WHERE status = 1 and userid = ?
+AND daysavailable > 0 GROUP BY plantypeid) f2 ON f1.plantypeid = f2.plantypeid 
+AND f1.createdate = f2.mdate AND f1.userid = ?
+]]>
+</string>
+
+<string name="selectPipeFRSubsByUserId">
+<![CDATA[
+SELECT * FROM fr_subscriptions f1 
+JOIN (SELECT plantypeid, MIN(createdate) as mdate 
+FROM fr_subscriptions WHERE status = 0 and userid = ?
+AND daysavailable > 0 GROUP BY plantypeid) f2 ON f1.plantypeid = f2.plantypeid 
+AND f1.createdate = f2.mdate AND f1.userid = ?
+]]>
+</string>
+
+<string name="updateFRSubsPipeToActive">
+<![CDATA[
+UPDATE fr_subscriptions
+SET status = 1, startdate = now(), enddate = (now() + CAST((:validDays) AS interval)), 
+	prevdate = now(), nextdate = (now() + '1 day')  
+WHERE subscriptionid =:subId
+]]>
+</string>
+
+<string name="updateFRSubscriptionActive">
+<![CDATA[
+UPDATE fr_subscriptions
+SET status =:status, startdate =:startdate, enddate =:enddate, prevdate =:prevdate, 
+	nextdate =:nextdate, availablesearches =:availablesearches, findpeoplesearches =:findpeoplesearches, 
+	criminalsearches =:criminalsearches, daysavailable =:daysavailable 
+WHERE subscriptionid = :subscriptionid
+]]>
+</string>
+
+<string name="updateFPAvailableSearch">
+<![CDATA[
+UPDATE fr_subscriptions SET findpeoplesearches = (findpeoplesearches - 1), availablesearches = (availablesearches - 1)  
+WHERE subscriptionid = ?
+]]>
+</string>
+
+
+<string name="updateOnExpireySubscriptions">
+<![CDATA[
+UPDATE fr_subscriptions SET status = 3, daysavailable = 0 WHERE enddate < now() and status = 1
+]]>
+</string>
+
+<string name="updateBGCAvailableSearch">
+<![CDATA[
+UPDATE fr_subscriptions SET criminalsearches = (criminalsearches - 1), availablesearches = (availablesearches - 1)  
+WHERE subscriptionid = ?
+]]>
+</string>
+
+<!-- Flat Rate Subscriptions Ends here-->
+
+
+
+<!-- select: 1 row -->
+<!-- uses ? place holder to simplify java code -->
+<string name="selectSubscriptionBySubscriptionId">
+<![CDATA[SELECT * FROM ss_subscriptions WHERE subscription_id = ?]]>
+</string>
+
+<string name="selectSubscriptionBySubscriptionIdCheckNextBill">
+<![CDATA[
+SELECT * 
+FROM ss_subscriptions 
+WHERE subscription_id = ?
+  AND next_bill_date < now()
+]]>
+</string>
+
+<!-- select: 0 or more rows -->
+<!-- uses ? place holder to simplify java code -->
+<string name="selectSubscriptionsByUserId">
+<![CDATA[SELECT * FROM ss_subscriptions WHERE user_id = ?]]>
+</string>
+
+<string name="selectSubscriptionsByUsername">
+<![CDATA[
+SELECT S.* 
+FROM ss_subscriptions S 
+JOIN ss_users U USING (user_id)
+WHERE U.username = ?
+]]>
+</string>
+
+<!-- update -->
+<string name="updateSubscription">
+<![CDATA[
+UPDATE ss_subscriptions
+SET 
+  active = :active,
+  
+WHERE subscription_id = :subscriptionId
+]]>
+</string>
+
+<string name="updateSubscriptionActive">
+<![CDATA[
+UPDATE ss_subscriptions
+SET active = :active
+WHERE subscription_id = :subscriptionId
+]]>
+</string>
+
+<string name="deleteSubscription">
+<![CDATA[
+DELETE FROM ss_subscriptions
+WHERE subscription_id = :subscriptionId
+]]>
+</string>
+
+<string name="advanceSubscriptionBillDates">
+<![CDATA[
+UPDATE ss_subscriptions
+SET 
+  prev_bill_date = next_bill_date,
+  next_bill_date = next_bill_date + CAST((:interval) AS interval)
+WHERE subscription_id = :subscriptionId
+]]>
+</string>
+
+<string name="getSubscriptionsDueForBilling">
+<![CDATA[
+SELECT S.subscription_id, S.user_id, U.username, 
+  R.rate_id, R.rate_name, R.rate_description, R.recurring_price, R.bill_in_advance,
+  R.recurring_units, TP.time_period_name,
+  S.prev_bill_date, S.next_bill_date
+FROM ss_subscriptions S
+JOIN ss_rates R on S.rate_id = R.rate_id
+JOIN ss_users U on S.user_id = U.user_id
+JOIN ss_time_periods TP on R.recurring_period = TP.time_period_id
+WHERE 
+  U.inactive = FALSE AND 
+  U.disabled = FALSE AND
+  S.active = true AND
+  S.rebill = true AND
+  S.next_bill_date < (now() + CAST((:interval) AS interval) )
+ORDER BY S.subscription_id
+]]>
+</string>
+
+<string name="getSubscriptionsDueForBillingByRate">
+<![CDATA[
+SELECT S.subscription_id, S.user_id, U.username, 
+  R.rate_id, R.rate_name, R.rate_description, R.recurring_price, R.bill_in_advance,
+  R.recurring_units, TP.time_period_name,
+  S.prev_bill_date, S.next_bill_date
+FROM ss_subscriptions S
+JOIN ss_rates R on S.rate_id = R.rate_id
+JOIN ss_users U on S.user_id = U.user_id
+JOIN ss_time_periods TP on R.recurring_period = TP.time_period_id
+WHERE 
+  R.rate_id = :rateId AND
+  U.inactive = FALSE AND 
+  U.disabled = FALSE AND
+  S.active = true AND
+  S.rebill = true AND
+  S.next_bill_date < (now() + CAST((:interval) AS interval) )  
+ORDER BY S.subscription_id
+]]>
+</string>
+
+<string name="getSubscriptionSalesForecast">
+<![CDATA[
+SELECT R.rate_id, R.rate_name, COUNT(S.subscription_id) as total_subs, SUM(R.recurring_price) as total_amount
+FROM ss_subscriptions S
+JOIN ss_rates R on S.rate_id = R.rate_id
+JOIN ss_users U on S.user_id = U.user_id
+JOIN ss_time_periods TP on R.recurring_period = TP.time_period_id
+WHERE 
+  U.inactive = FALSE AND 
+  U.disabled = FALSE AND
+  S.active = true AND
+  S.rebill = true AND
+  S.next_bill_date < (now() + CAST((:interval) AS interval) ) 
+GROUP BY R.rate_id,  R.rate_name
+ORDER BY R.rate_id,  R.rate_name
+]]>
+</string>
+
+<string name="getSubscriptionIdsDueForBilling">
+<![CDATA[
+SELECT S.subscription_id
+FROM ss_subscriptions S
+JOIN ss_rates R on S.rate_id = R.rate_id
+JOIN ss_users U on S.user_id = U.user_id
+JOIN ss_time_periods TP on R.recurring_period = TP.time_period_id
+WHERE 
+  U.inactive = FALSE AND 
+  U.disabled = FALSE AND
+  S.active = true AND
+  S.rebill = true AND
+  S.next_bill_date < (now() + CAST((:interval) AS interval) )
+ORDER BY S.subscription_id
+]]>
+</string>
+
+
+
+<string name="getInactiveSubIdsForNoRebill">
+<![CDATA[
+SELECT subscription_id
+FROM ss_subscriptions S
+JOIN ss_users U on S.user_id = U.user_id
+WHERE 
+  U.inactive = false AND
+  U.disabled = false AND
+  S.active = true AND
+  S.rebill = false AND
+  S.next_bill_date < (now() + CAST((:interval) AS interval) )
+]]>
+</string>
+
+<string name="getNoRebillSubscriptionsSalesForecastSummary">
+<![CDATA[
+SELECT R.rate_id, R.rate_name, COUNT(S.subscription_id) as total_subs, SUM(R.recurring_price) as total_amount
+FROM ss_subscriptions S
+JOIN ss_rates R on S.rate_id = R.rate_id
+JOIN ss_users U on S.user_id = U.user_id
+JOIN ss_time_periods TP on R.recurring_period = TP.time_period_id
+WHERE 
+  S.active = true AND
+  S.rebill = false AND
+  S.next_bill_date < (now() + CAST((:interval) AS interval) )
+GROUP BY R.rate_id,  R.rate_name
+ORDER BY R.rate_id,  R.rate_name
+]]>
+</string>
+
+<string name="getNoRebillSubscriptionsSalesForecastByRate">
+<![CDATA[
+SELECT S.subscription_id, S.user_id, U.username, 
+  R.rate_id, R.rate_name, R.rate_description, R.recurring_price, R.bill_in_advance,
+  R.recurring_units, TP.time_period_name,
+  S.prev_bill_date, S.next_bill_date
+FROM ss_subscriptions S
+JOIN ss_rates R on S.rate_id = R.rate_id
+JOIN ss_users U on S.user_id = U.user_id
+JOIN ss_time_periods TP on R.recurring_period = TP.time_period_id
+WHERE 
+  R.rate_id = :rateId AND
+  S.active = true AND
+  S.rebill = false AND
+  S.next_bill_date < (now() + CAST((:interval) AS interval) )  
+ORDER BY S.subscription_id
+]]>
+</string>
+
+
+<string name="setInactiveForNoRebill">
+<![CDATA[
+UPDATE ss_subscriptions
+SET active = false
+WHERE 
+  active = true AND
+  rebill = false AND
+  next_bill_date < now()
+]]>
+</string>
+</strings>

@@ -1,0 +1,160 @@
+@charset "utf-8";
+/* CSS Document */
+body {background:#ddd url(../images/newfunnel/bg-body.gif) repeat-x; padding:0; margin:0;}
+
+h1,h2,h3,h4,h5,h6 {font-family:Tahoma, Arial, Helvetica, sans-serif; font-weight:normal;}
+p,blockquote,cite,li,dt,dd,label,span,input,textarea,option,td {
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:normal;
+	padding: 6px;
+	color: #000000;
+	list-style-position: outside;
+	list-style-image: none;
+	list-style-type: disc;
+}
+code {font-family:Courier New, Courier, monospace; font-weight:normal;}
+
+h3 {font-size:1.3em; color:#036; margin:0.5em 0;}
+
+	#formwrapper h3 {margin:0;}
+
+p {font-size:0.9em; line-height:1.444em; margin:0.5em 0;}
+
+	#colone p {color:#036;}
+	#colone .twocol p {margin:0.5em 1em;}
+	
+	#formwrapper p {color:#666; margin:0;}
+	
+	p.note {float:right;}
+
+	#testimonials p {font-size:0.8em; color:#333; margin:0.35em 0;}
+	#testimonials p.credit {font-size:0.75em; color:#888; font-style:italic; text-align:right;}
+
+li {font-size:0.9em;}
+
+	#colone .twocol li {font-size:1em; background:url(../images/newfunnel/bullet-yellow-check.gif) no-repeat center left; padding:6px 2px 6px 37px; list-style-type:none; display:block;}
+	#options li {list-style-type:none;}
+	
+	#formwrapper li {height:25px; color:#2c4669; padding-bottom:3px; list-style-type:none; display:block;}
+	#formwrapper #submit li {height:auto; margin:0em 0.5em; float:left;}
+	#formwrapper li.checkbox {font-size:0.7em;}
+
+ul {}
+
+	.twocol ul {padding:0; margin:0;}
+	#options ul {padding:0 15px 20px 40px; margin:0; display:block;}
+	ul.ccdetails {background:url(../images/newfunnel/bg-credit-card-info.gif) no-repeat top right; display:block;}
+
+a {}
+	a img {border:none;}
+	a:hover {text-decoration:none;}
+
+	#colone a {
+	color:#003366;
+	padding: 4px;
+}
+	
+	#coltwo a {color:#369;}
+
+label {font-size:0.9em;}
+
+	#options label strong {color:#c60;}
+	
+	#formwrapper li label {width:155px; text-align:right; padding:2px 2px; display:block; float:left;}
+
+span {}
+
+	span.req {font-size:1.2em; color:#c30; padding:0;}
+
+strong {}
+	
+	.checkbox strong {color:#c63;}
+
+/*form elements*/
+form {padding:0; margin:0;}
+	
+	input {font-size:0.9em; padding:2px;}
+		input.formfield, select.formfield {background:#fafafa url(../images/newfunnel/bg-form-fields.gif) repeat-x; border:1px solid #d6d6d6;}
+
+
+/*site body*/
+#owrap {width:950px;}
+		
+		#masthead {height:51px; text-align:left;}
+		
+		#maintable {background:#fff;}
+		
+			#colone {
+	width:685px;
+	background:url(../images/newfunnel/bg-col-one.jpg) no-repeat top left;
+	padding: 6px;
+	color: #000000;
+}
+			
+				#colone .wrap {background:url(../images/newfunnel/bg-col-one-wrap.jpg) no-repeat bottom right; }
+				#colone .wrap .innerwrap {background:url(../images/newfunnel/divider-3px-horizontal.gif) repeat-x bottom; padding:25px;}
+				
+				#options {background:url(../images/newfunnel/divider-3px-horizontal.gif) repeat-x bottom; padding:1px;}
+					#options .wrapper {background:url(../images/newfunnel/bg-options.gif) no-repeat bottom; }
+				
+				.buttons {padding:10px 30px; clear:left;}
+				
+				#formwrapper {padding:10px 50px;}
+				
+				.arrow {background:url(../images/newfunnel/bg-twocol-arrow.gif) no-repeat center bottom; padding-bottom:70px;}
+				
+				#security {background:url(../images/newfunnel/divider-3px-horizontal.gif) repeat-x bottom; padding:1px;}
+			
+				#colone .divider {height:1px; font-size:0.1em; background:url(../images/newfunnel/divider-3px-horizontal.gif) repeat-x top;}
+			
+			#coltwo {width:265px; background:url(../images/newfunnel/divider-3px-vertical.gif) repeat-y left;}
+			
+				#photo {background:url(../images/newfunnel/divider-3px-horizontal.gif) repeat-x bottom; text-align:center; padding:1px;}
+				
+				#testimonials {background:url(../images/newfunnel/bg-testimonials.gif) no-repeat top right; padding:78px 25px 30px 25px;}
+	
+
+/* two columns */
+.twocol {
+	width:49.9%;
+	float:left;
+	display:block;
+	padding-top: 3px;
+	padding-right: 0;
+	padding-bottom: 3px;
+	padding-left: 0;
+	list-style-position: inside;
+	list-style-image: url(../images/newfunnel/bullet-yellow-check.gif);
+	list-style-type: square;
+}
+	.buttons .twocol {text-align:center; padding:5px 0;}
+	
+/* borders */
+.rightborder {background:url(../images/newfunnel/divider-3px-vertical.gif) repeat-y right;}
+
+/*clearing elements*/
+.cleft {clear:left;}
+.cright {clear:both;}
+.cboth {clear:both;}
+
+/*newfunnel navigation*/
+#mainnav li, #footer li {list-style-type:none;}
+#mainnav ul, #footer li {list-style:none; padding:0; margin:0;}
+
+/*drop down navigation - please refer to ddnav.js for script */
+	#nav li ul {top:1em; left:0; position:absolute; display:none;}
+	#nav li > ul {top:auto; left:auto;}
+	#nav li:hover ul, #nav li.over ul {display:block;}	
+
+/*footer navigation*/
+#footer {background:url(../images/newfunnel/bg-footer.gif) repeat-x top; padding:15px 0;}
+	#footer .wrap {width:920px; text-align:left;}
+	#footer ul.security {padding:0; margin:0;}
+	#footer ul {padding:0; margin:0.3em 0;}
+		#footer ul.secondary {padding:0; margin:0;}
+	#footer li {font-size:0.75em; color:#777; display:inline;}
+	#footer .security li {display:block; float:right;}
+	#footer a {color:#777;}
+	.footer{color:#000000; font-size:13px; padding-bottom:10px;}
+	
+	

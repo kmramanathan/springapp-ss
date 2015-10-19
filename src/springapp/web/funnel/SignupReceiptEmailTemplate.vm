@@ -1,0 +1,35 @@
+Thank you for using SearchSystems.net. Below is your receipt. This transaction
+was processed automatically via our Internet website.
+
+========= ORDER INFORMATION =========
+
+Invoice : ${invoiceNumber}
+Description : ${description}
+Automatic Billing: ${recurring}
+Amount : $${amount} (USD)
+Payment Method : Credit Card
+
+========= BILLING INFORMATION =========
+
+Customer ID : ${u.userId}
+Username : ${u.username}
+First Name : ${u.firstName}
+Last Name : ${u.lastName}
+Company : ${cc.company}
+Address : ${cc.address1}
+City : ${cc.city}
+State/Province : ${cc.state}
+Zip/Postal Code : ${cc.postalCode}
+Country : ${countryCode}
+Phone : ${cc.phone}
+E-Mail : ${u.email}
+
+-----------------
+Please do not reply to this email.  If you have any questions or problems you
+can contact us here:
+http://publicrecords.searchsystems.net/contact.php
+
+Search Systems, Inc.
+1-800-350-2232 (toll free in the U.S.) or
++1-805-375-4041 (outside the U.S.)
+-----------------

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-init-method="init"
+		xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:context="http://www.springframework.org/schema/context"
+        
+        xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+        
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <!-- the parent application context definition for the springapp application -->
+	<!-- enable annotation-based config -->
+	<context:component-scan base-package="springapp" />
+
+	<!-- aspect stuff -->
+	<aop:aspectj-autoproxy/>
+	<!-- 
+	<aop:config>
+        <aop:advisor pointcut="execution(* *..UserManager.*(..))" advice-ref="txAdvice"/>
+        <aop:advisor pointcut="execution(* *..UserDao.*(..))" advice-ref="txAdvice"/>
+    </aop:config>
+-->
+
+	<tx:annotation-driven />
+	<!-- 
+    <tx:advice id="txAdvice">
+        <tx:attributes>
+        	<tx:method name="*" />
+            <tx:method name="get*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+ -->
+    
+    <!-- configure properties for use within this file -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:javamail.properties</value>
+                <value>classpath:neon.properties</value>
+                <value>classpath:webservice.properties</value>
+            </list>
+        </property>
+    </bean> 
+    	
+	<!-- JDBC -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+       
+    	
+   <!-- Torque -->
+    <bean id="torque" class="springapp.manager.TorqueManager" init-method="init" />
+
+	<!-- JavaMail -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${mail.host}"/>
+	</bean>
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+      <property name="velocityProperties">
+         <value>
+            resource.loader=class
+            class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+         </value>
+      </property>
+   </bean>
+	
+	
+	    
+    <!-- this manages SQL/JDBC txns, not CC txns -->
+   	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <!-- Spring and Hibernate communication with database -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+  		<property name="dataSource">
+     		<ref bean="dataSource"/>
+   		</property>
+  		<property name="configLocation">
+    		<value>classpath:hibernate.cfg.xml</value>
+  		</property>
+  		<property  name="configurationClass">
+    		<value>org.hibernate.cfg.AnnotationConfiguration</value>
+  		</property>        
+  		<property name="hibernateProperties">
+    		<props>
+    			<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+      			<prop key="hibernate.bytecode.provider">javassist</prop>
+      			<prop key="hibernate.cache.use_second_level_cache">false</prop>
+      			<prop key="hibernate.hbm2ddl.auto">update</prop>
+    		</props>
+  		</property>
+	</bean>
+    
+   	<!-- load alternate log4j configs -->
+   	<bean id="log4jDirectConfigurer" class="springapp.manager.Log4jDirectConfigurer">
+   		<!-- <property name="location" value="${logging.location}" /> -->
+   		<property name="location" value="classpath:live.log4j.properties" />
+   		<property name="refreshInterval" value="0" />
+   	</bean>
+
+	   	
+   	<!-- scheduling support -->
+   	<!-- 
+   	A job needs to be split into 2 parts: the core job and the runner. The core job 
+   	can be created as a typical class with the @Service or @Component annotation, and 
+   	additional beans can be autowired into it, so it does not need to be defined here. 
+   	
+   	The runner must be defined here and does not support autowiring. The runner must
+   	have access to the app context so that it can obtain the core job bean by name.
+   	-->
+    
+    <!-- run daily billing job at 6:00 AM -->
+    <!--  
+	<bean name="dailyBillingJobRunner" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="springapp.service.billing.DailyBillingJobRunner" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="neon.host.name" value="${neon.host.name}" />
+			</map>
+		</property>
+	</bean>
+	<bean id="dailyBillingJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	    <property name="jobDetail" ref="dailyBillingJobRunner" />
+	    <property name="cronExpression" value="0 0 6 * * ?" />
+	</bean>
+	-->
+	<!-- runs Every 15 min for Flat Rate -->
+	<!--  	
+	<bean id="FlatRateJobRunner" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+  		<property name="targetObject" ref="serviceObject"/>
+  		<property name="targetMethod" value="FlatRateJobs"/>
+	</bean>
+	<bean id="serviceObject" class="springapp.service.billing.FRJobRunner"/>
+	<bean id="FRcronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+  		<property name="jobDetail" ref="FlatRateJobRunner"/>
+	    <property name="cronExpression" value="0 0/15 * * * ?"/> 	    
+	</bean>
+	 -->
+	
+	<!-- message resources -->  
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	   	<property name="basename" value="messages"/>
+	</bean>
+ 	
+	<!-- run test job every minute -->
+	<!-- dont forget to set or comment the cron trigger in the scheduler -->
+	<!-- 
+	<bean name="testJobRunner" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="springapp.service.billing.TestJobRunner" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="neon.host.name" value="${neon.host.name}" />
+			</map>
+		</property>
+	</bean>
+	<bean id="testJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	    <property name="jobDetail" ref="testJobRunner" />
+	    <property name="cronExpression" value="0 */1 * * * ?" />
+	</bean>
+ 	-->
+
+     
+	<!-- scheduler for triggers -->
+	<!-- 
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	    <property name="triggers">
+	        <list>
+	            <ref bean="dailyBillingJobCronTrigger" />
+	            <ref bean="FRcronTrigger"/>      
+	        </list>
+	    </property>
+	    <property name="applicationContextSchedulerContextKey">
+            <value>applicationContext</value>
+    	</property>	    
+	</bean>
+	-->
+	
+	
+</beans>

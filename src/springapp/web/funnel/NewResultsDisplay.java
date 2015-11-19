@@ -735,7 +735,7 @@ public class NewResultsDisplay extends AbstractFunnelController {
 						map.addAttribute("ssnState", searchData.getBgcState());
 						String sDOB= searchData.getBgcDobMonth()+"/"+ searchData.getBgcDobDay() +"/"+searchData.getBgcDobYear();
 						map.addAttribute("ssnDOB", sDOB);
-						map.addAttribute("ssnNumber", searchData.getBgcSsn());
+						//map.addAttribute("ssnNumber", searchData.getBgcSsn());
 						return newzeroResultsView;
 					}
 					String searchName =searchData.getBgcFirstName()+ " " +searchData.getBgcLastName() ;
@@ -753,8 +753,7 @@ public class NewResultsDisplay extends AbstractFunnelController {
 						map.addAttribute("ssnState", ssnSearchData.getBgcState());
 						String sDOB= ssnSearchData.getBgcDobMonth()+"/"+ ssnSearchData.getBgcDobDay() +"/"+ssnSearchData.getBgcDobYear();
 						map.addAttribute("ssnDOB", sDOB);
-						map.addAttribute("ssnNumber", ssnSearchData.getBgcSsn());
-						
+						//map.addAttribute("ssnNumber", ssnSearchData.getBgcSsn());
 					}
 					return newresultDetailsView;
 				

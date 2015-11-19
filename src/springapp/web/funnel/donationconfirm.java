@@ -24,7 +24,7 @@ import net.authorize.data.xml.Payment;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.tomcat.util.net.URL;
+//import org.apache.tomcat.util.net.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

@@ -10,7 +10,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.jasper.runtime.ProtectedFunctionMapper;
+//import org.apache.jasper.runtime.ProtectedFunctionMapper;
 import org.apache.torque.TorqueException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

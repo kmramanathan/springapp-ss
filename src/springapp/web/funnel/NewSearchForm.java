@@ -321,13 +321,6 @@ public class NewSearchForm extends AbstractFunnelController {
 			this.bgcState = bgcState;
 		}
 		
-		public String getBgcSsn() {
-			return bgcSsn;
-		}
-		public void setBgcSsn(String bgcSsn) {
-			this.bgcSsn = bgcSsn;
-		}
-		
 		public String getBgcFirstName() {
 			return bgcFirstName;
 		}

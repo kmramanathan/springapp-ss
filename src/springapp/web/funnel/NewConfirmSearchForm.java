@@ -98,11 +98,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 	
 	private String getSearchTypeString(SearchFormCommand searchfc) {
 		String searchType;
-		if(searchfc.getBgcSsn()!= null)
-		{
-			searchType = "Criminal Alias Search";
-		}		
-		else if (searchfc.getNationwideSearch()) {
+		if (searchfc.getNationwideSearch()) {
 			searchType = "Criminal Search Nationwide";
 		} else {
 			searchType = "Criminal Search in State (" + searchfc.getBgcState() + ")";
@@ -664,12 +660,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			{
 				searchDOB = personalfc.getBgcDobMonth() + "/" +personalfc.getBgcDobDay() +"/"+ personalfc.getBgcDobYear();
 			}
-			if(personalfc.getBgcSsn()!=null)
-			{
-				searchSSN = personalfc.getBgcSsn();
-			}
 			map.addAttribute("msg", msg);
-			map.addAttribute("searchSSN", searchSSN);
 			map.addAttribute("searchDOB", searchDOB);
 			map.addAttribute("NationWide", personalfc.getNationwideSearch());
 		}
@@ -742,6 +733,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 		// upgraded by vivek for crimial searches 21-03-2012
 		
 		SearchFormCommand personalfc = (SearchFormCommand) session.getAttribute("searchFormCommand");
+		AliasSearchFormCommand aliasfc =(AliasSearchFormCommand) session.getAttribute("aliasSearchFormCommand");
 		BJLSearchFormCommand bjlsfc = (BJLSearchFormCommand) session.getAttribute("bjlSearchFormCommand");
 		//eviction  programmed by vivek 26 may 2012
 		EvictionSearchFormCommand esfc=(EvictionSearchFormCommand) session.getAttribute("evictionSearchFormCommand");
@@ -765,7 +757,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			return landingHome;
 		}
 		// at least 1 of the other two must be present also
-		if ((bjlsfc == null) && (personalfc == null) && (rpfc == null) && (rpafc == null)  && (esfc == null) && (ebsfc == null) && (cisfc == null) && (cbsfc == null) && (nsfc == null) && (crimfc == null)) 
+		if ((bjlsfc == null) && (personalfc == null) && (aliasfc == null) && (rpfc == null) && (rpafc == null)  && (esfc == null) && (ebsfc == null) && (cisfc == null) && (cbsfc == null) && (nsfc == null) && (crimfc == null)) 
 		{
 			return landingHome;
 		}
@@ -803,7 +795,6 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 				
 				try
 				{		
-					logger.info("NewSearchForm_lin runSrch-->779ssn"+personalfc.getBgcSsn());
 					//Doing Criminal Personal Searches changed by vivek 21-03-2010
 					int responseId = runCriminalSearch(session, map, status, personalfc, t, u);
 
@@ -824,6 +815,26 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 					return newvwSearchError;			
 				} 
 				
+			}
+			else if(aliasfc != null)
+			{
+				//Doing bjl Search				
+				try {				
+					logger.error("Alias Search -  Search about to be done: for noCreditCard");
+					int responseId = runAliasSearch(session, map, status, aliasfc, t, u);
+					
+					// req id is set in runSearch()
+					session.setAttribute("responseId", responseId);
+					session.setAttribute("transactionId", t.getTransactionId());
+					session.setAttribute("searchPrice", aliasfc.getPrice());
+					
+					return newresultsRedir;
+				} catch (SearchException te) 
+				{		
+					logger.error(te);
+					logger.error("Alias Search Error for monthly User : " + u.getUsername() + ":" + u.getUserId());
+					return newvwSearchError;			
+				} 
 			}
 			else if(bjlsfc != null)
 			{
@@ -1943,7 +1954,114 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			}
 			
 			// end of Criminal member search ends
-		}	
+		}
+		
+		else if(aliasfc != null) {
+
+			// do criminal  searches
+	
+			
+			category=30;
+			subCategory=301;
+			
+			BigDecimal amount = aliasfc.getPrice();			
+			String description="";
+			
+			
+			if (aliasfc.getNationwideSearch()) {
+				description = "Alias US Search - Nationwide";				
+			} else {
+				String state = "(" + aliasfc.getBgcState() + ")";
+				description = "Alias Single State Search - State " + state;				
+			}
+			
+			// charge card first, if fails don't bother with search and register
+			Transaction t = new Transaction();
+			
+			if(member){
+				//XXX change test mode
+				//t = billingManager.runTransactionNoCvv(u, cc, amount, TxnType.AUTH_CAPTURE, description, u.getUserId(), category, subCategory,true);
+				//XXX change live mode
+				t = billingManager.runTransactionNoCvv(u, cc, amount, TxnType.AUTH_CAPTURE, description, u.getUserId(), category, subCategory);
+			}
+			else
+			{
+				try
+				{
+					t = userManager.registerNewUserBySearch(u, cc, rfc.getCcAuthCode(), amount, category, subCategory, rfc.getTest());							
+					
+					User regUser = userManager.getUserByUsername(u.getUsername());
+					CreditCard regcc = userManager.getCreditCard(regUser.getUserId());
+					
+					session.setAttribute("creditCardObj", regcc);
+					session.setAttribute("authenticated", "true");
+					session.setAttribute("username", regUser.getUsername());
+					session.setAttribute("userId", regUser.getUserId());
+					session.setAttribute("userEmail", regUser.getEmail());
+					
+				}catch (UserManagerException e) {
+					// bleh, how do we figure out the reason for the ex?
+					if (e.getType() == Type.CC_FAILURE) {
+						map.addAttribute("cardDeclineReason", e.getMessage());
+						return newcardDeclinedView;					
+					} else {
+						// XXX may need to void txn here
+						logger.error("Registeration failed, may need to manually void txn!");
+						logger.error("Username: " + u.getUsername());
+						logger.error("CC Name: " + cc.getName());
+						logger.error("CC Last 4: " + cc.getLastDigits());
+						logger.error(e);
+						
+						// check ex type to verify
+						return newcardDeclinedView;
+					}				
+				}			
+			}
+			
+			if (t.getTransactionStatusId() == BillingManager.txnApproved) {
+				try 
+				{				
+					//logger.error("onSubmt:Status@: "+ status );
+					logger.info("Alias Search Confrmd Seach : Transaction approved - Search starts here");
+					int responseId = runAliasSearch(session, map, status, aliasfc, t, u);
+
+					if(member)
+						sendSearchReceiptEmail(u.getFirstName(), u.getEmail(), t, description, String.valueOf(cc.getLastDigits()));
+					else
+					{	
+						String ccN = rfc.getCcNumber();					
+						String ccLast4 = ccN.substring(ccN.length() - 4, ccN.length());
+						sendSearchReceiptEmail(rfc.getName(), rfc.getEmail(), t, description, ccLast4);
+					}
+
+					// req id is set in runSearch()
+					session.setAttribute("responseId", responseId);
+					session.setAttribute("transactionId", t.getTransactionId());
+					session.setAttribute("searchPrice", aliasfc.getPrice());
+
+					return newresultsRedir;
+				} catch (Exception te) {			
+					// void charge
+					if (!billingManager.voidTransaction(cc, t)) {
+						// maybe send email if this fails?
+						logger.error("Failed to void transaction: " + t.getTransactionId());
+						logger.error("Username: " + u.getUsername());
+						logger.error("CC Name: " + t.getCcName());
+						logger.error("CC Last 4: " + t.getCcLastDigits());						
+					}
+		
+					// send to error page
+					return newvwSearchError;			
+				} 
+			} else {
+				map.addAttribute("cardDeclineReason", t.getBankResponseReasonText());
+				map.addAttribute("search", true);
+				return newcardDeclinedView;
+			}
+			
+			// end of alias  searches
+		
+		}
 		
 		/**
 		 * End National Security Search for Member
@@ -2085,11 +2203,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 		
 		int productId = 4;
 		String jurisdiction;
-		if(sfc.getBgcSsn()!=null)
-		{
-			jurisdiction = "SSN";
-		}
-		else if (sfc.getNationwideSearch()) 
+		if (sfc.getNationwideSearch()) 
 		{			
 			jurisdiction = "Nationwide";
 		} else 
@@ -2103,7 +2217,6 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 		long ssnRequestId=0;
 		int responseId=0;
 		//bgcSSNManager
-		logger.info("NwCfrm 2080+ssn"+sfc.getBgcSsn());
 		/*if(sfc.getBgcSsn()!=null)
 		{
 			logger.info("NewCfrm lin 2078 SSN if");
@@ -2137,6 +2250,67 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 		//return resultsView;
 		return responseId;
 	}// End Criminal  Searches 
+	
+	// Begin Alias Search
+		protected int runAliasSearch(HttpSession session, ModelMap map, SessionStatus status, 
+				 AliasSearchFormCommand sfc, Transaction t, User u) 
+		throws SearchException 
+		{
+			
+			if (sfc.getTest()) 
+			{
+				return TEST_CRIMINAL_RESULT_ID;
+			}
+			
+			int productId = 4;
+			String jurisdiction;
+			if (sfc.getNationwideSearch()) 
+			{			
+				jurisdiction = "Nationwide";
+			} else 
+			{
+				productId = 5;
+				jurisdiction = sfc.getBgcState();
+			}	
+
+			//sfc.setBgcDobYear(sfc.getBgcDobRangeBaseYear());
+			int requestId=0;
+			long ssnRequestId=0;
+			int responseId=0;
+			//bgcSSNManager
+			/*if(sfc.getBgcSsn()!=null)
+			{
+				logger.info("NewCfrm lin 2078 SSN if");
+				ssnRequestId = bgcSSNSearchManager.queryFunnel(u.getUserId(),t.getTransactionId(),session,sfc); 
+				responseId= (int) ssnRequestId;
+				logger.info("NwCfrm ssnRequestId 2081+ssn"+ ssnRequestId);
+			}*/
+			//else
+			{
+			requestId = bgcManager.prepareSearch(u.getUserId(), 
+					sfc.getBgcFirstName(), sfc.getBgcMiddleInitial(), sfc.getBgcLastName(), 
+					sfc.getBgcFirstNameExact(), sfc.getBgcLastNameExact(), 
+					sfc.getBgcDobMonth(), sfc.getBgcDobDay(), sfc.getBgcDobYear(), 
+					5, false, sfc.getBgcMatchMissingDates(), 
+					productId, false, jurisdiction, sfc.getBgcPurpose(), sfc.getBgcReferenceCode());
+			
+
+			BGCResponseBean response = bgcManager.runSearch(requestId);
+			responseId = response.getBgcResponseId();
+			logger.info("responseId:--> " + responseId);
+
+			// record the txn id
+			bgcManager.setTransactionId(responseId, (int) t.getTransactionId());
+					
+			}
+			
+
+			// finalize charge?
+			// XXX todo
+			
+			//return resultsView;
+			return responseId;
+		}// End Criminal  Searches 
 	
 	//Begin Real Property Name search
 	

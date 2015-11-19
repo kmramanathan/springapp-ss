@@ -115,9 +115,9 @@ public class NewAliasSearchForm extends AbstractFunnelController {
 			Errors errors,
 			SessionStatus status) {
 		
-		session.setAttribute("searchFormCommand", sfc);
+		session.setAttribute("aliasSearchFormCommand", sfc);
 		
-		AliasSearchFormCommand crimfc=(AliasSearchFormCommand) session.getAttribute("searchFormCommand");
+		AliasSearchFormCommand crimfc=(AliasSearchFormCommand) session.getAttribute("aliasSearchFormCommand");
 		if(crimfc!=null)
 		{
 			

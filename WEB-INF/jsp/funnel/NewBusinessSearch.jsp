@@ -321,8 +321,8 @@ margin: 0;
                                </p>  
                             </td>
                             <td colspan="2">
-							<p class="padd"><a href="https://www.searchsystems.net/springapp/funnel/ourDatabases.do" class="style107" target="_blank" style="font-size:14px">View Our  Coverage</a></p>
-                                  <p align="left" class="style107 padd"><a href="https://www.searchsystems.net/springapp/funnel/BestResultsGuide.html">Your Guide to Best Results</a></p>
+							<p class="padd"><a href="/springapp/funnel/ourDatabases.do" class="style107" target="_blank" style="font-size:14px">View Our  Coverage</a></p>
+                                  <p align="left" class="style107 padd"><a href="/BestResultsGuide.html">Your Guide to Best Results</a></p>
                                   <p align="left" class="style107 padd"><a href="http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/">Search Criminal Records for Free</a></p>
                                   <p align="left" class="style107 padd"><a href="crim-premium-faq.html">Frequently Asked Questions</a></p>
                             	

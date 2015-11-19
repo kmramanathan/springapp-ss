@@ -143,11 +143,12 @@ import springapp.service.user.UserManager;
     //protected static final String landingRedir = "redirect:landing.html";
 	//vivek changes//
 	protected static final String landingHome = "redirect:https://www.searchsystems.net/springapp/premium";//https://premium.searchsystems.net/secure/search.php
-	protected static final String logoutRedirect = "redirect:http://publicrecords.searchsystems.net/logout-new.php";
+	//protected static final String logoutRedirect = "redirect:http://publicrecords.searchsystems.net/logout-new.php";
+	protected static final String logoutRedirect = "redirect:../../premium";
 	protected static final String logoutnewRedirect = "redirect:http://publicrecords.searchsystems.net/logout-new.php";
 	//Aug8-2014 - Udhay
 	protected static final String landingPremium = "redirect:https://www.searchsystems.net/springapp/premium";
-	protected static final String landingTestPremium = "redirect:http://database02.searchsystems.net:8080/springapp/premium";
+	protected static final String landingTestPremium = "redirect:https://dev.searchsystems.net/springapp/premium";
 		
 	protected static final String landingRedir = "redirect:funnel/landing.html";
 	// form views
@@ -167,7 +168,7 @@ import springapp.service.user.UserManager;
 	
 	//For alias search
 	protected static final String newvwAliasSearch = "funnel/NewAliasSearch";
-	protected static final String newvwAliasSearchRedir = "redirect:newAliasSearch.do"; 
+	protected static final String newvwAliasSearchRedir = "redirect:aliasSearch.do";
 	
 	//New Criminal Search using DDN   -- Sep-20-2014
 	protected static final String newvwDdnSearch = "funnel/DdnCriminalSearch";

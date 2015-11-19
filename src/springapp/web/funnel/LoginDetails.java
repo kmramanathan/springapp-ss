@@ -205,17 +205,13 @@ public class LoginDetails extends AbstractFunnelController{
 		
 		ArrayList<String> alist=new ArrayList<String>();
 		
-		alist.add("http://207.178.157.123:8080/springapp/funnel/newSearch.do");
 		alist.add("https://www.searchsystems.net/springapp/funnel/newSearch.do");
-		alist.add("http://localhost:8080/springapp/funnel/newSearch.do");
-		alist.add("http://dev.searchsystems.net/springapp/funnel/newSearch.do");
+		alist.add("https://dev.searchsystems.net/springapp/funnel/newSearch.do");
 		
 		ArrayList<String> alist0=new ArrayList<String>();
 		
-		alist0.add("http://207.178.157.123:8080/springapp/funnel/aliasSearch.do");
 		alist0.add("https://www.searchsystems.net/springapp/funnel/aliasSearch.do");
-		alist0.add("http://localhost:8080/springapp/funnel/aliasSearch.do");
-		alist0.add("http://dev.searchsystems.net/springapp/funnel/aliasSearch.do");
+		alist0.add("https://dev.searchsystems.net/springapp/funnel/aliasSearch.do");
 		
 		ArrayList<String> alist1=new ArrayList<String>();
 		
@@ -229,35 +225,29 @@ public class LoginDetails extends AbstractFunnelController{
 		alist2.add("http://localhost:8080/springapp/funnel/eviction-records.do");
 		alist2.add("http://207.178.157.123:8080/springapp/funnel/eviction-records.do");
 		alist2.add("https://www.searchsystems.net/springapp/funnel/eviction-records.do");
-		alist2.add("http://dev.searchsystems.net/springapp/funnel/eviction-records.do");
+		alist2.add("https://dev.searchsystems.net/springapp/funnel/eviction-records.do");
 		
 		ArrayList<String> alist3=new ArrayList<String>();
 		
 		alist3.add("http://localhost:8080/springapp/funnel/eviction-records-business.do");
 		alist3.add("https://www.searchsystems.net/springapp/funnel/eviction-records-business.do");
 		alist3.add("http://207.178.157.123:8080/springapp/funnel/eviction-records-business.do");
-		alist3.add("http://dev.searchsystems.net/springapp/funnel/eviction-records-business.do");
+		alist3.add("https://dev.searchsystems.net/springapp/funnel/eviction-records-business.do");
 		
 		ArrayList<String> alist4= new ArrayList<String>();
 		
-		alist4.add("http://localhost:8080/springapp/funnel/corp-ind-search.do");
 		alist4.add("https://www.searchsystems.net/springapp/funnel/corp-ind-search.do");
-		alist4.add("http://207.178.157.123:8080/springapp/funnel/corp-ind-search.do");
-		alist4.add("http://dev.searchsystems.net/springapp/funnel/corp-ind-search.do");
+		alist4.add("https://dev.searchsystems.net/springapp/funnel/corp-ind-search.do");
 		
 		ArrayList<String> alist5= new ArrayList<String>();
 		
-		alist5.add("http://localhost:8080/springapp/funnel/corp-bus-search.do");
 		alist5.add("https://www.searchsystems.net/springapp/funnel/corp-bus-search.do");
-		alist5.add("http://207.178.157.123:8080/springapp/funnel/corp-bus-search.do");
-		alist5.add("http://dev.searchsystems.net/springapp/funnel/corp-bus-search.do");
+		alist5.add("https://dev.searchsystems.net/springapp/funnel/corp-bus-search.do");
 		
 		ArrayList<String> alist6= new ArrayList<String>();
 		
-		alist6.add("http://localhost:8080/springapp/funnel/national-security-search.do");//nationSecurity.do
 		alist6.add("https://www.searchsystems.net/springapp/funnel/national-security-search.do");
-		alist6.add("http://207.178.157.123:8080/springapp/funnel/national-security-search.do");
-		alist6.add("http://dev.searchsystems.net/springapp/funnel/national-security-search.do");
+		alist6.add("https://dev.searchsystems.net/springapp/funnel/national-security-search.do");
 		
 		//Real Prop indivudal search
 		ArrayList<String> alist7= new ArrayList<String>();
@@ -316,11 +306,12 @@ public class LoginDetails extends AbstractFunnelController{
 		
 		for (Iterator iterator = alist.iterator(); iterator.hasNext();) 
 		{
-				String string = (String) iterator.next();
+			String string = (String) iterator.next();
+			logger.info("Iterator: alist: " + string);
 				
 			if(session.getAttribute("searchFormCommand") == null && referrerURL.equals(string))
 			{
-				
+				logger.info("Iterator: " + referrerURL);
 				session.setAttribute("authenticated", "true");
 				session.setAttribute("username", user.getUsername());
 				session.setAttribute("userId", user.getUserId());
@@ -340,11 +331,12 @@ public class LoginDetails extends AbstractFunnelController{
 		
 		for (Iterator iterator = alist0.iterator(); iterator.hasNext();) 
 		{
-				String string = (String) iterator.next();
+			String string = (String) iterator.next();
+			logger.info("Iterator: alist0: " + string);
 				
 			if(session.getAttribute("aliasSearchFormCommand") == null && referrerURL.equals(string))
 			{
-				
+				logger.info("Iterator: " + referrerURL);
 				session.setAttribute("authenticated", "true");
 				session.setAttribute("username", user.getUsername());
 				session.setAttribute("userId", user.getUserId());
@@ -358,6 +350,7 @@ public class LoginDetails extends AbstractFunnelController{
 					session.setAttribute("creditCardObj", cc);  
 				}
 				session.removeAttribute("referrer");
+				logger.info("Before redirect - URL: " + newvwAliasSearchRedir);
 				return newvwAliasSearchRedir;
 			}
 		}
@@ -606,6 +599,8 @@ public class LoginDetails extends AbstractFunnelController{
 		session.removeAttribute("username");
 		session.removeAttribute("userId");
 		session.removeAttribute("userEmail");
+		session.invalidate();
+		logger.info("Before logout - URL=> " + logoutRedirect);
 		//session.removeAttribute("referrer");
 		return logoutRedirect;
 		

@@ -101,7 +101,7 @@ text-decoration:none!important;
       
      <% } else { %> 
      <td align="right" width="50%">&nbsp;</td>
-	  <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  width="80"><a href="https://members.searchsystems.net/login.php" style="text-decoration: none;font-size:14px;  padding:5px 0px 10px 0px;  color:#003366; ">My Account</a>
+	  <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  width="80"><a href="login.do" style="text-decoration: none;font-size:14px;  padding:5px 0px 10px 0px;  color:#003366; ">My Account</a>
       </td><td width="40"  style="background:#fec226;font-size:14px;  color:#003366;" ><a href="login.do" style="text-decoration: none;font-size:14px;   padding:5px 0px 10px 0px;  color:#003366; ">Log In</a> </td>
      <% } %>
 

@@ -30,6 +30,7 @@ import springapp.domain.User;
 import springapp.domain.NSS.NssResponseBean;
 import springapp.domain.corporation.CorporationSearches;
 import springapp.manager.SearchException;
+import springapp.manager.SpringAliasSearchManager;
 import springapp.manager.SpringBGCSearchManager;
 import springapp.manager.SpringBJLSearchManager;
 import springapp.manager.SpringCorporationSearchManager;
@@ -75,6 +76,8 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 	private BillingManager billingManager;
 	@Autowired
 	private SpringBGCSearchManager bgcManager;
+	@Autowired
+	private SpringAliasSearchManager aliasSearchManager;
 	@Autowired
 	private SpringBJLSearchManager bjlManager;
 	@Autowired
@@ -2022,9 +2025,10 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 				try 
 				{				
 					//logger.error("onSubmt:Status@: "+ status );
-					logger.info("Alias Search Confrmd Seach : Transaction approved - Search starts here");
+					logger.info("Alias Search Confirmed: Transaction approved: Search starts here");
 					int responseId = runAliasSearch(session, map, status, aliasfc, t, u);
-
+					logger.info("Alias Search Confirmed: Search Ends here: ResponseId: " + responseId);
+					
 					if(member)
 						sendSearchReceiptEmail(u.getFirstName(), u.getEmail(), t, description, String.valueOf(cc.getLastDigits()));
 					else
@@ -2033,13 +2037,14 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 						String ccLast4 = ccN.substring(ccN.length() - 4, ccN.length());
 						sendSearchReceiptEmail(rfc.getName(), rfc.getEmail(), t, description, ccLast4);
 					}
+					logger.info("Alias Search Confirmed: Transaction approved: Email sent to customer");
 
 					// req id is set in runSearch()
 					session.setAttribute("responseId", responseId);
 					session.setAttribute("transactionId", t.getTransactionId());
 					session.setAttribute("searchPrice", aliasfc.getPrice());
 
-					return newresultsRedir;
+					return newAliasResultsRedir;
 				} catch (Exception te) {			
 					// void charge
 					if (!billingManager.voidTransaction(cc, t)) {
@@ -2262,14 +2267,14 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 				return TEST_CRIMINAL_RESULT_ID;
 			}
 			
-			int productId = 4;
+			int productId = 7;
 			String jurisdiction;
 			if (sfc.getNationwideSearch()) 
 			{			
 				jurisdiction = "Nationwide";
 			} else 
 			{
-				productId = 5;
+				productId = 8;
 				jurisdiction = sfc.getBgcState();
 			}	
 
@@ -2287,20 +2292,20 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			}*/
 			//else
 			{
-			requestId = bgcManager.prepareSearch(u.getUserId(), 
+			requestId = aliasSearchManager.prepareSearch(u.getUserId(), 
 					sfc.getBgcFirstName(), sfc.getBgcMiddleInitial(), sfc.getBgcLastName(), 
 					sfc.getBgcFirstNameExact(), sfc.getBgcLastNameExact(), 
-					sfc.getBgcDobMonth(), sfc.getBgcDobDay(), sfc.getBgcDobYear(), 
-					5, false, sfc.getBgcMatchMissingDates(), 
+					sfc.getBgcDobMonth(), sfc.getBgcDobDay(), sfc.getBgcDobYear(), Integer.parseInt(sfc.getBgcSsn()),
 					productId, false, jurisdiction, sfc.getBgcPurpose(), sfc.getBgcReferenceCode());
 			
-
-			BGCResponseBean response = bgcManager.runSearch(requestId);
+			logger.info("The request id for alias search is: " + requestId);
+			
+			BGCResponseBean response = aliasSearchManager.runSearch(requestId);
 			responseId = response.getBgcResponseId();
 			logger.info("responseId:--> " + responseId);
 
 			// record the txn id
-			bgcManager.setTransactionId(responseId, (int) t.getTransactionId());
+			aliasSearchManager.setTransactionId(responseId, (int) t.getTransactionId());
 					
 			}
 			

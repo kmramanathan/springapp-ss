@@ -144,18 +144,28 @@ public class BGCRequestHelper {
 	}
 	
 	protected OMElement buildProductElement(OMFactory fac, BGCRequestBean bean) {
+		return buildProductElement(fac, bean, false);		
+	}
+	
+	protected OMElement buildProductElement(OMFactory fac, BGCRequestBean bean, boolean aliasSearch) {
 		OMElement eProduct = fac.createOMElement("product", null);
 		
 		OMElement eSearch;
-		if (bean.getUsonesearch()) {
-			eSearch = fac.createOMElement("USOneSearch", null);
+		logger.info("aliasSearch Flag - buildProductElement - " + aliasSearch);
+		if (aliasSearch) {
+			eSearch = fac.createOMElement("USAliasSearch", null);
 		} else {
-			eSearch = fac.createOMElement("SingleStateOneSearch", null);
+			if (bean.getUsonesearch()) {
+				eSearch = fac.createOMElement("USOneSearch", null);
+			} else {
+				eSearch = fac.createOMElement("SingleStateOneSearch", null);
+			}
 		}
+		logger.info("Alias search product label - " + eSearch.toString());
 		eProduct.addChild(eSearch);		
 		
-		OMElement eOrder = buildOrderElement(fac, bean);
-		OMElement eCustom = buildCustomElement(fac, bean);
+		OMElement eOrder = buildOrderElement(fac, bean, aliasSearch);
+		OMElement eCustom = buildCustomElement(fac, bean, aliasSearch);
 
 		eSearch.addChild(eOrder);		
 		eSearch.addChild(eCustom);
@@ -193,6 +203,10 @@ public class BGCRequestHelper {
 	}
 	
 	protected OMElement buildOrderElement(OMFactory fac, BGCRequestBean bean) {
+		return buildOrderElement(fac, bean, false);
+	}
+	
+	protected OMElement buildOrderElement(OMFactory fac, BGCRequestBean bean, boolean aliasSearch) {
 		OMElement eOrder = fac.createOMElement("order", null);
 		
 		OMElement firstName = fac.createOMElement("firstName", null);
@@ -207,13 +221,24 @@ public class BGCRequestHelper {
 		eOrder.addChild(middleName);
 		eOrder.addChild(lastName);
 		
-		OMElement eDOB = buildDOBElement(fac, bean);
-		eOrder.addChild(eDOB);
+		if(!aliasSearch  || (aliasSearch && bean.getDobMonth() > 0)) {
+			OMElement eDOB = buildDOBElement(fac, bean);
+			eOrder.addChild(eDOB);
+		}
 		
-		if (!bean.getUsonesearch()) {
-			OMElement state = fac.createOMElement("state", null);
-			state.setText(bean.getState());
-			eOrder.addChild(state);			
+		logger.info("aliasSearch Flag - buildOrderElement - " + aliasSearch);
+		if (aliasSearch) {
+			logger.info("buildOrderElement - ssn -  started");
+			OMElement ssn = fac.createOMElement("SSN", null);
+			ssn.setText(String.valueOf(bean.getDobYearRange()));
+			eOrder.addChild(ssn);
+			logger.info("buildOrderElement - ssn -  ends " + ssn.getText());
+		} else {
+			if (!bean.getUsonesearch()) {
+				OMElement state = fac.createOMElement("state", null);
+				state.setText(bean.getState());
+				eOrder.addChild(state);			
+			}
 		}
 
 		return eOrder;
@@ -284,67 +309,83 @@ public class BGCRequestHelper {
 	}
 	
 	protected OMElement buildCustomElement(OMFactory fac, BGCRequestBean bean) {
+		return buildCustomElement(fac, bean, false);
+	}
+	
+	protected OMElement buildCustomElement(OMFactory fac, BGCRequestBean bean, boolean aliasSearch) {
 		OMElement eCustom = fac.createOMElement("custom", null);
 		
-		// filters element
-		OMElement eFilters = fac.createOMElement("filters", null);
-		eCustom.addChild(eFilters);
+		if (!aliasSearch) {
+			// filters element
+			OMElement eFilters = fac.createOMElement("filters", null);
+			eCustom.addChild(eFilters);
 
-		// build up filter elements which are duplicated
-		OMElement eFirstNameFilterType = buildFilterTypeElement(fac, bean.getFirstNameExact());
-		OMElement eLastNameFilterType  = buildFilterTypeElement(fac, bean.getLastNameExact());
+			// build up filter elements which are duplicated
+			OMElement eFirstNameFilterType = buildFilterTypeElement(fac, bean.getFirstNameExact());
+			OMElement eLastNameFilterType  = buildFilterTypeElement(fac, bean.getLastNameExact());
+			
+			OMElement eFirstNameFilter = fac.createOMElement("firstName", null);
+			OMElement eLastNameFilter  = fac.createOMElement("lastName", null);
+			
+			eFirstNameFilter.addChild(eFirstNameFilterType);
+			eLastNameFilter.addChild(eLastNameFilterType);
 		
-		OMElement eFirstNameFilter = fac.createOMElement("firstName", null);
-		OMElement eLastNameFilter  = fac.createOMElement("lastName", null);
+			OMElement eDOBFilter = buildDOBFilterElement(fac, bean);
 		
-		eFirstNameFilter.addChild(eFirstNameFilterType);
-		eLastNameFilter.addChild(eLastNameFilterType);
-		
-		OMElement eDOBFilter = buildDOBFilterElement(fac, bean);
-		
-		// now build the actual filters
-		OMElement eSOF = fac.createOMElement("SOF", null);
-		eSOF.addChild(eFirstNameFilter.cloneOMElement());
-		eSOF.addChild(eLastNameFilter.cloneOMElement());
-		eSOF.addChild(eDOBFilter.cloneOMElement());
-		
-		OMElement eGCF = fac.createOMElement("GCF", null);
-		eGCF.addChild(eFirstNameFilter.cloneOMElement());
-		eGCF.addChild(eLastNameFilter.cloneOMElement());
-		eGCF.addChild(eDOBFilter.cloneOMElement());
-		
-		OMElement eNSF = fac.createOMElement("NSF", null);
-		eNSF.addChild(eFirstNameFilter.cloneOMElement());
-		eNSF.addChild(eLastNameFilter.cloneOMElement());
-		eNSF.addChild(eDOBFilter.cloneOMElement());
-		
-		eFilters.addChild(eSOF);
-		eFilters.addChild(eGCF);
-		//eFilters.addChild(eNSF);
+			// now build the actual filters
+			OMElement eSOF = fac.createOMElement("SOF", null);
+			eSOF.addChild(eFirstNameFilter.cloneOMElement());
+			eSOF.addChild(eLastNameFilter.cloneOMElement());
+			eSOF.addChild(eDOBFilter.cloneOMElement());
+			
+			OMElement eGCF = fac.createOMElement("GCF", null);
+			eGCF.addChild(eFirstNameFilter.cloneOMElement());
+			eGCF.addChild(eLastNameFilter.cloneOMElement());
+			eGCF.addChild(eDOBFilter.cloneOMElement());
+			
+			OMElement eNSF = fac.createOMElement("NSF", null);
+			eNSF.addChild(eFirstNameFilter.cloneOMElement());
+			eNSF.addChild(eLastNameFilter.cloneOMElement());
+			eNSF.addChild(eDOBFilter.cloneOMElement());
+			
+			eFilters.addChild(eSOF);
+			eFilters.addChild(eGCF);
+			//eFilters.addChild(eNSF);
+		}
 		
 		// options element		
 		OMElement eOptions = fac.createOMElement("options", null);		
 		eCustom.addChild(eOptions);
 		
 		OMElement eIncludeSources = fac.createOMElement("includeSources", null);
-		eIncludeSources.setText("YES");
+		eIncludeSources.setText(aliasSearch ? "NO": "YES");
 		eOptions.addChild(eIncludeSources);
 		
-		OMElement eIncludeDetails = fac.createOMElement("includeDetails", null);
-		eIncludeDetails.setText("YES");
-		// this is required per BGC docs
-		if (bean.getDobMatchMissingDates() || bean.getDobMatchFuzzyDates()) {
-			eIncludeDetails.setText("NO");			
-		}
-		
-		// this is apparently needed for fuzzy match
-		if (bean.getDobMatchFuzzyDates()) {
-			OMElement eNoSummary = fac.createOMElement("noSummary", null);
-			eNoSummary.setText("NO");
-			eOptions.addChild(eNoSummary);
-		}
+		if (!aliasSearch) {
+			OMElement eIncludeDetails = fac.createOMElement("includeDetails", null);
+			eIncludeDetails.setText("YES");
+			// this is required per BGC docs
+			if (bean.getDobMatchMissingDates() || bean.getDobMatchFuzzyDates()) {
+				eIncludeDetails.setText("NO");			
+			}
+			
+			// this is apparently needed for fuzzy match
+			if (bean.getDobMatchFuzzyDates()) {
+				OMElement eNoSummary = fac.createOMElement("noSummary", null);
+				eNoSummary.setText("NO");
+				eOptions.addChild(eNoSummary);
+			}
 				
-		eOptions.addChild(eIncludeDetails);
+			eOptions.addChild(eIncludeDetails);
+		} else {
+			OMElement doValidation = fac.createOMElement("doValidation", null);
+			doValidation.setText("YES");
+			eOptions.addChild(doValidation);
+			
+			OMElement checkDMI = fac.createOMElement("checkDMI", null);
+			checkDMI.setText("YES");
+			eOptions.addChild(checkDMI);
+		}
 		
 		return eCustom;
 	}
@@ -353,6 +394,11 @@ public class BGCRequestHelper {
 	 * build up the entire xml request from the methods above
 	 */
 	public String prepareXmlForBGCRequest(BGCRequestBean bean) {
+		return prepareXmlForBGCRequest(bean, false);
+	}
+	
+	public String prepareXmlForBGCRequest(BGCRequestBean bean, boolean aliasSearch) {
+		logger.info("aliasSearch Flage - prepareXmlForBGCRequest - " + aliasSearch);
 		OMFactory fac = OMAbstractFactory.getOMFactory();
         OMDocument doc = fac.createOMDocument();
 
@@ -361,7 +407,7 @@ public class BGCRequestHelper {
         doc.setOMDocumentElement(eBGC);
         
         OMElement eLogin = buildLoginElement(fac);        
-        OMElement eProduct = buildProductElement(fac, bean);
+        OMElement eProduct = buildProductElement(fac, bean, aliasSearch);
 
         eBGC.addChild(eLogin);
         eBGC.addChild(eProduct);

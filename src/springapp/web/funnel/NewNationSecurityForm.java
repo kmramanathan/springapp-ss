@@ -145,6 +145,7 @@ public class NewNationSecurityForm extends AbstractFunnelController {
 			session.removeAttribute("evictionBusinessSearchFormCommand");
 			session.removeAttribute("corpIndSearchFormCommand");
 			session.removeAttribute("corpBusSearchFormCommand");
+			session.removeAttribute("aliasSearchFormCommand");
 			
 			status.setComplete();
 			

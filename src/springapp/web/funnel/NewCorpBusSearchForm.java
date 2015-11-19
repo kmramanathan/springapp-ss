@@ -154,6 +154,7 @@ public class NewCorpBusSearchForm extends AbstractFunnelController {
 			session.removeAttribute("evictionSearchFormCommand");
 			session.removeAttribute("corpIndSearchFormCommand");
 			session.removeAttribute("nationSearchFormCommand");
+			session.removeAttribute("aliasSearchFormCommand");
 			session.setAttribute("corpBusSearchFormCommand", cbsfc);
 			status.setComplete();
 			if(cbsfc.getNewacc() == true)

@@ -159,6 +159,7 @@ public class NewCorpIndSearchForm extends AbstractFunnelController {
 			session.removeAttribute("corpBusSearchFormCommand");
 			session.removeAttribute("searchFormCommand");
 			session.removeAttribute("nationSearchFormCommand");
+			session.removeAttribute("aliasSearchFormCommand");
 			
 			status.setComplete();
 			if(cisfc.getNewacc() == true)

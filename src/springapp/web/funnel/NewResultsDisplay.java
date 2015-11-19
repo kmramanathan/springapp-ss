@@ -37,9 +37,11 @@ import springapp.domain.RealProperty.RealPropResponseBean;
 import springapp.domain.eviction.EvictionResults;
 import springapp.domain.eviction.EvictionSearches;
 import springapp.manager.SearchException;
+import springapp.manager.SpringAliasSearchManager;
 import springapp.manager.SpringBGCSearchManager;
 import springapp.manager.SpringEvictionSearchManager;
 import springapp.manager.SpringPropertySearchManager;
+import springapp.web.funnel.NewAliasSearchForm.AliasSearchFormCommand;
 import springapp.web.funnel.NewSearchForm.SearchFormCommand;
 
 @SessionAttributes("command")
@@ -49,6 +51,8 @@ public class NewResultsDisplay extends AbstractFunnelController {
 	
 	@Autowired
 	private SpringBGCSearchManager bgcManager;
+	@Autowired
+	private SpringAliasSearchManager aliasSearchManager;
 	@Autowired
 	private SpringEvictionSearchManager evictionManager;	
 	@Autowired
@@ -269,6 +273,197 @@ public class NewResultsDisplay extends AbstractFunnelController {
 			return newvwError;			
 		} 
 	}
+	
+	
+	@RequestMapping(value = "/funnel/newAliasResults.do", method = RequestMethod.GET)
+	public String getResultsForAlias(
+			HttpSession session,
+			ModelMap map,
+			@RequestParam(value="test",required=false) Boolean test,
+			@RequestParam(value="pageSize",required=false) Integer pageSize,
+			@RequestParam(value="", required=false) Boolean download,
+			HttpServletResponse hresponse
+			)  {		
+		
+		
+		if (test == null) { test = false; }
+		if (pageSize == null) { pageSize = 10; }
+		if(download == null){download=false;}
+		if (!verifySession(session, test))
+		{
+			return landingHome;
+		}
+		Integer responseId = (Integer) session.getAttribute("responseId");
+		if (responseId == null) {
+			return newvwError;
+		} else {
+			map.addAttribute("responseId", responseId);
+		}
+		
+		try {
+			BGCRequestBean request;
+			BGCResponseBean response;
+			try {
+				response = aliasSearchManager.getResponse(responseId);
+				request = aliasSearchManager.getRequest(response.getBgcRequestId());
+			} catch (NoRowsException e) {
+				throw new SearchException(e);
+			} catch (TooManyRowsException e) {
+				throw new SearchException(e);
+			} catch (TorqueException e) {
+				throw new SearchException(e);
+			}
+			logger.info("responseId: " + response.getBgcResponseId());
+			
+			if (response.getQuantityReturned() == 0) 
+			{				
+				map.addAttribute("firstName", request.getFirstName());
+				map.addAttribute("lastName", request.getLastName());
+				AliasSearchFormCommand sfc = (AliasSearchFormCommand) session.getAttribute("aliasSearchFormCommand");
+				
+				if(sfc != null)
+				{
+				map.addAttribute("location", sfc.getBgcState());
+				}
+				
+				String searchDOB = request.getDobMonth() + "/" + request.getDobDay() + "/" + request.getDobYear();
+				map.addAttribute("DOB", searchDOB);
+				//session.removeAttribute("bgcRequestId");
+				session.removeAttribute("responseId");
+				session.removeAttribute("aliasSearchFormCommand");
+				
+				return newzeroResultsView;
+			}
+			
+			// set result info
+			BGCOffenderBean[] beans;
+			try {
+				beans = aliasSearchManager.getOffenders(response.getBgcResponseId());
+				
+			} catch (TorqueException e) {
+				throw new SearchException(e);
+			}
+
+			ArrayList<BGCOffenderBean> offenders = new ArrayList<BGCOffenderBean>();
+			for (BGCOffenderBean b : beans) {
+				if(!b.getProvider().equalsIgnoreCase("P.R.I.O.R.S.")){
+					offenders.add(b);
+				}
+			}
+			
+//			ArrayList<BGCOffenderBean> offenders2 = new ArrayList<BGCOffenderBean>(offenders);
+//			for (int i=0; i<30; i++) {
+//				offenders.addAll(offenders2);
+//			}
+			
+			// finalize charge?
+			// XXX todo
+			// generate the download text format file by client 
+			//when they click the download link on the result page
+			if(download == true)
+			{
+				hresponse.setContentType("text/plain");
+				hresponse.setHeader("Content-Disposition", "attachment;filename="+request.getLastName()+"+"+request.getFirstName()+".txt");
+				BGCOffenseBean[] bgcOffenseList=null;
+				BGCAliasBean[] bgcAliasList=null;
+				try
+				{
+					PrintWriter pw=hresponse.getWriter();
+					int i=0;
+					pw.println("Alias Search - Result Details");
+					pw.println("*****************************************");
+					for (BGCOffenderBean bean : offenders) {
+						int id=bean.getBgcOffenderId();
+						bgcOffenseList=aliasSearchManager.getOffenses(id);
+						bgcAliasList = aliasSearchManager.getAliases(id);
+						if(bgcOffenseList.length > 0)
+						{
+							i=i+1;
+							pw.println("Record #"+i);
+							pw.println();
+							pw.println("Offender Info");
+							pw.println("*************");
+							generateOffendersTextFormat(pw,bean);
+						}
+						if(bgcOffenseList.length > 0 && bgcAliasList.length > 0)
+						{
+							pw.println("Aliases");
+							pw.println("*******************");
+							generateAliasTextFormat(pw, bgcAliasList);
+						}
+						if(bgcOffenseList.length > 0)
+						{
+							pw.println("Offenses");
+							pw.println("********");
+							genrateOffenseTextFormat(pw,bgcOffenseList);
+						}
+						
+					}
+					
+					pw.println("");
+					pw.println("DISCLAIMER");
+					pw.println("**********");
+					pw.println("Search Systems provides no warranty of any type as to the accuracy of this information, and any reliance on this information is solely ");
+					pw.println("at your own risk and responsibility. All information retrieved from or through SearchSystems.net must be utilized in accordance with the");
+					pw.println("User Agreement and all applicable state and federal laws.");
+					pw.println("");
+					pw.println("Copyright © 1997-2013 Search Systems, Inc. All rights reserved.");
+					pw.close();
+				}
+				catch (Exception e) {
+					// TODO: handle exception
+					logger.error("Error: While writing on the file :"+e);
+				}
+			}
+			// send to results page (or no results)
+			if(offenders.size() == 0)
+			{
+				map.addAttribute("firstName", request.getFirstName());
+				map.addAttribute("lastName", request.getLastName());
+				AliasSearchFormCommand sfc = (AliasSearchFormCommand) session.getAttribute("aliasSearchFormCommand");
+				
+				if(sfc != null)
+				{
+				map.addAttribute("location", sfc.getBgcState());
+				}
+				
+				String searchDOB = request.getDobMonth() + "/" + request.getDobDay() + "/" + request.getDobYear();
+				map.addAttribute("DOB", searchDOB);
+				//session.removeAttribute("bgcRequestId");
+				session.removeAttribute("responseId");
+				session.removeAttribute("aliasSearchFormCommand");
+				
+				return newzeroResultsView;
+			}
+			map.addAttribute("command", new ResultsCommand());
+			map.addAttribute("pageSizes", pageSizes);
+			map.addAttribute("pageSize", pageSize);
+			map.addAttribute("offenders", offenders);
+			map.addAttribute("offendersCount", offenders.size());
+			
+			AliasSearchFormCommand sfc = (AliasSearchFormCommand) session.getAttribute("aliasSearchFormCommand");
+			
+			if(sfc != null)
+			{
+			map.addAttribute("searchState", sfc.getBgcState());
+			}
+			
+			
+			session.removeAttribute("aliasSearchFormCommand");
+			
+			return newresultsView;
+			
+		} catch (SearchException e) {			
+			// void charge?
+			// XXX todo
+			logger.error("Error getting results", e);
+
+			// send to error page
+			return newvwError;			
+		} 
+	}
+	
+	
 	
 				
 	private void generateAliasTextFormat(PrintWriter pw,

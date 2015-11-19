@@ -104,6 +104,7 @@ import springapp.service.user.UserManager;
 	protected static final String resultsRedir = "redirect:results.do";
 	protected static final String resultsBjlRedir = "redirect:resultsBJL.do";
 	protected static final String newresultsRedir = "redirect:newResults.do";
+	protected static final String newAliasResultsRedir = "redirect:newAliasResults.do";
 	protected static final String newresultsBjlRedir = "redirect:newResultsBJL.do";
 	protected static final String evictionresultsRedir = "redirect:evictionResults.do";
 	protected static final String completeSignupRedir = "redirect:completeSignup.do";

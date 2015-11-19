@@ -204,6 +204,7 @@ public class NewSearchForm extends AbstractFunnelController {
 			session.removeAttribute("corpIndSearchFormCommand");
 			session.removeAttribute("corpBusSearchFormCommand");
 			session.removeAttribute("nationSearchFormCommand");
+			session.removeAttribute("aliasSearchFormCommand");
 			status.setComplete();
 			
 			if(sfc.getNewacc() == true)

@@ -2,8 +2,7 @@ package springapp.web.funnel;
 
 import java.util.ArrayList;
 
-import org.eclipse.jdt.core.dom.ThisExpression;
-
+@SuppressWarnings("rawtypes")
 public class BjlXMLbean {
 	
 	

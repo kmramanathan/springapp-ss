@@ -2,14 +2,12 @@ package springapp.web.flatrate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.hsqldb.Collation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import springapp.domain.FRBGCRequest;
 import springapp.domain.FRBGCResponse;
-import springapp.manager.FRBGCManager;
 import springapp.web.funnel.AbstractFunnelController;
-import sun.misc.FpUtils;
 
 @Controller
 public class BGCResultDisplay extends AbstractFunnelController{

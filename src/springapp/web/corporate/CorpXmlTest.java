@@ -3,8 +3,6 @@ package springapp.web.corporate;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,9 +18,9 @@ import springapp.domain.CorpAddress;
 import springapp.domain.CorpHistory;
 import springapp.domain.CorpNameInfo;
 import springapp.domain.CorpResponses;
-
 import springapp.repository.CorpDao;
 
+@SuppressWarnings("rawtypes")
 public class CorpXmlTest {
 	@Autowired
 	protected CorpDao corpDao;

@@ -1,32 +1,20 @@
 package springapp.web.flatrate;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.io.StringReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.List;
-
-import org.quartz.JobExecutionContext;
-import org.springframework.context.ApplicationContext;
-
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.log4j.*;
-import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.Credentials;
+import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.*;
+import org.apache.commons.httpclient.auth.AuthScope;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -34,9 +22,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import springapp.domain.FRBGCResponse;
-import sun.misc.FpUtils;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 
 public class testParser

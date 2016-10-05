@@ -1,29 +1,17 @@
 package springapp.web.funnel;
 
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Map;
-
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
-
-import javax.jws.WebResult;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-
-
-import org.apache.commons.lang.ArrayUtils;
-//import org.apache.jasper.tagplugins.jstl.core.ForEach; 
-import org.apache.velocity.runtime.directive.Foreach;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,15 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.sun.xml.internal.ws.wsdl.writer.UsingAddressing;
-
 import springapp.domain.NewBJLResults;
-
 import springapp.domain.NewBJLSearches;
-
 import springapp.manager.SearchException;
-
 import springapp.manager.SpringBJLSearchManager;
+//import org.apache.jasper.tagplugins.jstl.core.ForEach; 
 
 @SessionAttributes("command")
 @Controller

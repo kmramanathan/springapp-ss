@@ -2,6 +2,7 @@ package springapp.web.findpeople;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("rawtypes")
 public class BGxmlManager {
 	
  

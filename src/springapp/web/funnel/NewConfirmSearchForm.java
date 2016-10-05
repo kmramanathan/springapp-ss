@@ -2,7 +2,6 @@ package springapp.web.funnel;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.sun.jmx.snmp.UserAcl;
-
 import springapp.crypt.Crypt;
 import springapp.domain.AdminUserIPBean;
 import springapp.domain.CreditCard;
@@ -38,8 +35,6 @@ import springapp.manager.SpringDDNCriminalManager;
 import springapp.manager.SpringEvictionSearchManager;
 import springapp.manager.SpringNSSSearchManager;
 import springapp.manager.SpringPropertySearchManager;
-//import springapp.manager.SpringSSNSearchManager;
-import springapp.repository.AdminUserDao;
 import springapp.repository.AdminUserIPDao;
 import springapp.service.billing.BillingManager;
 import springapp.service.billing.BillingManager.TxnType;
@@ -50,16 +45,14 @@ import springapp.web.funnel.NewAliasSearchForm.AliasSearchFormCommand;
 import springapp.web.funnel.NewBJLSearchForm.BJLSearchFormCommand;
 import springapp.web.funnel.NewCorpBusSearchForm.CorpBusSearchFormCommand;
 import springapp.web.funnel.NewCorpIndSearchForm.CorpIndSearchFormCommand;
-
-
 import springapp.web.funnel.NewEvictionBusinessSearchForm.EvictionBusinessSearchFormCommand;
 import springapp.web.funnel.NewEvictionSearchForm.EvictionSearchFormCommand;
 import springapp.web.funnel.NewNationSecurityForm.NationSearchFormCommand;
-import springapp.web.funnel.NewPurchaseForm.NewPurchaseFormCommand;
+import springapp.web.funnel.NewSearchForm.SearchFormCommand;
 import springapp.web.funnel.PropertyAddressSearchForm.RealPropAddressSearchFormCommand;
 import springapp.web.funnel.PropertySearchForm.RealPropSearchFormCommand;
 import springapp.web.funnel.RegisterForm.RegisterFormCommand;
-import springapp.web.funnel.NewSearchForm.SearchFormCommand;
+//import springapp.manager.SpringSSNSearchManager;
 
 
 @Controller

@@ -1,32 +1,18 @@
 package springapp.web.findpeople;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.ResourceBundle;
-
-import org.quartz.JobExecutionContext;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.bind.annotation.SessionAttributes;
-
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.axis2.util.HostConfiguration;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.log4j.*;
-import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.Credentials;
+import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.*;
+import org.apache.commons.httpclient.auth.AuthScope;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -51,10 +37,6 @@ import springapp.web.findpeople.BGxmlManager.merchantVessels;
 import springapp.web.findpeople.BGxmlManager.otherPeople;
 import springapp.web.findpeople.BGxmlManager.profileReport;
 import springapp.web.findpeople.SearchLandingForm.SearchFPFormCommand;
-import springapp.web.funnel.AbstractFunnelController;
-import sun.security.util.Password;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 
 public class xmlParser

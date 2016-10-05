@@ -1,17 +1,21 @@
 package springapp.web.flatrate;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.io.Serializable;
 import java.io.StringReader;
-import java.util.StringTokenizer;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.httpclient.Credentials;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.UsernamePasswordCredentials;
+import org.apache.commons.httpclient.auth.AuthScope;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,28 +26,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import springapp.domain.FRfpDetail;
 import springapp.repository.SubscriptionDao;
-import springapp.repository.UserDao;
 import springapp.service.NeonValidator;
-import springapp.service.user.UserManager;
 import springapp.web.findpeople.SearchLandingForm.SearchFPFormCommand;
 import springapp.web.funnel.AbstractFunnelController;
-
-
-import org.apache.commons.httpclient.*;
-import org.apache.commons.httpclient.auth.AuthScope;
-import org.apache.commons.httpclient.methods.*;
-import org.apache.log4j.Logger;
-
-import org.w3c.dom.*;
-import org.xml.sax.*;
-
-import com.sun.net.httpserver.HttpContext;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
 
 @Controller
 

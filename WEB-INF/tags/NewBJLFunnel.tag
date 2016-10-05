@@ -99,16 +99,23 @@ text-decoration:none!important;
       
      <% } else { %> 
       <td align="right" width="50%">&nbsp;</td>
-	  <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  width="80"><a href="https://members.searchsystems.net/login.php" style="text-decoration: none;font-size:14px;  padding:5px 0px 10px 0px;  color:#003366; ">My Account</a>
+	  <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  width="80">
+	  <a href="https://www.searchsystems.net/springapp/funnel/login.do" style="text-decoration: none;font-size:14px;  padding:5px 0px 10px 0px;  color:#003366; ">
+	  My Account</a>
       </td><td width="40"  style="background:#fec226;font-size:14px;  color:#003366;" ><a href="login.do" style="text-decoration: none;font-size:14px;   padding:5px 0px 10px 0px;  color:#003366; ">Log In</a> </td>
      <% } %>
 
  </tr>
- <tr><td valign="top" colspan="3"><div class="homenav"><a href="http://publicrecords.searchsystems.net/" class="homelink">Home Page</a> | <a href="https://www.searchsystems.net/springapp/funnel/newSearch.do" class="homelink">Criminal Records</a>
-      | <a href="https://www.searchsystems.net/springapp/funnel/newSearchBJL.do">Bankruptcies-Judgments-Liens</a> | <a href="https://www.searchsystems.net/springapp/funnel/eviction-records.do">Tenant Screening</a> | <a href="http://publicrecords.searchsystems.net/contact.php">Contact</a></div></td></tr>
+ <tr><td valign="top" colspan="3"><div class="homenav">
+			<a href="http://publicrecords.searchsystems.net/" class="homelink">Home Page</a> 
+		| <a href="/springapp/premium" class="homelink">Premium Databases</a>
+		| <a href="http://publicrecords.searchsystems.net/contact.php">Contact</a></div>
+	</td>
+</tr>
  </table>
- <div style="background:#ff9900;height:26px;border-top:1px solid #000">
- <a href="http://www.bbb.org/santa-barbara/business-reviews/internet-services/searchsystems-net-in-newbury-park-ca-13000131/" target="blank"><img src="images/common/bbb-clickratingsm.gif" alt="bbb" width="80" height="25" style="float:right;padding:0;margin:0" /></a>
+ <div id="orangetopbar">
+ <a href="http://www.bbb.org/santa-barbara/business-reviews/internet-services/searchsystems-net-in-newbury-park-ca-13000131/" target="blank">
+ <img src="images/common/bbb-clickratingsm.gif" alt="bbb" width="80" height="25" style="float:right;padding:0;margin:0" /></a>
  </div>
  <!--// masthead ends //-->
 
@@ -134,12 +141,14 @@ text-decoration:none!important;
    
 <!--// footer begins //-->
 <div style="clear: both; height: 30px;"></div></div>
-<div class="footer style19h style20h"><img src="/springapp/images/common/Footer-trans.png" border="0 alt="ss-footer" width="418" height="60" usemap="#footer"></div>
-<map name="footer">
-  <area shape="poly" coords="242,38,242,50,278,55,321,56,324,40,277,40,243,37," alt="Privacy Policy" href="http://publicrecords.searchsystems.net/privacypolicy.php">
- 
-</map>
 
+
+<div class="footer" style="text-align: center;">Copyright &copy; 1997-2016 Search Systems, Inc. All rights reserved.
+<address>SearchSystems.net, 2945 Townsgate Road, Suite 200, Westlake Village, California 91361</address>
+<address>Call Us at: 805-375-4041 | 
+<a href="http://publicrecords.searchsystems.net/privacypolicy.php">Privacy Policy</a>
+</address>
+</div>
 <!--// footer ends //-->
 	
 </center>     

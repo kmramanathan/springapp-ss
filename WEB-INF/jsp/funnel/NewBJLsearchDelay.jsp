@@ -1,6 +1,3 @@
-
-<html>
-<head>
 <%@include file="/WEB-INF/jsp/include.jsp" %>
 
 <% 	boolean member = false;
@@ -11,12 +8,16 @@
 	}
 %>
 <!DOCTYPE html>
+<html>
+<head>
 <title>Confirm Purchase</title>
 <style type="text/css">	
     @import url("/springapp/css/new-funnel.css");	    
 </style>
 <link href="/springapp/css/common.css" rel="stylesheet" type="text/css" media="screen" />
 <script type="text/JavaScript" src="/springapp/js/common.js"></script>
+<script type="text/JavaScript" src="/springapp/js/heartcode-canvasloader-min-0.9.1.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="language" content="en" />
 <meta name="description" content="" />
@@ -51,27 +52,37 @@
 			left:50%;
 		}
 	</style>
-<!-- Include the heartcode canvasloader js file -->
-	<script src="http://heartcode-canvasloader.googlecode.com/files/heartcode-canvasloader-min-0.9.1.js"></script>
+<!-- Include the heartcode canvasloader js file 
+	<script src="http://heartcode-canvasloader.googlecode.com/files/heartcode-canvasloader-min-0.9.1.js"></script> -->
 <script language="javascript" type="text/javascript">
+
 function sendToResult()
 {
-	document.dummy.submit();	
+
+	
+	document.dummy.submit();
+	
+	
 }
+
 </script>
 
 </head>
+
 <% 
 	if(session.getAttribute("charged") != null){
 		session.removeAttribute("charged");
 		response.sendRedirect("newConfirmSearch.do");
 }
 %>
+
+
 <body onLoad="sendToResult();">
+
 <form name="dummy" method="post" action="newConfirmSearch.do"></form>
 <center>
   <div id="owrap">
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
 	<tr>
 	<td rowspan="2" valign="middle">
     <a href="http://publicrecords.searchsystems.net/"><img src="images/common/updated-logo.png" width="293" height="40" /></a>
@@ -81,7 +92,8 @@ function sendToResult()
       
       <td style="color:#ffffff;" align="right"><div align="right">Welcome <strong><%=username%></strong></div></td>
 
-      <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  height="35"  width="80"><a href="https://members.searchsystems.net/login.php?username=<%=username%>" style="text-decoration: none;font-size:14px;  color:#003366; ">My Account</a>
+      <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  height="35"  width="80">
+	  <a href="https://members.searchsystems.net/login.php?username=<%=username%>" style="text-decoration: none;font-size:14px;  color:#003366; ">My Account</a>
       </td><td width="30"  style="background:#fec226;font-size:14px;  color:#003366;" ><a href="logout.do" style="text-decoration: none;font-size:14px;  color:#003366; ">Logout</a> </td>
       
      
@@ -89,36 +101,46 @@ function sendToResult()
  <tr><td colspan="4">&nbsp;</td> </tr>
  <tr><td colspan="4">&nbsp;</td> </tr>
  </table>
+
       <!--// masthead ends //-->
 
-      <!--// main content area begins //-->  
-    <table cellpadding="0" cellspacing="0" border="0" width="950" id="maintable">
-	<tr valign="top">    		
+      <!--// main content area begins //-->
+      
+    
+    <table cellpadding="0" cellspacing="0" border="0" width="950" id="maintable"><tr valign="top">
+    		
         <!--// column one begins //--> 
-    <td width="868" height="210"><p>&nbsp;</p>
-		<!-- Create a div which will be the canvasloader wrapper -->	
-	<div id="canvasloader-container" class="wrapper"></div>		
+       
+                                                    <td width="868" height="210"><p>&nbsp;</p>
+                                                    
+													<!-- Create a div which will be the canvasloader wrapper -->	
+	<div id="canvasloader-container" class="wrapper"></div>
+		
 	<!-- This script creates a new CanvasLoader instance and places it in the wrapper div -->
 	<script type="text/javascript">
 		var cl = new CanvasLoader('canvasloader-container');
 		cl.setColor('#003366'); // default is '#000000'
-		cl.show(); // Hidden by default		
+		cl.show(); // Hidden by default
+		
 		// This bit is only for positioning - not necessary
-		var loaderObj = document.getElementById("canvasLoader");
+		  var loaderObj = document.getElementById("canvasLoader");
   		loaderObj.style.position = "absolute";
   		loaderObj.style["top"] = cl.getDiameter() * -0.5 + "px";
   		loaderObj.style["left"] = cl.getDiameter() * -0.5 + "px";
     </script>
-	<h4 align="center"><span class="style34d">Please do not refresh this screen or click your browser's Back button.</span></h4>
-	<h4 align="center"><span class="style34d">This may take a few minutes. We appreciate your patience. 
-	We are searching over 100 million records to find your results.</span></h4>
-	</td>
-    </tr> 
+                                                    <h4 align="center"><span class="style34d">Please do not refresh this screen or click your browser's Back button.</span></h4>
+													<h4 align="center"><span class="style34d">This may take a few minutes. We appreciate your patience. We are searching over 100 million records to find your results.</span></h4>
+													</td>
+                                                  </tr>
+ 
 	<tr>
 	<td>&nbsp;
 	</td>
-	</tr>      
-    </table>
+	</tr>
+		
+  
+                
+            </table>
       
         <!--// column one ends //--> 
         
@@ -126,13 +148,15 @@ function sendToResult()
         <!--// column two begins //--> 
     
    	 
-  </div>   
+  </div>
+   
 <!--// footer begins //-->
-<div style="clear: both; height: 30px;"></div><div class="footer style19h style20h">
-Copyright &copy; 2014 SearchSystems.net. All rights reserved.
-</div>
-<!--// footer ends //-->	
+<div style="clear: both; height: 30px;"></div><div class="footer style19h style20h">Copyright &copy; 2016 SearchSystems.net. All rights reserved.</div>
+
+<!--// footer ends //-->
+	
 </center>
+
 </body>
 </html>
   

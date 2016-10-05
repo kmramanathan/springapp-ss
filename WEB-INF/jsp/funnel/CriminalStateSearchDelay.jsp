@@ -42,12 +42,12 @@
 		}
 		.wrapper {
 			position:absolute;
-			top:24%;
+			top:14%;
 			left:50%;
 		}
 	</style>
 <!-- Include the heartcode canvasloader js file -->
-	<script src="http://heartcode-canvasloader.googlecode.com/files/heartcode-canvasloader-min-0.9.1.js"></script>
+<script type="text/JavaScript" src="/springapp/js/heartcode-canvasloader-min-0.9.1.js"></script>
 <script language="javascript" type="text/javascript">
 function sendToResult()
 {
@@ -112,7 +112,7 @@ function sendToResult()
     </script>
 	<h4 align="center"><span class="style34d">Please do not refresh this screen or click your browser's Back button.</span></h4>
 	<h4 align="center"><span class="style34d">This may take a few minutes. We appreciate your patience. 
-	We are searching over 100 million records to find your results.</span></h4>
+	We are searching over 500 million records to find your results.</span></h4>
 	</td>
     </tr> 
 	<tr>
@@ -130,7 +130,8 @@ function sendToResult()
   </div>   
    
 <!--// footer begins //-->
-<div style="clear: both; height: 30px;"></div><div class="footer style19h style20h">Copyright &copy; 2015 SearchSystems.net. All rights reserved.</div>
+<div style="clear: both; height: 30px;"></div>
+<div class="footer style19h style20h">Copyright &copy; 2016 SearchSystems.net. All rights reserved.</div>
 
 <!--// footer ends //-->
 	

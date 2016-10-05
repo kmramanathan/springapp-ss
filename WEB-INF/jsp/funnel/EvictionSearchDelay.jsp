@@ -116,7 +116,7 @@ function sendToResult()
   </div>
    
 <!--// footer begins //-->
-<div style="clear: both; height: 30px;"></div><div class="footer style19h style20h">Copyright &copy; 2010 SearchSystems.net. All rights reserved.</div>
+<div style="clear: both; height: 30px;"></div><div class="footer style19h style20h">Copyright &copy; 2016 SearchSystems.net. All rights reserved.</div>
 
 <!--// footer ends //-->
 	

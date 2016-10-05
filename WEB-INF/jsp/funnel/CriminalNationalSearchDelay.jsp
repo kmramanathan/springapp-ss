@@ -15,6 +15,8 @@
 </style>
 <link href="/springapp/css/common.css" rel="stylesheet" type="text/css" media="screen" />
 <script type="text/JavaScript" src="/springapp/js/common.js"></script>
+<script type="text/JavaScript" src="/springapp/js/heartcode-canvasloader-min-0.9.1.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>please wait</title>
 <style type="text/css">
@@ -95,15 +97,9 @@ function sendToResult()
 	<td><table width="850" border="0" cellspacing="0.5" cellpadding="0.5" align="center">
 	<tr>
 		<td colspan="3"> <h1><span class="style102">Your Search is Processing</span></h1>
-                                                     <h4 align="center"><span class="style34d">Please do not refresh this screen or click your browser's Back button.</span></h4>
-	<h4 align="center"><span class="style34d">This may take a few minutes. We appreciate your patience. 
-	We are searching over 500 million records to find your results.</span></h4>
-                                                 <!--   <p class="style102"><strong>Please do not navigate away from this page. Your search is processing and may take a few moments to complete.</strong></p>
-              <p class="style104"><strong>We are searching all records in the state and </strong><strong> 
-              verifying the records to ensure a proper match to the criteria you input.</strong> <strong>We appreciate your 
-              patience.</strong></p>  --> 
-              
-              </td>
+                                                  
+                                                    <p class="style102"><strong>Please do not navigate away from this page. Your search is processing and may take a few moments to complete.</strong></p>
+              <p class="style104"><strong>We are searching all records in the state and </strong><strong> verifying the records to ensure a proper match to the criteria you input.</strong> <strong>We appreciate your patience.</strong></p></td>
 	</tr>
                       <tr>
                         <th width="409" height="1500" scope="col"><p align="left" class="style104">Criminal record databases as provided by the 50 States</p>
@@ -201,7 +197,7 @@ function sendToResult()
   </div>
    
 <!--// footer begins //-->
-<div style="clear: both; height: 30px;"></div><div class="footer style19h style20h">Copyright &copy; 2010 SearchSystems.net. All rights reserved.</div>
+<div style="clear: both; height: 30px;"></div><div class="footer style19h style20h">Copyright &copy; 2016 SearchSystems.net. All rights reserved.</div>
 
 <!--// footer ends //-->
 	

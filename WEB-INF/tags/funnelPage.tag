@@ -97,7 +97,7 @@
 
             <!--// primary footer links //-->
             <ul class="primary">
-                <li>Copyright &copy; 2003-2008 Pacific Information Resources, Inc. All rights reserved.</li>
+                <li>Copyright &copy; 1997-2016 Search Systems, Inc. All rights reserved.</li>
             </ul>
             <!--// primary footer links ends //-->
 

@@ -51,7 +51,7 @@
 		}
 	</style>
 <!-- Include the heartcode canvasloader js file -->
-	<script src="http://heartcode-canvasloader.googlecode.com/files/heartcode-canvasloader-min-0.9.1.js"></script>
+	<script src="https://heartcode-canvasloader.googlecode.com/files/heartcode-canvasloader-min-0.9.1.js"></script>
 <script language="javascript" type="text/javascript">
 
 function sendToResult()
@@ -90,7 +90,7 @@ function sendToResult()
       
       <td style="color:#ffffff;" align="right"><div align="right">Welcome <strong><%=username%></strong></div></td>
 
-      <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  height="35"  width="80"><a href="https://members.searchsystems.net/login.php?username=<%=username%>" style="text-decoration: none;font-size:14px;  color:#003366; ">My Account</a>
+       <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  height="35"  width="80"><a href="https://members.searchsystems.net/login.php?username=<%=username%>" style="text-decoration: none;font-size:14px;  color:#003366; ">My Account</a>
       </td><td width="30"  style="background:#fec226;font-size:14px;  color:#003366;" ><a href="logout.do" style="text-decoration: none;font-size:14px;  color:#003366; ">Logout</a> </td>
       
      
@@ -148,7 +148,7 @@ function sendToResult()
   </div>
    
 <!--// footer begins //-->
-<div style="clear: both; height: 30px;"></div><div class="footer style19h style20h">Copyright &copy; 2014 SearchSystems.net. All rights reserved.</div>
+<div style="clear: both; height: 30px;"></div><div class="footer style19h style20h">Copyright &copy; 2016 SearchSystems.net. All rights reserved.</div>
 
 <!--// footer ends //-->
 	

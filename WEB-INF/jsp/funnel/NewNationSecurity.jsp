@@ -125,7 +125,7 @@ margin: 0;
 						  </td>
                            <td height="39" valign="top">
                             
-                            <p class="style71 style819"><strong>Date of   Birth </strong>(Optional)</p>
+                            <p class="style71 style819"><strong>Date of   Birth </strong><strong class="style72">*</strong></p>
                             <span class="style71">
      						<form:select path="nssDobMonth" cssClass="formfield1">
 							<form:option value="0">Month</form:option>

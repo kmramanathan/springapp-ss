@@ -16,7 +16,7 @@ public class NssTest {
 	public static final String bgcPostUrlTest = "https://model.backgroundchecks.com/integration/bgcdirectpost2.aspx";
 	public static final String bgcPostUrlLive = "https://direct.backgroundchecks.com/integration/bgcdirectpost2.aspx" ;
 	private static final String bgcUser = "searchsystems";
-	private static final String bgcPassword = "J@$0n11";
+	private static final String bgcPassword = "!nt3grat!On1";
 	private static final String bgcAccount = "10009807";
 	private static final String firstname="John";
 	private static final String lastname="Smith";

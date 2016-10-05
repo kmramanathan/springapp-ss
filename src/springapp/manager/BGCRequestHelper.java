@@ -37,7 +37,7 @@ public class BGCRequestHelper {
 	private static final Logger logger = Logger.getLogger("BGCSearchManager");
 	
 	private static final String bgcUser = "searchsystems";
-	private static final String bgcPassword = "J@$0n11";
+	private static final String bgcPassword = "!nt3grat!On1";
 	private static final String bgcAccount = "10009807";	
 
 	private String buildBGCProduct(String crimJurisdiction, boolean open) {
@@ -91,7 +91,7 @@ public class BGCRequestHelper {
 	
 	public String buildBGCQueryStringLogin() {
 		String bgcUser = "searchsystems";
-		String bgcPassword = "J@$0n11";
+		String bgcPassword = "!nt3grat!On1";
 		String bgcAccount = "10009807";
 		
 		String login = 
@@ -438,7 +438,7 @@ public class BGCRequestHelper {
 <BGC>
 <login>
     <user>searchsystems</user>
-    <password>J@$0n11</password>        
+    <password>!nt3grat!On1</password>        
     <account>10009807</account>
 </login>
 <product>
@@ -471,7 +471,7 @@ public class BGCRequestHelper {
 <BGC>
 <login>
     <user>searchsystems</user>
-    <password>J@$0n11</password>        
+    <password>!nt3grat!On1</password>        
     <account>10009807</account>
 </login>
 <product>

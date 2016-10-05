@@ -315,7 +315,15 @@ public class NewNationSecurityForm extends AbstractFunnelController {
 			//validateStringEmptyMsg("bgcPurpose",  cmd.getBgcPurpose(), errors,  2, 50, regexBasicSpace, "Purpose", "Enter in Subject's Purpose");
 			
 			
-			
+			// validate exact date
+			Calendar cal = Calendar.getInstance();
+			cal.setLenient(false);
+			try {
+				cal.set(cmd.getNssDobYear(), cmd.getNssDobMonth() - 1, cmd.getNssDobDay());
+				cal.getTime();
+			} catch (Exception e) {
+				errors.reject("invalid-date", "The date of birth you entered is invalid.");
+			}
 
 			// check additional options
 			//validateStringEmptyOk("bgcMiddleInitial", cmd.getBgcMiddleInitial(), errors, 1, 1, regexLettersOnly, "Middle Initial");

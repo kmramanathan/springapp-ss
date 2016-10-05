@@ -41,7 +41,7 @@ p{margin:0;padding:0;}
                     </tr>
                    
               		<tr>
-              			<td colspan="2"><p>Tips: If you are not finding the record you are looking for, check the spelling in your query. Also, if you searched by Business Name, make sure you are not adding suffixes like LLC, Inc. LP, etc. </p></td>
+              			<td colspan="2"><p>Tips: If you don't find the record you are looking for, check the spelling, and make sure that the first name was entered in the correct field.  Same for the last name. </p></td>
               			
               		</tr>
                     

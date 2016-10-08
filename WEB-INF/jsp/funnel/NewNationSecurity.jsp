@@ -4,9 +4,6 @@
 <jsp:attribute name="stylesheet">funnel.css,new-funnel.css,style_02.css</jsp:attribute>
 <jsp:attribute name="javascript">jquery-latest.js</jsp:attribute>
 <jsp:body>
-
-
-
 <style type="text/css">
 #button2
 {
@@ -28,8 +25,8 @@
 }
 
 .style71 {font-family: Arial, Helvetica, sans-serif;color:black!important;paddibg:0!important;margin:0!important;}
-.style61 {font-family: Arial, Helvetica, sans-serif; font-size: 12px;color:#000;paddibg:0!important;margin:0!important;}
-.style72 {color: #FF0000!important}
+.style61 {font-family: Arial, Helvetica, sans-serif; font-size: 12px;color:#000;paddibg:0!important;margin:0!important;    vertical-align: text-top;}
+.style72 {color: #FF0000!important;font-size:19px;}
 .style75 {font-size: 14px}
 .style76 {
 	font-family: Arial, Helvetica, sans-serif;
@@ -76,13 +73,47 @@ font-family:Arial, Helvetica, sans-serif;
 .style821{margin:0;padding:0}
 .padd{padding:0;margin:0}
 .style107 {font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #333333; }
-#datediv{display:none;color:red;position:absolute;width:250px;text-align:justify;font-size: 12px;margin-left:100px;margin-top:37px}
-#refdiv{display:none;color:red;position:absolute;width:250px;text-align:justify;font-size: 12px;margin-left:100px}
+#refdiv{display:none;position:absolute;width:290px;text-align:left;font-size: 11px;font-weight:bold; float:left;}
+#refdiv2{display:none;position:absolute;width:290px;text-align:left;font-size: 11px;font-weight:bold; float:left;}
 .datalink{padding: 0;margin: 0;}
 #dataview p{padding:4px 0 4px 0; margin:0;font-family:Arial, Helvetica, sans-serif;font-size:12px}
 #dataview{ font-size:12px;font-family:Arial, Helvetica, sans-serif}
 .head{color:#000!important}
 </style>
+  <script>
+function showTips()
+ {
+	var div = document.getElementById("refdiv2");
+	var div1 = document.getElementById("refdiv");
+	div1.style.display = "none";
+	if (div.style.display !== "none") 
+	{
+	    div.style.display = "none";
+	}
+	else
+	{
+	    div.style.display = "block";
+	}
+ }
+ function showRefernceCodeTips()
+ {
+	var div = document.getElementById("refdiv2");
+	var div1 = document.getElementById("refdiv");
+	div.style.display = "none";
+	if (div1.style.display !== "none") 
+	{
+	    div1.style.display = "none";
+	}
+	else
+	{
+	    div1.style.display = "block";
+	}
+ }
+ 
+ 
+</script>
+  
+  
   <form:form name="crimeForm" method="post">
     <form:errors path="*" element="div" id="error" cssClass="error-box" />
 <tr valign="top">
@@ -109,7 +140,7 @@ font-family:Arial, Helvetica, sans-serif;
                   <tr valign="top">
                     <td width="100%">
                    
-                      <table width="100%" border="0" bgcolor="#B4DDFE" cellpadding="0" cellspacing="0">
+                      <table width="100%" border="0" bgcolor="#B4DDFE" cellpadding="0" cellspacing="0" style="display:block;padding-bottom:10px;">
                       <tr>
                       	<td colspan="2"><span class="style61"><strong class="style72">*</strong><span class="style91"> Required Field</span></span></td>
                       	<td colspan="2"><span class="style86" style="font-size:14px">Price: <strong>$5.00</strong> </span></td>
@@ -119,21 +150,27 @@ font-family:Arial, Helvetica, sans-serif;
                         <tr>
                           <td>
                           <p class="style71 style819"><strong>First Name</strong><strong class="style72">*</strong></p>
-                            
+                             <div style="float:left;">
                             <form:input path="nssFirstName" cssClass="formfield" size="20" maxlength="20" />
                             
                             <form:checkbox path="nssFirstNameExact" cssClass="formfield" />
                             
-                            <span class="style61">Exact</span></td>
+                            <span class="style61">Exact<img src="/springapp/img/Help.jpg" border="0"  
+                            style="margin:0 0 -5px 6px;cursor:pointer;" width="15" height="15" onclick="showTips()"/></span>
+                           </div> </td>
                              <td>
-							 <div style="margin-left:18px"><p class="style71 style819"><strong>Last Name</strong><strong class="style72">*</strong></p>
-                            <form:input path="nssLastName" cssClass="formfield" size="16" maxlength="20" />
-                        
-                          <form:checkbox path="nssLastNameExact" cssClass="formfield" /><span class="style61">Exact</span>
+							 <div style="margin-left:18px">
+							 	<p class="style71 style819"><strong>Last Name</strong><strong class="style72">*</strong></p>
+	                           <div style="float:left;">
+	                            <form:input path="nssLastName" cssClass="formfield" size="16" maxlength="20" />
+	                        
+	                          	<form:checkbox path="nssLastNameExact" cssClass="formfield" /><span class="style61">Exact
+							  	<img src="/springapp/img/Help.jpg" border="0" style="margin:0 0 -5px 6px;cursor:pointer;"
+							  	 width="15" height="15" onclick="showTips()"/></span>
+							  </div>
 						  </div>
 						  </td>
-                           <td height="39" valign="top">
-                            
+                           <td height="39" valign="top">                            
                             <p class="style71 style819"><strong>Date of   Birth </strong><strong class="style72">*</strong></p>
                             <!--span class="style71" -->
      						<form:select path="nssDobMonth" cssClass="formfield1">
@@ -158,7 +195,7 @@ font-family:Arial, Helvetica, sans-serif;
                        
 							<tr>
 							<td colspan="2">
-							<p class="style71 style819"><strong>Purpose of your search</strong><span class="req"><strong>*</strong></span></p>
+							<p class="style71 style819"><strong>Purpose of your search</strong><span class="style72"><strong>*</strong></span></p>
 							<div>
 								<form:select path="nssPurpose" cssClass="formfield1">
 								<form:option value="">[Choose]</form:option>
@@ -169,15 +206,14 @@ font-family:Arial, Helvetica, sans-serif;
 							<td colspan="2">
 							 <p style="color:black;margin:0;padding:0px 0 0 8px"><label for="bgcReferenceCode">Reference Code</label> 
 							<form:input path="nssReferenceCode" cssClass="formfield" size="20" maxlength="20" />
-							<span class="style61"><img src="/springapp/img/Help.jpg" border="0" width="18" height="23" id="refbtn"></span></p>
-							<div id="refdiv" align="right">You can enter an optional reference code for your own tracking purposes. The code will appear on your credit card billing statement or monthly invoice. (NOTE: Reference code may not be available for some credit cards.)</div>
+							<span class="style61"><img src="/springapp/img/Help.jpg" border="0" width="15" height="15" 
+							onclick="showRefernceCodeTips()" style="cursor:pointer;" /></span></p>
 							</td>
 							</tr>
 							<tr>
-							<td colspan="4">
+							<td colspan="2">
 							<div style="float: left;padding-left:160px">
-								<p class="style71 style819">
-								
+								<p class="style71 style819">								
 								<form:radiobutton path="newacc" value="true"/>
 								<strong>I am a new customer</strong></p>
                                 <p class="style71 style819">
@@ -190,6 +226,12 @@ font-family:Arial, Helvetica, sans-serif;
                               <input type="submit" name="button2" id="button2" value="Proceed" onclick="bgcredirCtrl(); return false;" style="cursor: pointer;">
                             </p></div>
                             </td>
+							 <td colspan="2">
+							<div id="refdiv" align="right" class="style72" style="display:none;">You can enter an optional reference code for your own tracking purposes. 
+							The code will appear on your credit card billing statement or monthly invoice. 
+							(NOTE: Reference code may not be available for some credit cards.)</div>
+							<div id="refdiv2" class="style72" style="display:none;">Uncheck the "Exact" box to do a partial name search.</div>
+							</td>
                         </tr>
                        
                       </table>

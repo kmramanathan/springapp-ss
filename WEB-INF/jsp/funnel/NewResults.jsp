@@ -65,7 +65,15 @@ function validate()
 <%-- CJ tracking code, uses BGC response id --%>
 <iframe src="https://secure.img-cdn.mediaplex.com/0/11449/universal.html?page_name=results_page&Sale_1=${searchPrice}&Sale_2=1&mpuid=${responseId}" HEIGHT="1" WIDTH="1" FRAMEBORDER="0"></iframe>
 
-<div id="title" style="float:left; width:250px;"><a href="newSearch.do">Back to Search Page</a>
+<div id="title" style="float:left; width:250px;">
+<c:choose>
+    <c:when test="${aliasSearchFlag}">
+       <a href="newSearch.do">Back to Search Page</a>
+    </c:when>    
+    <c:otherwise>
+       <a href="aliasSearch.do">Back to Search Page</a>
+    </c:otherwise>
+</c:choose> 
 </div>
 <div style="float:right; width:480px;"><Strong>Need more information? Try our 
 <a href="http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/${directoryStates[searchState]}_Criminal_Records/" target="blank">${directoryStates[searchState]} criminal records directory</a></Strong>
@@ -74,7 +82,16 @@ function validate()
               
 <div id="formwrapper">
 <p>&nbsp;</p>
-<h1>Criminal Record Results</h1>
+<h1>
+<c:choose>
+    <c:when test="${aliasSearchFlag}">
+        Criminal Record Results
+    </c:when>    
+    <c:otherwise>
+       AKA / Alias Criminal Search
+    </c:otherwise>
+</c:choose>
+</h1>
 <c:set var="pageSize" value="50" />
 <c:out value="${offendersCount}"/> results found.<br/>
 <c:set var="pageCount" value="${offendersCount / pageSize}"/>

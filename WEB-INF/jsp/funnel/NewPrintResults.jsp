@@ -13,10 +13,28 @@ tr.odd{background:#fff;}
 </style>
 <tr>
 <td>
-<p style=" color:red; font-size:12pt;">Your report details are below. Be sure to print or copy this page now, as your search results are NOT stored in our system for later viewing.</p>
-<div id="title">
-<a href="newResults.do">Return to results</a> <a href="javascript:window.print();" style="float:right"> <img src="/springapp/images/newfunnel/printer-icon.jpg" border="0" align="top"></img></a>
-</div>
+<p style=" color:red; font-size:12pt;">Your report details are below. Be sure to <strong>print, copy or download</strong> this page now, as your search results are NOT stored in our system for later viewing.</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td width="30%">
+		<div id="title">
+			<a href="newResults.do">Return to results</a> 
+		</div>
+	</td>
+	<td width="30%">
+		<div id="title">
+			<a href="newResults.do?download=true">Download</a> 
+		</div>
+	</td>
+	<td width="40%">
+	
+	<div align="right" style="font-size:10px;">
+	<a href="javascript:window.print();"> <img src="/springapp/images/newfunnel/printer-icon.jpg" border="0" align="top"></img></a><br>
+	Print result details</div>
+	</td>
+	</tr>
+</table>
+
               
 <table border="0">
 <tr>
@@ -65,7 +83,7 @@ and any reliance on this information is solely at your own risk and responsibili
 information retrieved from or through SearchSystems.net must be utilized in accordance with
 the User Agreement and all applicable state and federal laws.
 <br/><br/> 
-Copyright &copy; 1997-2012 Search Systems, Inc. All rights reserved.
+Copyright &copy; 1997-2016 Search Systems, Inc. All rights reserved.
 </div>
 </td>
 </tr>

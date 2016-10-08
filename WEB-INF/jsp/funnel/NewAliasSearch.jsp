@@ -80,8 +80,8 @@ function shownote(a, b, c){
 }
 
 .style71 {font-family: Arial, Helvetica, sans-serif;color:black!important;paddibg:0!important;margin:0!important;}
-.style61 {font-family: Arial, Helvetica, sans-serif; font-size: 12px;color:#000;paddibg:0!important;margin:0!important;}
-.style72 {color: #FF0000!important}
+.style61 {font-family: Arial, Helvetica, sans-serif; font-size: 12px;color:#000;paddibg:0!important;margin:0!important;    vertical-align: text-top;}
+.style72 {color: #FF0000!important;font-size:19px;}
 .style75 {font-size: 14px}
 .style76 {
 	font-family: Arial, Helvetica, sans-serif;
@@ -121,13 +121,79 @@ function shownote(a, b, c){
 .style1111{
 padding: 0;
 margin: 0;
+font-family:Arial, Helvetica, sans-serif;
+
+
 }
 .style821{margin:0;padding:0}
 .padd{padding:0;margin:0}
 .style107 {font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #333333; }
-#datediv{display:none;color:red;position:absolute;width:250px;text-align:justify;font-size: 12px;margin-left:100px;margin-top:37px}
-#refdiv{display:none;color:red;position:absolute;width:250px;text-align:justify;font-size: 12px;margin-left:100px}
+#refdiv{display:none;position:absolute;width:290px;text-align:left;font-size: 11px;font-weight:bold; float:left;}
+#refdiv2{display:none;position:absolute;width:290px;text-align:left;font-size: 11px;font-weight:bold; float:left;}
+.datalink{padding: 0;margin: 0;}
+#dataview p{padding:4px 0 4px 0; margin:0;font-family:Arial, Helvetica, sans-serif;font-size:12px}
+#dataview{ font-size:12px;font-family:Arial, Helvetica, sans-serif}
+.head{color:#000!important}
 </style>
+
+ <script>
+function showTips()
+ {
+	var div = document.getElementById("refdiv2");
+	var div1 = document.getElementById("refdiv");
+	var datediv = document.getElementById("datediv");
+	
+	div1.style.display = "none";
+	datediv.style.display = "none";
+	if (div.style.display !== "none") 
+	{
+	    div.style.display = "none";
+	}
+	else
+	{
+	    div.style.display = "block";
+	}
+ }
+ 
+ function showRefernceCodeTips()
+ {
+	var div = document.getElementById("refdiv2");
+	var div1 = document.getElementById("refdiv");
+	var datediv = document.getElementById("datediv");
+	
+	div.style.display = "none";
+	datediv.style.display = "none";
+	
+	if (div1.style.display !== "none") 
+	{
+	    div1.style.display = "none";
+	}
+	else
+	{
+	    div1.style.display = "block";
+	}
+ }
+ 
+ function showDateTips()
+ {
+	var div = document.getElementById("refdiv2");
+	var div1 = document.getElementById("refdiv");
+	var datediv = document.getElementById("datediv");
+	
+	div.style.display = "none";
+	div1.style.display = "none";
+	
+	if (datediv.style.display !== "none") 
+	{
+	    datediv.style.display = "none";
+	}
+	else
+	{
+	    datediv.style.display = "block";
+	}
+ }
+ 
+</script>
   <form:form name="crimeForm" method="post">
     <form:errors path="*" element="div" id="error" cssClass="error-box" />
 <tr valign="top">
@@ -135,11 +201,11 @@ margin: 0;
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 <td>
- <h1 class="style59 style92">Start Your Instant Criminal Alias Search</h1></td>
+ <h1 class="style59 style92">Start Your Instant AKA / Alias Criminal Search</h1></td> 
  <td valign="top"><a href="${bbbUrl}" target="_blank"><img src="/springapp/images/findpeople/bbb-clickratingsm.gif" alt="bbb" width="90" height="35" style="float: right;"></a></td>
 </tr>
 <tr><td colspan="2">
-           <h3 class="style1111">Search over <strong>450</strong> <strong>Million</strong> <strong>criminal records</strong> nationwide!</h3>
+           <h3 class="style1111">Search over <strong>550</strong> <strong>Million</strong> <strong>criminal records</strong> nationwide!</h3>
            </td>
            </tr>
            </table>
@@ -151,7 +217,7 @@ margin: 0;
                   <tr valign="top">
                     <td width="100%">
                    
-                      <table width="100%" border="0" bgcolor="#B4DDFE" cellpadding="0" cellspacing="0">
+                      <table width="100%" border="0" bgcolor="#B4DDFE" cellpadding="0" cellspacing="0" >
                       <tr>
                       	<td ><span class="style61"><strong class="style72">*</strong>
                       	<span class="style91"> Required Field</span></span>
@@ -161,26 +227,31 @@ margin: 0;
                       	<a href="https://www.searchsystems.net/springapp/funnel/BestResultsGuide.html" class="style71 style819" style="font-size:14px!important;"> <strong>Search Tips </strong></a>
                       	</span>
                       	</td>
-                      	<td colspan="2"><span class="style86" style="font-size:14px">Price: <strong>$14.95</strong> Nationwide or <strong>$9.95</strong>
+                      	<td colspan="2"><span class="style86" style="font-size:14px">Price: <strong>$19.95</strong> Nationwide or <strong>$14.95</strong>
 						Statewide <br/>&nbsp;&nbsp;No signup or monthly fees.</span>
 						</td>
                       	
                       </tr>
                      
                         <tr>
-                          <td>
+                          <td style="width: 275px;">
                           <p class="style71 style819"><strong>First Name</strong><strong class="style72">*</strong></p>
-                            
-                            <form:input path="bgcFirstName" cssClass="formfield" size="20" maxlength="20" />
-                            
-                            <form:checkbox path="bgcFirstNameExact" cssClass="formfield" />
-                            
-                            <span class="style61">Exact</span></td>
-                             <td>
+                             
+                            <form:input path="bgcFirstName" cssClass="formfield" size="20" maxlength="20" />                            
+                            <form:checkbox path="bgcFirstNameExact" cssClass="formfield" />                            
+                            <span class="style61">Exact<img src="/springapp/img/Help.jpg" border="0"  
+                            style="margin:0 0 -5px 6px;cursor:pointer;" width="15" height="15" onclick="showTips()"/></span>
+                             
+                            </td>
+                             
+                             <td style="width: 266px;">
 							 <div style="margin-left:18px"><p class="style71 style819"><strong>Last Name</strong><strong class="style72">*</strong></p>
                             <form:input path="bgcLastName" cssClass="formfield" size="16" maxlength="20" />
                         
-                          <form:checkbox path="bgcLastNameExact" cssClass="formfield" /><span class="style61">Exact</span>
+                          <form:checkbox path="bgcLastNameExact" cssClass="formfield" />
+						  <span class="style61">Exact
+							  	<img src="/springapp/img/Help.jpg" border="0" style="margin:0 0 -5px 6px;cursor:pointer;"
+							  	 width="15" height="15" onclick="showTips()"/></span>
 						  </div>
 						  </td>
                            <td><p class="style71 style819">M.I.(optional)</p>
@@ -200,9 +271,8 @@ margin: 0;
                           <td>
 						     <div style="float:left;"> 
                            <p class="style71 style819">
-                            <strong>Date of   Birth</strong><br>
-                           </p>
-                            
+                            <strong>Date of   Birth</strong><strong class="style72">*</strong><br>
+                           </p>                            
      						<form:select path="bgcDobMonth" cssClass="formfield1">
 							<form:option value="0">Month</form:option>
 							<form:options items="${dobMonths}"/>
@@ -230,15 +300,14 @@ margin: 0;
                       
                           <td class="style71" colspan="2" valign="top">
                            <strong>Options</strong>                    
-                            <p style="color:black;margin:0;padding:0 0 0 12px">
+                            <p style="color:black;margin:0;padding:0 0 0 1px">
                               
                               <form:checkbox path="bgcMatchMissingDates" cssClass="formfield" />
-                              <label for="bgcMatchMissingDates" class="style71">Include records where there is no date of birth</label>
-                              <span class="style61"><img src="/springapp/img/Help.jpg" border="0" width="18" height="23" id="datebtn"></span>
+                              <span for="bgcMatchMissingDates" class="style71" style="font-size:12px;">Include records where there is no date of birth
+                              <img src="/springapp/img/Help.jpg" width="15" height="15" onclick="showDateTips()" style="cursor:pointer;"></span>
+                              
                             </p>
-                           <div id="datediv" align="right">Not every reporting agency provides a full date of birth on every record. This feature gives you those records as well. CAUTION: These additional results may or may not be for your person because there is not an exact date of birth match.</div>
-                           
-                        
+                          
 							</td>
 							</tr>
 							
@@ -255,12 +324,13 @@ margin: 0;
 							<td colspan="2">
 							 <p style="color:black;margin:0;padding:0px 0 0 8px"><label for="bgcReferenceCode">Reference Code</label> 
 							<form:input path="bgcReferenceCode" cssClass="formfield" size="20" maxlength="20" />
-							<span class="style61"><img src="/springapp/img/Help.jpg" border="0" width="18" height="23" id="refbtn"></span></p>
-							<div id="refdiv" align="right">You can enter an optional reference code for your own tracking purposes. The code will appear on your credit card billing statement or monthly invoice. (NOTE: Reference code may not be available for some credit cards.)</div>
+							<span class="style61"><img src="/springapp/img/Help.jpg" border="0" width="15" height="15" 
+							onclick="showRefernceCodeTips()" style="cursor:pointer;" /></span>
+							</p>							
 							</td>
 							</tr>
 							<tr>
-							<td colspan="4">
+							<td colspan="2">
 							<div style="float: left;padding-left:160px">
 								<p class="style71 style819">
 								
@@ -275,6 +345,18 @@ margin: 0;
                             <p align="center">
                               <input type="submit" name="button2" id="button2" value="Proceed" onclick="bgcredirCtrl(); return false;" style="cursor: pointer;">
                             </p></div>
+                            </td>
+                            <td colspan="2">
+                            <div id="refdiv" align="left" class="style72" style="display:none;">You can enter an optional reference code for your own tracking purposes. 
+							The code will appear on your credit card billing statement or monthly invoice. 
+							(NOTE: Reference code may not be available for some credit cards.)
+							</div>
+							 <div id="datediv" align="left" class="style72" style="display:none;font-size:11px;font-weight: bold;">Not every reporting agency provides a full date of birth on every record. 
+						   This feature gives you those records as well. CAUTION: These additional results may or may not be for your person 
+						   because there is not an exact date of birth match.</div>
+						   
+                           <div id="refdiv2" align="left"  class="style72" style="display:none;">Uncheck the "Exact" box to do a partial name search.</div>
+                           <br/><br/>
                             </td>
                         </tr>
                        
@@ -301,10 +383,10 @@ margin: 0;
                     	 <tr>
                         	<td colspan="2" width="75%">
 							<h3 class="style1111">The affordable professional system anyone can use.</h3>
-                        		<p class="style107 padd"><strong>Search felonies, misdemeanors, traffic offenses, court records, inmate, probation, parole records, escapees, and more. Certain records are not available in all states. Please check our coverage area for the region of your search, to ensure you receive the best service we have to offer. 
+                        		<p class="style107 padd"><strong>Search our database of over 550 million records by name, birth date, and social security number for a subject's name and maiden name, married name, nickname, and aliases revealed by an address history.  FCRA Only.
 								<a href="https://www.searchsystems.net/springapp/funnel/ourDatabases.do" target="_blank">You can find our coverage area here</a>.</strong></p>
-                              <p class="padd"><strong>450 Million records! The largest criminal record database available online.<br>
-							  At $14.95 per nationwide search, this is the most information you can find for the lowest price on the Internet.</strong>
+                              <p class="padd"><strong>550 Million records! The largest criminal record database available online.<br>
+							  At $19.95 per nationwide search, this is the most information you can find for the lowest price on the Internet.</strong>
 							  
                                </p>  
                             </td>

@@ -395,7 +395,7 @@ public class NewAliasSearchForm extends AbstractFunnelController {
 			validateStringEmptyMsg("bgcSsn",  cmd.getBgcSsn(), errors,  9, 9, regexNumeric, "SSN", "Enter in Subject's SSN");
 			
 			// validate exact date
-			if (cmd.getBgcDobYear() != 0  || cmd.getBgcDobMonth() != 0 || cmd.getBgcDobDay() != 0) {
+			//if (cmd.getBgcDobYear() != 0  || cmd.getBgcDobMonth() != 0 || cmd.getBgcDobDay() != 0) {
 				Calendar cal = Calendar.getInstance();
 				cal.setLenient(false);
 				try {
@@ -404,7 +404,7 @@ public class NewAliasSearchForm extends AbstractFunnelController {
 				} catch (Exception e) {
 					errors.reject("invalid-date", "The date of birth you entered is invalid.");
 				}
-			}
+			//}
 
 			// check additional options
 			validateStringEmptyOk("bgcMiddleInitial", cmd.getBgcMiddleInitial(), errors, 1, 1, regexLettersOnly, "Middle Initial");

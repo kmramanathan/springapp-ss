@@ -737,8 +737,8 @@ public class SpringAliasSearchManager implements ResourceLoaderAware {
 			
 			bean.setFirstName(map.get("firstName"));
 			bean.setLastName(map.get("lastName"));
-			bean.setMiddleName(map.get("middleName"));
-			bean.setSuffix(map.get("suffix"));
+			bean.setMiddleName(map.get("middleName") != null ? map.get("middleName") : " ");
+			bean.setSuffix(map.get("suffix") != null? map.get("suffix") : " ");
 			
 			BGCAlias alias = BGCAlias.createBGCAlias(bean);
 			alias.save();

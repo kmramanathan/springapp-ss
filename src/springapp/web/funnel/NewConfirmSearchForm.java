@@ -824,7 +824,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 					session.setAttribute("transactionId", t.getTransactionId());
 					session.setAttribute("searchPrice", aliasfc.getPrice());
 					
-					return newresultsRedir;
+					return newAliasResultsRedir;
 				} catch (SearchException te) 
 				{		
 					logger.error(te);

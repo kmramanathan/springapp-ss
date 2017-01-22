@@ -498,8 +498,8 @@ public class SpringAliasSearchManager implements ResourceLoaderAware {
 		
 		Element eProduct = (Element) eRoot.getElementsByTagName("product").item(0);
 		Element eSearch;
-		//if (crimJurisdiction.equals("ALL")) {
-		eSearch = (Element) eProduct.getElementsByTagName("USAliasSearch").item(0);
+		eSearch = (Element) eProduct.getElementsByTagName(reqBean.getUsonesearch() ? "USAliasSearch" : 
+			"SingleStateAliasSearch").item(0);
 		logger.info("Remote query complete, parsing results - USAliasSearch: " + eSearch.toString());
 		
 		Element eResponse = (Element) eSearch.getElementsByTagName("response").item(0);
@@ -735,8 +735,8 @@ public class SpringAliasSearchManager implements ResourceLoaderAware {
 			String hashKey = generateHashKey(bean.getClass().getName());
 			bean.setHashKey(hashKey);
 			
-			bean.setFirstName(map.get("firstName"));
-			bean.setLastName(map.get("lastName"));
+			bean.setFirstName(map.get("firstName") != null ? map.get("firstName") : " ");
+			bean.setLastName(map.get("lastName") != null ? map.get("lastName") : " ");
 			bean.setMiddleName(map.get("middleName") != null ? map.get("middleName") : " ");
 			bean.setSuffix(map.get("suffix") != null? map.get("suffix") : " ");
 			

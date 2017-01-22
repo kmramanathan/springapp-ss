@@ -153,7 +153,11 @@ public class BGCRequestHelper {
 		OMElement eSearch;
 		logger.info("aliasSearch Flag - buildProductElement - " + aliasSearch);
 		if (aliasSearch) {
-			eSearch = fac.createOMElement("USAliasSearch", null);
+			if (bean.getUsonesearch()) {
+				eSearch = fac.createOMElement("USAliasSearch", null);
+			} else {
+				eSearch = fac.createOMElement("SingleStateAliasSearch", null);
+			}
 		} else {
 			if (bean.getUsonesearch()) {
 				eSearch = fac.createOMElement("USOneSearch", null);
@@ -169,6 +173,8 @@ public class BGCRequestHelper {
 
 		eSearch.addChild(eOrder);		
 		eSearch.addChild(eCustom);
+		
+		eSearch.addChild(eOrder);
 		
 		return eProduct;		
 	}
@@ -233,14 +239,14 @@ public class BGCRequestHelper {
 			ssn.setText(String.valueOf(bean.getDobYearRange()));
 			eOrder.addChild(ssn);
 			logger.info("buildOrderElement - ssn -  ends " + ssn.getText());
-		} else {
-			if (!bean.getUsonesearch()) {
-				OMElement state = fac.createOMElement("state", null);
-				state.setText(bean.getState());
-				eOrder.addChild(state);			
-			}
+		} 
+		
+		if (!bean.getUsonesearch()) {
+			OMElement state = fac.createOMElement("state", null);
+			state.setText(bean.getState());
+			eOrder.addChild(state);			
 		}
-
+		
 		return eOrder;
 	}
 	

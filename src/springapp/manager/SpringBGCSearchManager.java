@@ -480,7 +480,7 @@ public class SpringBGCSearchManager implements ResourceLoaderAware {
 		Document xmlData = reqHelper.doHttpPostQuery(bgcPostUrlLive, xmlQuery);
 		
 		// This function only for reading XML for testing purpose
-		readXMLForTest(xmlData);
+		//readXMLForTest(xmlData);
 		 
 		logger.info("Remote query complete, parsing results");
 					
@@ -492,6 +492,8 @@ public class SpringBGCSearchManager implements ResourceLoaderAware {
 			String error = n.getNodeValue();
 			
 			throw new SearchException(error);
+			
+			//Add email to sendd to Tim here - Ram Kumarappan (Search term - Remote query complete, parsing results)
 		}		
 		
 		// process the results	

@@ -360,7 +360,8 @@ public class OrdersController {
 		List<BGCRequestBean> reqp;
 		List<CriminalPurposesBean> reqpurpose;
 		try {
-			c.add(BGCResponsePeer.TRANSACTION_ID, transactionId);
+			//c.add(BGCResponsePeer.TRANSACTION_ID, transactionId);
+			c.add(BGCResponsePeer.BGC_REQUEST_ID, transactionId);
 			resL = BGCResponsePeer.doSelect(c);
 			net.searchsystems.limestone.BGCResponse res = resL.get(0);
 			

@@ -6,37 +6,65 @@
 <jsp:attribute name="javascript">jquery-1.2.1.pack.js,table.js,selectPage.js</jsp:attribute>
 
 <jsp:body>
-
+<script>
+	$(document).ready(function(){
+		$('#btn').bind('click', function() {
+		    if($("#accountId").val() == "-") {
+				$("#errorLblForAccount").show();
+				return false;
+		    }
+			if($("#searchType").val() == "-") {
+				$("#errorLblForSearchType").show();
+				return false;
+		    }
+			if($("#year").val() == "-") {
+				$("#errorLblForYear").show();
+				return false;
+		    }
+			if($("#month").val() == "-") {
+				$("#errorLblForMonth").show();
+				return false;
+		    }
+			$('#searchCorpInvoicing').submit();
+		});
+		
+		$('#accountId').bind('change', function() {
+			if($("#accountId").val() != "-") {
+				$("#errorLblForAccount").hide();
+			}
+		});
+		
+		$('#searchType').bind('change', function() {
+			if($("#searchType").val() != "-") {
+				$("#errorLblForSearchType").hide();
+			}
+		});
+		
+		$('#year').bind('change', function() {
+			if($("#year").val() != "-") {
+				$("#errorLblForYear").hide();
+			}
+		});
+		
+		$('#month').bind('change', function() {
+			if($("#month").val() != "-") {
+				$("#errorLblForMonth").hide();
+			}
+		});
+	});
+</script>
 <h2>Corporate Invoice</h2>
 <hr/>
 
-<form:form method="post">
-	<table border="0" cellspacing="0">
+<form:form method="post" id="searchCorpInvoicing">
+	<table border="0" cellspacing="0" width="600">
 		<tr>
-			<td class="label">Account:</td>
+			<td class="label" width="15%">Account:</td>
 			<td class="input">
 				<form:select path="accountId">
 					<form:option value="-"  label="Select" />
 					<form:options items="${corporateAccounts}" />
-				</form:select>
-			</td>
-		</tr>
-		<tr>
-			<td class="label">Month:</td>
-			<td class="input">
-				<form:select path="month">
-					<form:option value="-"  label="Select" />
-					<form:options items="${months}" />
-				</form:select>
-			</td>
-		</tr>
-		<tr>
-			<td class="label">Year:</td>
-			<td class="input">
-				<form:select path="year">
-					<form:option value="-"  label="Select" />
-					<form:options items="${years}" />
-				</form:select>
+				</form:select><div id="errorLblForAccount" style="display:none;color:red;float:left"><b>please select</b></div>
 			</td>
 		</tr>
 		<tr>
@@ -45,11 +73,29 @@
 				<form:select path="searchType">
 					<form:option value="-"  label="Select" />
 					<form:options items="${searchTypes}" />
-				</form:select>
+				</form:select><div id="errorLblForSearchType" align="left" style="display:none;color:red;float:left"><b>please select</b></div>
 			</td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="Get Searches" /></td>
+			<td class="label">Year:</td>
+			<td class="input">
+				<form:select path="year">
+					<form:option value="-"  label="Select" />
+					<form:options items="${years}" />
+				</form:select><div id="errorLblForYear" align="left" style="display:none;color:red;float:left"><b>please select</b></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="label">Month:</td>
+			<td class="input">
+				<form:select path="month">
+					<form:option value="-"  label="Select" />
+					<form:options items="${months}" />
+				</form:select><div id="errorLblForMonth" align="left" style="display:none;color:red;float:left"><b>please select</b></div>
+			</td>
+		</tr>
+		<tr>
+			<td><input id="btn" type="button" value="Get Searches" /></td>
 		</tr>
 	
 	</table>	

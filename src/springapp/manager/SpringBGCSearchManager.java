@@ -485,11 +485,14 @@ public class SpringBGCSearchManager implements ResourceLoaderAware {
 		logger.info("Remote query complete, parsing results");
 					
 		// check for error element first
-		NodeList errorlist = xmlData.getElementsByTagName("Error");
+		NodeList errorlist = xmlData.getElementsByTagName("errors");
+		logger.info("errorlist - " + errorlist + "; length - " + errorlist.getLength());
 		if (errorlist.getLength() > 0) {
 			Node n = errorlist.item(0);
+			logger.info("errorlist - node - " + n);
 			// an invalid search was created
 			String error = n.getNodeValue();
+			logger.info("errorlist - error - " +error);
 			
 			throw new SearchException(error);
 			
@@ -740,11 +743,12 @@ public class SpringBGCSearchManager implements ResourceLoaderAware {
 			String hashKey = generateHashKey(bean.getClass().getName());
 			bean.setHashKey(hashKey);
 			
-			bean.setFirstName(map.get("firstName"));
-			bean.setLastName(map.get("lastName"));
-			bean.setMiddleName(map.get("middleName"));
-			bean.setSuffix(map.get("suffix"));
 			
+			bean.setFirstName(map.get("firstName") != null ? map.get("firstName") : " ");
+			bean.setLastName(map.get("lastName") != null ? map.get("lastName") : " ");
+			bean.setMiddleName(map.get("middleName") != null ? map.get("middleName") : " ");
+			bean.setSuffix(map.get("suffix") != null? map.get("suffix") : " ");
+						
 			BGCAlias alias = BGCAlias.createBGCAlias(bean);
 			alias.save();
 			int aliasId = alias.getBgcAliasId();

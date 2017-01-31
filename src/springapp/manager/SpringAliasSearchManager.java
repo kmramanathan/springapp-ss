@@ -62,7 +62,7 @@ public class SpringAliasSearchManager implements ResourceLoaderAware {
 	@Autowired
 	protected BGCRequestDao purposeDao;
 
-	private static final Logger logger = Logger.getLogger("BGCSearchManager");
+	private static final Logger logger = Logger.getLogger("AliasSearchManager");
 
 	@Autowired
 	protected ResourceLoader resourceLoader;
@@ -479,12 +479,12 @@ public class SpringAliasSearchManager implements ResourceLoaderAware {
 		Document xmlData = reqHelper.doHttpPostQuery(bgcPostUrlLive, xmlQuery);
 		
 		// This function only for reading XML for testing purpose
-		readXMLForTest(xmlData);
+		//readXMLForTest(xmlData);
 		 
 		logger.info("Remote query complete, parsing results");
 					
 		// check for error element first
-		NodeList errorlist = xmlData.getElementsByTagName("Error");
+		NodeList errorlist = xmlData.getElementsByTagName("errors");
 		if (errorlist.getLength() > 0) {
 			Node n = errorlist.item(0);
 			// an invalid search was created
@@ -557,19 +557,20 @@ public class SpringAliasSearchManager implements ResourceLoaderAware {
 			response = BGCResponse.createBGCResponse(resBean);
 			response.save();
 			int responseId = response.getBgcResponseId();		
-			logger.info("responseId: " + responseId);
+			logger.info("Inside BGC Search manager - responseId: " + responseId);
 			
 			// bail out here if no results
 			if (matchCount == 0) {
 				logger.info("no results, returning");
 			} else {				
+				logger.info("Size - listOffenders - " + listOffenders.size());
 				// loop through all matches and add them into a batch operation list 
 				for (Iterator<BGCOffenderMapHolder> it = listOffenders.iterator(); it.hasNext(); ) {
 					BGCOffenderMapHolder match = it.next();						
 					
 					// add offender
 					int offenderId = processOffenderTop(responseId, match);
-					//logger.info("added offender: " + offenderId);				
+					logger.info("added offender: " + offenderId);				
 					
 					// these are linked to offender
 					ArrayList<Integer> aliasIdList = processAliases(offenderId, match);
@@ -725,24 +726,36 @@ public class SpringAliasSearchManager implements ResourceLoaderAware {
 	}
 	
 	protected ArrayList<Integer> processAliases(int offenderId, BGCOffenderMapHolder match) throws TorqueException {
+		logger.info("Inside processAliases");
 		ArrayList<HashMap<String,String>> listAliases = match.getListAliases();
+		logger.info("Inside processAliases - listAliases - " + listAliases);
+		logger.info("Inside processAliases - size - " + listAliases.size());
 		ArrayList<Integer> aliasIdList = new ArrayList<Integer>();				
 		
 		for (HashMap<String,String> map : listAliases) {
 			BGCAliasBean bean = new BGCAliasBean();
+			logger.info("Inside processAliases - offenderId - " + offenderId);
 			bean.setBgcOffenderId(offenderId);
 			
 			String hashKey = generateHashKey(bean.getClass().getName());
+			logger.info("Inside processAliases - hashKey - " + hashKey);
 			bean.setHashKey(hashKey);
 			
+			logger.info("First name - " + map.get("firstName") 
+					+ "; Last Name - " + map.get("lastName") + "; Middle Name - " + map.get("middleName") 
+					+ "Suffix to be set in db - " + map.get("suffix"));
 			bean.setFirstName(map.get("firstName") != null ? map.get("firstName") : " ");
 			bean.setLastName(map.get("lastName") != null ? map.get("lastName") : " ");
 			bean.setMiddleName(map.get("middleName") != null ? map.get("middleName") : " ");
 			bean.setSuffix(map.get("suffix") != null? map.get("suffix") : " ");
+			logger.info("First name - " + bean.getFirstName() 
+					+ "; Last Name - " + bean.getLastName() + "; Middle Name - " + bean.getMiddleName() 
+					+ "Suffix to be set in db - " + bean.getSuffix());
 			
 			BGCAlias alias = BGCAlias.createBGCAlias(bean);
 			alias.save();
 			int aliasId = alias.getBgcAliasId();
+			logger.info("Inside processAliases - aliasId - " + aliasId);
 			
 			aliasIdList.add(aliasId);
 		}

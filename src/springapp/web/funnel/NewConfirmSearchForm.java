@@ -816,14 +816,16 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			{
 				//Doing bjl Search				
 				try {				
-					logger.error("Alias Search -  Search about to be done: for noCreditCard");
+					logger.info("Alias Search -  Search about to be done: for noCreditCard");
 					int responseId = runAliasSearch(session, map, status, aliasfc, t, u);
+					logger.info("Alias Search -  Response id - " + responseId);
 					
 					// req id is set in runSearch()
 					session.setAttribute("responseId", responseId);
 					session.setAttribute("transactionId", t.getTransactionId());
 					session.setAttribute("searchPrice", aliasfc.getPrice());
 					
+					logger.info("Alias Search -  Before redirecting - " + newAliasResultsRedir);
 					return newAliasResultsRedir;
 				} catch (SearchException te) 
 				{		
@@ -2212,7 +2214,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 
 		sfc.setBgcDobYear(sfc.getBgcDobRangeBaseYear());
 		int requestId=0;
-		long ssnRequestId=0;
+		//long ssnRequestId=0;
 		int responseId=0;
 		//bgcSSNManager
 		/*if(sfc.getBgcSsn()!=null)
@@ -2223,7 +2225,8 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			logger.info("NwCfrm ssnRequestId 2081+ssn"+ ssnRequestId);
 		}*/
 		//else
-		{
+		//{
+		try {
 		requestId = bgcManager.prepareSearch(u.getUserId(), 
 				sfc.getBgcFirstName(), sfc.getBgcMiddleInitial(), sfc.getBgcLastName(), 
 				sfc.getBgcFirstNameExact(), sfc.getBgcLastNameExact(), 
@@ -2239,7 +2242,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 		// record the txn id
 		bgcManager.setTransactionId(responseId, (int) t.getTransactionId());
 				
-		}
+		//}
 		
 
 		// finalize charge?
@@ -2247,6 +2250,11 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 		
 		//return resultsView;
 		return responseId;
+		} catch (Exception e) {
+			logger.error("Error in running criminal search and before sending admin email - ", e);
+			sendSearchExceptionEmail(u.getFirstName(), t.getCcName(), t.getTransactionId(), t.getCcLastDigits());
+			throw new SearchException(e.getMessage());
+		}
 	}// End Criminal  Searches 
 	
 	// Begin Alias Search
@@ -2273,7 +2281,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 
 			//sfc.setBgcDobYear(sfc.getBgcDobRangeBaseYear());
 			int requestId=0;
-			long ssnRequestId=0;
+			//long ssnRequestId=0;
 			int responseId=0;
 			//bgcSSNManager
 			/*if(sfc.getBgcSsn()!=null)
@@ -2284,7 +2292,8 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 				logger.info("NwCfrm ssnRequestId 2081+ssn"+ ssnRequestId);
 			}*/
 			//else
-			{
+			//{
+			try {
 			requestId = aliasSearchManager.prepareSearch(u.getUserId(), 
 					sfc.getBgcFirstName(), sfc.getBgcMiddleInitial(), sfc.getBgcLastName(), 
 					sfc.getBgcFirstNameExact(), sfc.getBgcLastNameExact(), 
@@ -2300,7 +2309,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			// record the txn id
 			aliasSearchManager.setTransactionId(responseId, (int) t.getTransactionId());
 					
-			}
+			//}
 			
 
 			// finalize charge?
@@ -2308,6 +2317,11 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			
 			//return resultsView;
 			return responseId;
+			} catch (Exception e) {
+				logger.error("Error in running alias search and before sending admin email - ", e);
+				sendSearchExceptionEmail(u.getFirstName(), t.getCcName(), t.getTransactionId(), t.getCcLastDigits());
+				throw new SearchException(e.getMessage());
+			}
 		}// End Criminal  Searches 
 	
 	//Begin Real Property Name search

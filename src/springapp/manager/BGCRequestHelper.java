@@ -236,7 +236,10 @@ public class BGCRequestHelper {
 		if (aliasSearch) {
 			logger.info("buildOrderElement - ssn -  started");
 			OMElement ssn = fac.createOMElement("SSN", null);
-			ssn.setText(String.valueOf(bean.getDobYearRange()));
+			String ssnStr = String.valueOf(bean.getDobYearRange());
+			ssnStr = (ssnStr.length() < 9 ? String.format("%0" + (9 - ssnStr.length()) + "d%s", 0 , 
+					ssnStr) : ssnStr);
+			ssn.setText(ssnStr);
 			eOrder.addChild(ssn);
 			logger.info("buildOrderElement - ssn -  ends " + ssn.getText());
 		} 

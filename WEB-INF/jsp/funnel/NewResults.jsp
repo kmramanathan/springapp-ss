@@ -8,6 +8,8 @@
 <jsp:attribute name="javascript">jquery-1.2.1.pack.js,table.js,selectPage.js,verifyCheckBoxesForPrint.js</jsp:attribute>
 
 <jsp:body>
+<c:set var="aliasSearchFlag" value="${aliasSearchFlag}" scope="session"/>
+<c:set var="aliasSSN" value="${aliasSSN}" scope="session"/>
 <script type="text/javascript">
 var checked = false;
 //var flag=false;
@@ -68,10 +70,10 @@ function validate()
 <div id="title" style="float:left; width:250px;">
 <c:choose>
     <c:when test="${aliasSearchFlag}">
-       <a href="newSearch.do">Back to Search Page</a>
+       <a href="aliasSearch.do">Back to Search Page</a>
     </c:when>    
     <c:otherwise>
-       <a href="aliasSearch.do">Back to Search Page</a>
+       <a href="newSearch.do">Back to Search Page</a>
     </c:otherwise>
 </c:choose> 
 </div>
@@ -85,10 +87,10 @@ function validate()
 <h1>
 <c:choose>
     <c:when test="${aliasSearchFlag}">
-        Criminal Record Results
+       AKA / Alias Criminal Search
     </c:when>    
     <c:otherwise>
-       AKA / Alias Criminal Search
+       Criminal Record Results
     </c:otherwise>
 </c:choose>
 </h1>

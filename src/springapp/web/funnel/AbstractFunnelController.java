@@ -239,11 +239,12 @@ import springapp.service.user.UserManager;
 	// email stuff
 	protected static final String emailFromThankYou = "thank-you@searchsystems.net";
 	protected static final String emailFromNoReply = "no-reply@searchsystems.net";
-	protected static final String emailToAdmin = "seand@searchsystems.net";
+	protected static final String emailToAdmin = "ram.dvk@gmail.com";
 	protected static final String emailFromSkipTrace = "skip-trace@searchsystems.net";
 	
 	protected static final String tplThankYou = "springapp/web/funnel/ThankYouEmailTemplate.vm";
 	protected static final String tplAdminProblem = "springapp/web/funnel/AdminProblemEmailTemplate.vm";
+	protected static final String tplSearchException = "springapp/web/funnel/SearchExceptionEmailTemplate.vm";
 	protected static final String tplSearchReceipt = "springapp/web/funnel/SearchReceiptEmailTemplate.vm";
 	protected static final String tplSignupReceipt = "springapp/web/funnel/SignupReceiptEmailTemplate.vm";
 	protected static final String skipTraceOrder = "springapp/web/skiptrace/orderTemplate.vm";
@@ -647,5 +648,18 @@ protected final void populateAllUSState() {
         String subject = "FUNNEL: Admin Problem";
         
         sendEmailVelocity(map, tplThankYou, emailFromNoReply, emailToAdmin, subject);
+	}
+	
+	// this might be more useful if we could include a map
+	protected final void sendSearchExceptionEmail(String userName, String customerName, int transactionId, Short ccLast4) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("userName", userName);
+		map.put("ccName", (customerName != null && customerName.trim().length() > 0 ? customerName : "Tim Koster"));
+		map.put("transactionId", transactionId);
+		map.put("ccLast4", ccLast4);
+		
+        String subject = "Search Exception: An error occured in premium search";
+        
+        sendEmailVelocity(map, tplSearchException, emailFromNoReply, emailToAdmin, subject);
 	}
 }

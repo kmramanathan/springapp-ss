@@ -7,6 +7,8 @@
 <jsp:attribute name="javascript">jquery-1.2.1.pack.js,table.js,selectPage.js</jsp:attribute>
 
 <jsp:body>
+<c:set var="aliasSearchFlag" value="${aliasSearchFlag}" scope="session"/>
+<c:set var="aliasSSN" value="${aliasSSN}" scope="session"/>
 <style type="text/css">
 tr.even{background-color:#f7f6a5;}
 tr.odd{background:#fff;}
@@ -23,7 +25,14 @@ tr.odd{background:#fff;}
 	</td>
 	<td width="30%">
 		<div id="title">
-			<a href="newResults.do?download=true">Download</a> 
+			<c:choose>
+				<c:when test="${aliasSearchFlag}">
+					<a href="newAliasResults.do?download=true">Download</a>
+				</c:when>
+				<c:otherwise>
+					<a href="newResults.do?download=true">Download</a>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</td>
 	<td width="40%">

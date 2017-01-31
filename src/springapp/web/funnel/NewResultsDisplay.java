@@ -12,11 +12,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import net.searchsystems.limestone.bean.BGCAliasBean;
 import net.searchsystems.limestone.bean.BGCOffenderBean;
 import net.searchsystems.limestone.bean.BGCOffenseBean;
 import net.searchsystems.limestone.bean.BGCRequestBean;
 import net.searchsystems.limestone.bean.BGCResponseBean;
+
+import org.apache.commons.lang.StringUtils;
 import org.apache.torque.NoRowsException;
 import org.apache.torque.TooManyRowsException;
 import org.apache.torque.TorqueException;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.WebRequest;
+
 import springapp.domain.NewBJLResults;
 import springapp.domain.CriminalSSN.CriminalSSNRequestBean;
 import springapp.domain.CriminalSSN.CriminalSSNResponseBean;
@@ -139,6 +143,7 @@ public class NewResultsDisplay extends AbstractFunnelController {
 				
 				String searchDOB = request.getDobMonth() + "/" + request.getDobDay() + "/" + request.getDobYear();
 				map.addAttribute("DOB", searchDOB);
+				map.addAttribute("aliasSearchFlag", false);
 				//session.removeAttribute("bgcRequestId");
 				session.removeAttribute("responseId");
 				session.removeAttribute("searchFormCommand");
@@ -240,6 +245,7 @@ public class NewResultsDisplay extends AbstractFunnelController {
 				
 				String searchDOB = request.getDobMonth() + "/" + request.getDobDay() + "/" + request.getDobYear();
 				map.addAttribute("DOB", searchDOB);
+				map.addAttribute("aliasSearchFlag", false);
 				//session.removeAttribute("bgcRequestId");
 				session.removeAttribute("responseId");
 				session.removeAttribute("searchFormCommand");
@@ -259,8 +265,9 @@ public class NewResultsDisplay extends AbstractFunnelController {
 			map.addAttribute("searchState", sfc.getBgcState());
 			}
 			
+			map.addAttribute("aliasSearchFlag", false);
 			
-			session.removeAttribute("searchFormCommand");
+			//session.removeAttribute("searchFormCommand");
 			
 			return newresultsView;
 			
@@ -285,7 +292,7 @@ public class NewResultsDisplay extends AbstractFunnelController {
 			HttpServletResponse hresponse
 			)  {		
 		
-		
+		logger.info("Inside  newAliasResults - Download flag - " + download);
 		if (test == null) { test = false; }
 		if (pageSize == null) { pageSize = 10; }
 		if(download == null){download=false;}
@@ -328,6 +335,13 @@ public class NewResultsDisplay extends AbstractFunnelController {
 				
 				String searchDOB = request.getDobMonth() + "/" + request.getDobDay() + "/" + request.getDobYear();
 				map.addAttribute("DOB", searchDOB);
+				
+				map.addAttribute("aliasSearchFlag", true);
+				String ssnStr = String.valueOf(request.getDobYearRange());
+				ssnStr = (ssnStr.length() < 9 ? String.format("%0" + (9 - ssnStr.length()) + "d%s", 0 , 
+						ssnStr) : ssnStr);
+				map.addAttribute("aliasSSN", ssnStr);
+				
 				//session.removeAttribute("bgcRequestId");
 				session.removeAttribute("responseId");
 				session.removeAttribute("aliasSearchFormCommand");
@@ -339,7 +353,7 @@ public class NewResultsDisplay extends AbstractFunnelController {
 			BGCOffenderBean[] beans;
 			try {
 				beans = aliasSearchManager.getOffenders(response.getBgcResponseId());
-				
+				logger.info("Offenders Length: " + beans.length);
 			} catch (TorqueException e) {
 				throw new SearchException(e);
 			}
@@ -350,7 +364,7 @@ public class NewResultsDisplay extends AbstractFunnelController {
 					offenders.add(b);
 				}
 			}
-			
+			logger.info("Offenders size: " + offenders.size());
 //			ArrayList<BGCOffenderBean> offenders2 = new ArrayList<BGCOffenderBean>(offenders);
 //			for (int i=0; i<30; i++) {
 //				offenders.addAll(offenders2);
@@ -413,6 +427,7 @@ public class NewResultsDisplay extends AbstractFunnelController {
 				catch (Exception e) {
 					// TODO: handle exception
 					logger.error("Error: While writing on the file :"+e);
+					e.printStackTrace();
 				}
 			}
 			// send to results page (or no results)
@@ -429,6 +444,10 @@ public class NewResultsDisplay extends AbstractFunnelController {
 				
 				String searchDOB = request.getDobMonth() + "/" + request.getDobDay() + "/" + request.getDobYear();
 				map.addAttribute("DOB", searchDOB);
+				
+				map.addAttribute("aliasSearchFlag", true);
+				map.addAttribute("aliasSSN", sfc.getBgcSsn());
+				
 				//session.removeAttribute("bgcRequestId");
 				session.removeAttribute("responseId");
 				session.removeAttribute("aliasSearchFormCommand");
@@ -448,8 +467,10 @@ public class NewResultsDisplay extends AbstractFunnelController {
 			map.addAttribute("searchState", sfc.getBgcState());
 			}
 			
+			map.addAttribute("aliasSearchFlag", true);
+			map.addAttribute("aliasSSN", sfc.getBgcSsn());
 			
-			session.removeAttribute("aliasSearchFormCommand");
+			//session.removeAttribute("aliasSearchFormCommand");
 			
 			return newresultsView;
 			
@@ -513,78 +534,78 @@ public class NewResultsDisplay extends AbstractFunnelController {
 	private void genrateOffenseTextFormat(PrintWriter pw,
 			BGCOffenseBean[] bgcOffenseList) {
 		for (BGCOffenseBean bgcOffenseBean : bgcOffenseList) {
-			if(!bgcOffenseBean.getDescription().isEmpty())
+			if(!StringUtils.isEmpty(bgcOffenseBean.getDescription()))      //if(!bgcOffenseBean.getDescription().isEmpty())
 			{
 				pw.println("Description");
 				pw.println(bgcOffenseBean.getDescription());
 			}
-			if(!bgcOffenseBean.getStatute().equals(""))
+			if(!StringUtils.isEmpty(bgcOffenseBean.getStatute()))
 			{
 				pw.println("Statute");
 				pw.println(bgcOffenseBean.getStatute());
 
 			}
-			if(!bgcOffenseBean.getDegreeOfOffense().equals(""))
+			if(!StringUtils.isEmpty(bgcOffenseBean.getDegreeOfOffense()))
 			{
 				pw.println("Degree Of Offense");
 				pw.println(bgcOffenseBean.getDegreeOfOffense());
 
 			}
-			if(!bgcOffenseBean.getOffenseDate().equals(""))
+			if(!StringUtils.isEmpty(bgcOffenseBean.getOffenseDate()))
 			{
 				pw.println("Offense Date");
 				pw.println(bgcOffenseBean.getOffenseDate());
 
 			}
-			if(!bgcOffenseBean.getArrestDate().equals(""))
+			if(!StringUtils.isEmpty(bgcOffenseBean.getArrestDate()))
 			{
 				pw.println("Arrest Date");
 				pw.println(bgcOffenseBean.getArrestDate());
 
 			}
-			if(!bgcOffenseBean.getArrestingAgency().equals(""))
+			if(!StringUtils.isEmpty(bgcOffenseBean.getArrestingAgency()))
 			{
 				pw.println("Arresting Agency");
 				pw.println(bgcOffenseBean.getArrestingAgency());
 
 			}
-			if(!bgcOffenseBean.getDisposition().equals(""))
+			if(!StringUtils.isEmpty(bgcOffenseBean.getDisposition()))
 			{
 			pw.println("Disposition");pw.println(bgcOffenseBean.getDisposition());
 
 			}
-			if(!bgcOffenseBean.getDispositionDate().equals(""))
+			if(!StringUtils.isEmpty(bgcOffenseBean.getDispositionDate()))
 			{
 			pw.println("Disposition Date");pw.println(bgcOffenseBean.getDispositionDate());
 
 			}
-			if(!bgcOffenseBean.getSentence().equals(""))
+			if(!StringUtils.isEmpty(bgcOffenseBean.getSentence()))
 			{
 			pw.println("Sentence");pw.println(bgcOffenseBean.getSentence());
 
 			}
-			if(!bgcOffenseBean.getSentenceDate().equals(""))
+			if(!StringUtils.isEmpty(bgcOffenseBean.getSentenceDate()))
 			{
 			pw.println("Sentence Date");pw.println(bgcOffenseBean.getSentenceDate());
 
 			}
-			if(!bgcOffenseBean.getConfinement().equals(""))
+			if(!StringUtils.isEmpty(bgcOffenseBean.getConfinement()))
 			{
 			pw.println("Confinement");pw.println(bgcOffenseBean.getConfinement());
 
 			}
-			if(!bgcOffenseBean.getProbation().equals(""))
+			if(!StringUtils.isEmpty(bgcOffenseBean.getProbation()))
 			{
 			pw.println("Probation");pw.println(bgcOffenseBean.getProbation());
 
 			}
-			if(!bgcOffenseBean.getFine().equals(""))
+			if(!StringUtils.isEmpty(bgcOffenseBean.getFine()))
 			{
 			pw.println("Fine");
 			pw.println(bgcOffenseBean.getFine());
 
 			}
-			if(!bgcOffenseBean.getPlea().equals(""))
+			if(!StringUtils.isEmpty(bgcOffenseBean.getPlea()))
 			{
 			pw.println("Plea");
 			pw.println(bgcOffenseBean.getPlea());
@@ -601,7 +622,7 @@ public class NewResultsDisplay extends AbstractFunnelController {
 			BGCOffenderBean bean) {
 		String address, city, state, postal, gender, race, county, country, height, weight, eye, hair, provider, rstate;
 		//address
-		if(bean.getStreet().isEmpty())
+		if(StringUtils.isEmpty(bean.getStreet()))        //if(bean.getStreet().isEmpty())
 		{
 			address="---";
 		}else {
@@ -609,92 +630,93 @@ public class NewResultsDisplay extends AbstractFunnelController {
 		}
 		
 		//city
-		if(bean.getCity().isEmpty())
+		if(StringUtils.isEmpty(bean.getCity()))
 		{
 			city="---";
 		}else {
 			city=bean.getCity();
 		}
-			
+		
+		logger.info("isEmpty(bean.getCounty()) - " + StringUtils.isEmpty(bean.getCounty()));
 		//county
-		if(bean.getCounty().isEmpty())
+		if(StringUtils.isEmpty(bean.getCounty()))
 		{
 			county="---";
 		}else {
 			county=bean.getCounty();
 		}
 		//country
-		if(bean.getCountry().isEmpty())
+		if(StringUtils.isEmpty(bean.getCountry()))
 		{
 			country="---";
 		}else {
 			country=bean.getCountry();
 		}
 		//gender
-		if(bean.getGender().isEmpty())
+		if(StringUtils.isEmpty(bean.getGender()))
 				{
 					gender="---";
 		}else {
 					gender=bean.getGender();
 			}
 		//Race
-		if(bean.getRace().isEmpty())
+		if(StringUtils.isEmpty(bean.getRace()))
 		{
 			race="---";
 		}else {
 				race=bean.getRace();
 			}
 		//state
-		if(bean.getState().isEmpty())
+		if(StringUtils.isEmpty(bean.getState()))
 			{
 				state="---";
 		}else {
 				state=bean.getState();
 				}
 		//postal
-		if(bean.getPostalCode().isEmpty())
+		if(StringUtils.isEmpty(bean.getPostalCode()))
 			{
 				postal="---";
 		}else {
 			postal=bean.getPostalCode();
 				}
 		//height
-		if(bean.getHeightFeet().isEmpty())
+		if(StringUtils.isEmpty(bean.getHeightFeet()))
 			{
 				height="---";
 		}else {
 			height=bean.getHeightFeet();
 				}
 		//weight
-		if(bean.getWeight().isEmpty())
+		if(StringUtils.isEmpty(bean.getWeight()))
 			{
 				weight="---";
 		}else {
 				weight=bean.getWeight();
 				}
 		//eye color
-		if(bean.getEyeColor().isEmpty())
+		if(StringUtils.isEmpty(bean.getEyeColor()))
 			{
 				eye="---";
 		}else {
 				eye=bean.getEyeColor();
 				}
 		//hair color
-		if(bean.getHairColor().isEmpty())
+		if(StringUtils.isEmpty(bean.getHairColor()))
 			{
 				hair="---";
 		}else {
 				hair=bean.getHairColor();
 				}
 		//Provider
-		if(bean.getProvider().isEmpty())
+		if(StringUtils.isEmpty(bean.getProvider()))
 			{
 				provider="---";
 		}else {
 			provider=bean.getProvider();
 				}
 		//Record State
-		if(bean.getRecordState().isEmpty())
+		if(StringUtils.isEmpty(bean.getRecordState()))
 			{
 				rstate="---";
 		}else {

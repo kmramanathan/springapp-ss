@@ -15,12 +15,13 @@
 <c:set var="dob" value="${DOB}" scope="session"/>
 <c:set var="aliasSearchFlag" value="${aliasSearchFlag}" scope="session"/>
 <c:set var="aliasSSN" value="${aliasSSN}" scope="session"/>
+<div style="color:red;">NOTE: We are not able to store these results for later viewing. Click the "Print Version" link below and then save or print your results.</div>
 <table width="99%" border="0" cellpadding="0" cellspacing="0">
 <tr><td><h3>Search Results</h3></td><td align="right"><h3 align="right"><a href="no-records-print.jsp" target="blank">Print Version</a></h3></td></tr></table>
 <p>Your <c:choose><c:when test="${aliasSearchFlag}">AKA / Alias Criminal</c:when><c:otherwise>criminal record</c:otherwise></c:choose> Search is complete.</p>        				
 <c:choose>
 <c:when test="${location eq 'all'}">
-<p style="color:#000;">We searched over 550 million criminal records nationwide and over 70 national and international terrorist and debarred persons databases and found NO criminal disposition records for your subject, based on your search criteria:</p>
+<p style="color:#000;">We searched over 550 million criminal records nationwide and over 100 national and international terrorist and debarred persons databases and found NO criminal disposition records for your subject, based on your search criteria:</p>
 </c:when>
 <c:otherwise>
 <p style="color:#000;">We searched available criminal disposition records and did not find any records that matched your subject, based on your search criteria:</p>
@@ -103,20 +104,20 @@
 		<c:choose>
 		<c:when test="${location eq 'all'}">
 			<table align="center" class="styletable111">
-			<tr align="center"> <td width="120"><b>State</b></td><td width="150"><b>Name Searched</b></td><td width="100"><b>Date of Birth</b></td><td width="120"><b>Records Found</b></td><td width="100"><b>Coverage</b></td><td width="150"><b>More Resources</b></td></tr>
+			<tr align="center"> <td width="220"><b>State</b></td><td width="300"><b>Name Searched</b></td><td width="100"><b>Date of Birth</b></td><td width="120"><b>Records Found</b></td></tr>
 			<c:forEach var="displaystates" items="${USStatelist}">
 			
-			<tr align="center"><td>${displaystates.value}</td><td>${firstName}&nbsp;${lastName}</td><td>${DOB}</td><td align="center">0</td><td><c:choose> <c:when test="${displaystates.key eq 'us' or displaystates.key eq 'all'}"><a href="https://www.searchsystems.net/springapp/funnel/ourDatabases.do?view=us" target="blank">Coverage</a></c:when><c:otherwise><a href="https://www.searchsystems.net/springapp/funnel/ourDatabases.do?state=${displaystates.key}" target="blank">Coverage</a></c:otherwise> </c:choose></td><td><c:choose><c:when test='${displaystates.value == "National"}'><a href="http://publicrecords.searchsystems.net/United-States/Criminal-Records/" target="blank">More Resources</a></c:when><c:when test='${displaystates.value == "International"}'><a href="http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/International-Criminal-Records/" target="blank">More Resources</a></c:when> <c:otherwise><a href="http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/${displaystates.value}_Criminal_Records/" target="blank">More Resources</a></c:otherwise></c:choose></td></tr>
+			<tr align="center"><td>${displaystates.value}</td><td>${firstName}&nbsp;${lastName}</td><td>${DOB}</td><td align="center">0</td></tr>
 			
 			</c:forEach>
 			</table>
 		</c:when>
 		<c:otherwise>
 			<table align="center" class="styletable111">
-			<tr align="center"> <th width="120">State</th><th width="150">Name Searched</th><th width="100">Date of Birth</th><th width="120">Records Found</th><th width="100">Coverage</th><th width="150">More Resources</th></tr>
+			<tr align="center"> <th width="220">State</th><th width="300">Name Searched</th><th width="100">Date of Birth</th><th width="120">Records Found</th></tr>
 			<c:forEach var="displaystates" items="${USStatelist}">
 			<c:if test="${displaystates.key eq location}">
-			<tr align="center"><td>${displaystates.value}</td><td>${firstName}&nbsp;${lastName}</td><td>${DOB}</td><td>0</td><td><a href="https://www.searchsystems.net/springapp/funnel/ourDatabases.do?state=${displaystates.key}" target="blank">Coverage</a></td><td><a href="http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/${displaystates.value}_Criminal_Records/" target="blank">More Resources</a></td></tr>
+			<tr align="center"><td>${displaystates.value}</td><td>${firstName}&nbsp;${lastName}</td><td>${DOB}</td><td>0</td></tr>
 			</c:if>
 			</c:forEach>
 			</table>
@@ -148,11 +149,11 @@
                 </ol>
                 <p>&nbsp;</p>
 
-			<p align="left">
+			<p align="right">
 				<span class="style107">
 					<c:choose>
-						<c:when test="${aliasSearchFlag}"><a href="aliasSearch.do">Search Again</a></c:when>
-			        	<c:otherwise><a href="newSearch.do">Search Again</a></c:otherwise>
+						<c:when test="${aliasSearchFlag}"><a href="aliasSearch.do">Back to Search Page</a></c:when>
+			        	<c:otherwise><a href="newSearch.do">Back to Search Page</a></c:otherwise>
 		        	</c:choose>
 	        	</span>
         	</p>

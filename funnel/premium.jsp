@@ -101,12 +101,12 @@
               <table width="893" border="0">
                 <tr>
                   <td width="887" height="506"><p><strong>In addition to providing the world's largest and longest-running directory of free public record databases, Search Systems also offers unique fee-based &quot;premium&quot; databases that help you save time and search for information using features that  free databases don't offer.</strong></p>
-                    <p>Access all of our Nationwide and Statewide Premium databases from the menu below. If you have an account, you may log in now via the link in the upper right. If you do not yet have an account,<a href="/springapp/funnel/register.do">click here</a>, or you can establish one for free when you begin your first search.</p>
+                    <p>Access all of our National and Statewide Premium databases from the menu below. If you have an account, you may log in now via the link in the upper right. If you do not yet have an account,<a href="/springapp/funnel/register.do">click here</a>, or you can establish one for free when you begin your first search.</p>
                     <table width="778" border="0" align="center">
                       <tr>
                         <td><p><a href="/springapp/funnel/selectSearch.do" target="self"><img src="images/common/prem-link-crim.jpg" alt="criminal records" width="221" height="101" usemap="#Map2" border="0" /></a></p></td>
-                        <td><p><strong>Nationwide  $14.95 | Statewide $9.95</strong></p>
-                          <p>The largest database of this type available to the public. Search over 500 million criminal records, including those from national, and state databases. Instant results and powerful search features.</p></td>
+                        <td><p><strong>National Records  $14.95 | State Search $9.95</strong></p>
+                          <p>The largest database of this type available to the public. Search over 550 million criminal records, including those from national, and state databases. Instant results and powerful search features.</p></td>
                       </tr>
 					   <tr>
                         <td><p>
@@ -114,10 +114,10 @@
 						<img src="images/common/Aliash_Srch.jpg" alt="Alias Search records" width="221" height="101" usemap="#Map5" border="0" /></a></p>
 						</td>
                         <td>
-						<p><strong>National $19.95 | Statewide $14.95</strong></p>
+						<p><strong>National Records $19.95 | State Search $14.95</strong></p>
                         <p>
 						Search our database of over 550 million records by name, birth date, and social security number for a subject's name and maiden name, 
-						married name, nickname, and aliases revealed by an address history. FCRA Only.</p></td>
+						married name, nickname, and aliases revealed by an address history.</p></td>
                       </tr>
 					  <tr valign="top">
                         <td  valign="top"><p><a href="/springapp/funnel/national-security-search.do" target="self"><img src="images/common/prem_link_national.jpg" alt="National Security" width="221" height="80" usemap="#Map1" border="0" /></a></p></td>
@@ -157,7 +157,7 @@
 <!--// footer begins //-->
 <div style="clear: both; height: 30px;"></div>
 
-<div class="footer" style="text-align: center;">Copyright &copy; 1997-2016 Search Systems, Inc. All rights reserved.
+<div class="footer" style="text-align: center;">Copyright &copy; 1997-2017 Search Systems, Inc. All rights reserved.
 <address>SearchSystems.net, 2945 Townsgate Road, Suite 200, Westlake Village, California 91361</address>
 <address>Call Us at: 805-375-4041 | 
 <a href="http://publicrecords.searchsystems.net/privacypolicy.php">Privacy Policy</a>

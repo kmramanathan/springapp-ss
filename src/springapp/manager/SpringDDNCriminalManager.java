@@ -2,6 +2,7 @@ package springapp.manager;
 import java.io.DataOutputStream;
 import java.io.StringReader;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -114,8 +115,8 @@ public class SpringDDNCriminalManager implements ResourceLoaderAware {
 			 Short searchStatusId;
 	         Integer totalMatches = 0;
 	         Integer rowsReturned = 0;	        
-	         	String username = "tjkoster";
-				String password = "tksearch2014";
+	         	String username = "kostertj";
+				String password = "Koster2016";
 				String lastname= sLastname;
 				String firstname= sFirstname;
 				String dob= "";
@@ -133,27 +134,33 @@ public class SpringDDNCriminalManager implements ResourceLoaderAware {
 			{
 				String xml= "<?xml version='1.0' encoding='utf-8'?><OrderXML><Method>SEND ORDER</Method>";
 				xml += "<Authentication><Username>"+ username +"</Username><Password>"+ password +"</Password></Authentication>";
-				xml += "<ReturnResultURL>http://database02.searchsystems.net:8080/springapp/funnel/ddnResults.do</ReturnResultURL>";
+				//xml += "<TestMode>YES</TestMode>";
+				xml += "<ReturnResultURL>https://dev.searchsystems.net/springapp/funnel/ddnResults.do</ReturnResultURL>";
 				xml += "<OrderingUser></OrderingUser><Order><BillingReferenceCode></BillingReferenceCode><Subject>";
 				 //if(session.getAttribute("ddnXMLValueNameSearch") != null)
-				 {
-					 xml += "<FirstName>"+ firstname +"</FirstName><MiddleName></MiddleName><LastName>"+ lastname +"</LastName><Generation></Generation>";
-					 xml += "<DOB>"+ dob +"</DOB><SSN>"+ ssn +"</SSN><Gender></Gender><Ethnicity></Ethnicity><DLNumber></DLNumber>";
-				 }				 				
-				xml += "<ApplicantPosition></ApplicantPosition><CurrentAddress><StreetAddress></StreetAddress><City></City>";
-				if(state!= null && !state.equals("Natcrim") )
+				 //{
+				xml += "<FirstName>"+ firstname +"</FirstName><MiddleName></MiddleName><LastName>"+ lastname +"</LastName><Generation></Generation>";
+				xml += "<DOB>"+ (dob != null? dob.replace("0/0/0", "11/8/1993") : "") +"</DOB>";
+				xml += "<SSN>"+ (ssn != null? ssn : "") +"</SSN>";
+				xml += "<Gender></Gender><Ethnicity></Ethnicity><DLNumber></DLNumber>";
+				 //}				 				
+				xml += "<ApplicantPosition></ApplicantPosition><CurrentAddress><StreetAddress></StreetAddress><City></City><State></State>";
+				/*if(state!= null && !state.equals("all") )
 					xml += "<State>"+ state +"</State>";
 				else 
-					xml += "<State></State>";
+					xml += "<State></State>";*/
 			    xml += "<Zipcode></Zipcode></CurrentAddress><Aliases><Alias><FirstName></FirstName>";
 				xml += "<MiddleName></MiddleName><LastName></LastName></Alias></Aliases></Subject>";
-				if(state!= null && state.equals("Natcrim") ) 
-					xml += "<OrderDetail ServiceCode='Natcrim' OrderId='25678950055'><State></State></OrderDetail>";
+				String strUniqueDateIdentifier = new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime());
+				logger.info("Unique Identified - " + strUniqueDateIdentifier);
+				if(state!= null && state.equals("all") ) 
+					xml += "<OrderDetail ServiceCode='Natcrim' OrderId='" + (transactionId != 0 ? transactionId : strUniqueDateIdentifier) + "'><State></State></OrderDetail>";
 				else
-					xml += "<OrderDetail ServiceCode='State Instant' OrderId='25678445'><State>"+state +"</State></OrderDetail>";
-				xml += "</Order></OrderXML> ";		
+					xml += "<OrderDetail ServiceCode='State Instant' OrderId='" + (transactionId != 0 ? transactionId : strUniqueDateIdentifier) + "'><State>"+state +"</State></OrderDetail>";
+				xml += "</Order></OrderXML> ";
 				
-				logger.info("request xml"+xml);  //SSN:numbr: -- 149-58-7526
+				
+				logger.info("Request xml: "+ xml.replaceAll("><", ">\n<"));  //SSN:numbr: -- 149-58-7526
 
 	         /*
 	 		 *  step 2: Sending Request

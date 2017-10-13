@@ -91,8 +91,6 @@ Search Systems provides no warranty of any type as to the accuracy of this infor
 and any reliance on this information is solely at your own risk and responsibility.  All 
 information retrieved from or through SearchSystems.net must be utilized in accordance with
 the User Agreement and all applicable state and federal laws.
-<br/><br/> 
-Copyright &copy; 1997-2016 Search Systems, Inc. All rights reserved.
 </div>
 </td>
 </tr>

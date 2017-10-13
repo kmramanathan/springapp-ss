@@ -1,5 +1,4 @@
 An exception occured while doing a search for -
-
 Username: ${userName}
 CC Name: ${ccName}
 Transction Id: ${transactionId}

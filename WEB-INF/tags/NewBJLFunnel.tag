@@ -99,9 +99,7 @@ text-decoration:none!important;
       
      <% } else { %> 
       <td align="right" width="50%">&nbsp;</td>
-	  <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  width="80">
-	  <a href="https://www.searchsystems.net/springapp/funnel/login.do" style="text-decoration: none;font-size:14px;  padding:5px 0px 10px 0px;  color:#003366; ">
-	  My Account</a>
+	  <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  width="80"><a href="https://www.searchsystems.net/springapp/funnel/login.do" style="text-decoration: none;font-size:14px;  padding:5px 0px 10px 0px;  color:#003366; ">My Account</a>
       </td><td width="40"  style="background:#fec226;font-size:14px;  color:#003366;" ><a href="login.do" style="text-decoration: none;font-size:14px;   padding:5px 0px 10px 0px;  color:#003366; ">Log In</a> </td>
      <% } %>
 
@@ -113,8 +111,7 @@ text-decoration:none!important;
 	</td>
 </tr>
  </table>
- <div id="orangetopbar">
- <a href="http://www.bbb.org/santa-barbara/business-reviews/internet-services/searchsystems-net-in-newbury-park-ca-13000131/" target="blank">
+ <div id="orangetopbar"><a href="http://www.bbb.org/santa-barbara/business-reviews/internet-services/searchsystems-net-in-newbury-park-ca-13000131/"  target="blank">
  <img src="images/common/bbb-clickratingsm.gif" alt="bbb" width="80" height="25" style="float:right;padding:0;margin:0" /></a>
  </div>
  <!--// masthead ends //-->
@@ -142,13 +139,14 @@ text-decoration:none!important;
 <!--// footer begins //-->
 <div style="clear: both; height: 30px;"></div></div>
 
-
-<div class="footer" style="text-align: center;">Copyright &copy; 1997-2016 Search Systems, Inc. All rights reserved.
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<div class="footer">Copyright &copy; 1997- <fmt:formatDate pattern="yyyy" value="${now}" /> Search Systems, Inc. All rights reserved.
 <address>SearchSystems.net, 2945 Townsgate Road, Suite 200, Westlake Village, California 91361</address>
 <address>Call Us at: 805-375-4041 | 
 <a href="http://publicrecords.searchsystems.net/privacypolicy.php">Privacy Policy</a>
 </address>
 </div>
+
 <!--// footer ends //-->
 	
 </center>     

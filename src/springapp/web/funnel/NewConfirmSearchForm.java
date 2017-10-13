@@ -102,6 +102,16 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 		return searchType;
 	}
 	
+	private String getSearchTypeString(CriminalSearchFormCommand searchfc) {
+		String searchType;
+		if (searchfc.getNationwideSearch()) {
+			searchType = "Criminal Search Nationwide";
+		} else {
+			searchType = "Criminal Search in State (" + searchfc.getState() + ")";
+		}
+		return searchType;
+	}
+	
 	private String getSearchTypeString(AliasSearchFormCommand searchfc) {
 		String searchType;
 		if (searchfc.getNationwideSearch()) {
@@ -620,12 +630,18 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 		{
 			map.addAttribute("searchCriminal", true);
 			map.addAttribute("searchPrice", crimfc.getPrice());
-			map.addAttribute("searchName", crimfc.getFirstname()+" "+crimfc.getMiddlename()+" " +crimfc.getLastname());
+			map.addAttribute("searchType", getSearchTypeString(crimfc));
+			map.addAttribute("searchName", crimfc.getFirstname()+ " " + crimfc.getLastname());
 			map.addAttribute("searchState", crimfc.getState());
-			//map.addAttribute("searchCity", crimfc.getCity());
-			//map.addAttribute("searchRefer", crimfc.getReference());			
+			map.addAttribute("searchSsn", crimfc.getSsn());
+			map.addAttribute("searchDOB", crimfc.getCrmnlDobMonth() + "/" +crimfc.getCrmnlDobDay() +"/"+ crimfc.getCrmnlDobYear());
+			map.addAttribute("NationWide", crimfc.getNationwideSearch());
 			logger.info("Criminal_Search_: Get search INFO");
-			return newRealPropconfirm;
+			
+			boolean msg=false;
+			map.addAttribute("msg", msg);
+			
+			return newconfirmView;
 		}
 		else if (personalfc != null) {
 			//upgrade by vivek 21--2011
@@ -637,10 +653,9 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			map.addAttribute("searchName", searchName);
 			String state=personalfc.getBgcState();
 			String searchDOB="";
-			String searchSSN="";
 			boolean msg=false;
 				
-			if(personalfc.getBgcDobRange())
+			/*if(personalfc.getBgcDobRange())
 			{
 				if(state.equals("CA") || state.equals("IN") || state.equals("MO") || state.equals("HI") || state.equals("KS") || state.equals("MS") || state.equals("ND") || state.equals("NJ") || state.equals("NV") || state.equals("PA") || state.equals("RI") || state.equals("UT"))
 				{
@@ -653,11 +668,13 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 				}
 			}
 			else
-			{
+			{*/
 				searchDOB = personalfc.getBgcDobMonth() + "/" +personalfc.getBgcDobDay() +"/"+ personalfc.getBgcDobYear();
-			}
+			//}
 			map.addAttribute("msg", msg);
 			map.addAttribute("searchDOB", searchDOB);
+			String searchSSN=personalfc.getBgcSsn();
+			map.addAttribute("searchSSN", searchSSN);
 			map.addAttribute("NationWide", personalfc.getNationwideSearch());
 		}
 		else if (aliasfc != null) {
@@ -684,22 +701,6 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			ModelMap map,
 			SessionStatus status) 
 	{
-		//crimfc.getFirstname(),crimfc.getLastname(),crimfc.getDob(), crimfc.getSsn(),crimfc.getState()
-		 
-		CriminalSearchFormCommand crimfc=(CriminalSearchFormCommand) session.getAttribute("CriminalSearchFormCommand");
-		if(crimfc!=null)
-		{
-			if(crimfc.getFirstname() !=null && crimfc.getLastname() !=null )
-			{
-				if(crimfc.getFirstname().equals("Charles") && crimfc.getLastname().equals("Souza") || crimfc.getDob().equals("5/28/1959"))
-				{
-					//logger.info("NewSearchForm_lin:>>122-->" + crimfc.getDob());
-					return newzeroResultsView;
-				}
-			}
-			
-		}
-		
 		String sReturnPage;
 		sReturnPage = ManageSearchandRedirect(session,map,status);
 		return sReturnPage ;
@@ -2468,7 +2469,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			//logger.error("runDDNCriminalSearch::::" + crimfc.getFirstname() + " nna"+ crimfc.getLastname() +" dob"+ crimfc.getDob() +"ssn"+  crimfc.getSsn() +"state"+crimfc.getState() );
 			// run query
 			long result = ddnCriminalManager.queryFunnel(u.getUserId(), searchsubcategory,t.getTransactionId(), 
-					crimfc.getFirstname(),crimfc.getLastname(),crimfc.getDob(), crimfc.getSsn(),crimfc.getState(), session);
+					crimfc.getFirstname(),crimfc.getLastname(), crimfc.getCrmnlDobMonth() + "/" +crimfc.getCrmnlDobDay() +"/"+ crimfc.getCrmnlDobYear(), crimfc.getSsn(),crimfc.getState(), session);
 			
 			//session.removeAttribute("RPNameSearch");
 			return (int) result;

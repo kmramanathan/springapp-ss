@@ -95,8 +95,12 @@ text-decoration:none!important;
      <% } %>
 
  </tr>
- <tr><td valign="top" colspan="3"><div class="homenav"><a href="http://publicrecords.searchsystems.net/" class="homelink">Home Page</a> | <a href="https://www.searchsystems.net/springapp/funnel/newSearch.do" class="homelink">Criminal Records</a>
-      | <a href="https://www.searchsystems.net/springapp/funnel/newSearchBJL.do">Bankruptcies-Judgments-Liens</a> | <a href="https://www.searchsystems.net/springapp/funnel/eviction-records.do">Tenant Screening</a> | <a href="http://publicrecords.searchsystems.net/contact.php">Contact</a></div></td></tr>
+ <tr><td valign="top" colspan="3"><div class="homenav">
+			<a href="http://dev.searchsystems.net/" class="homelink">Home Page</a> 
+		| <a href="/springapp/premium" class="homelink">Premium Databases</a>
+		| <a href="http://dev.searchsystems.net/contact.php">Contact</a></div>
+	</td>
+</tr>
  </table>
  <div style="background:#ff9900;height:26px;border-top:1px solid #000">&nbsp;</div>
  <!--// masthead ends //-->
@@ -123,7 +127,7 @@ text-decoration:none!important;
    
 <!--// footer begins //-->
 <div style="clear: both; height: 30px;"></div></div>
-<div class="footer style19h style20h"><img src="/springapp/images/common/Footer-trans.png" border="0 alt="ss-footer" width="418" height="60" usemap="#footer"></div>
+<div class="footer style19h style20h" style="margin-top: 90px;""><img src="/springapp/images/common/Footer.png" border="0 alt="ss-footer" width="418" height="60" usemap="#footer"></div>
 <map name="footer">
   <area shape="poly" coords="242,38,242,50,278,55,321,56,324,40,277,40,243,37," alt="Privacy Policy" href="http://publicrecords.searchsystems.net/privacypolicy.php">
  

@@ -133,11 +133,17 @@ text-decoration:none!important;
    
 <!--// footer begins //-->
 <div style="clear: both; height: 30px;"></div></div>
-<div class="footer style19h style20h"><img src="/springapp/images/common/Footer.png" border="0 alt="ss-footer" width="418" height="60" usemap="#footer"></div>
-<map name="footer">
-  <area shape="poly" coords="242,38,242,50,278,55,321,56,324,40,277,40,243,37," alt="Privacy Policy" href="http://publicrecords.searchsystems.net/privacypolicy.php">
- 
-</map>
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<div class="footer">Copyright &copy; 1997- <fmt:formatDate pattern="yyyy" value="${now}" /> Search Systems, Inc. All rights reserved.
+<address>SearchSystems.net, 2945 Townsgate Road, Suite 200, Westlake Village, California 91361</address>
+<address>Call Us at: 805-375-4041 | 
+<a href="http://publicrecords.searchsystems.net/privacypolicy.php">Privacy Policy</a>
+</address>
+
+
+
+
+</div>
 
 <!--// footer ends //-->
 	

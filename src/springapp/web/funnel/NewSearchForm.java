@@ -39,6 +39,12 @@ public class NewSearchForm extends AbstractFunnelController {
 	 * verify item for campaign
 	 * set rate id (item) 
 	 */
+	@RequestMapping(value = "/funnel/selectSearch.do", method = RequestMethod.GET)
+	public String redirectCriminalSearch() {   
+	   
+		return newvwCriminalSearchHome;  
+	}
+	  
 	@RequestMapping(value = "/funnel/newSearch.do", method = RequestMethod.GET)
 	public String setupBusinessFormCampaign(
 			HttpSession session,
@@ -205,7 +211,9 @@ public class NewSearchForm extends AbstractFunnelController {
 			session.removeAttribute("corpBusSearchFormCommand");
 			session.removeAttribute("nationSearchFormCommand");
 			session.removeAttribute("aliasSearchFormCommand");
-			status.setComplete();
+			//status.setComplete();
+			
+			map.addAttribute("searchType", "bgc");
 			
 			if(sfc.getNewacc() == true)
 			{
@@ -215,7 +223,7 @@ public class NewSearchForm extends AbstractFunnelController {
 			if(session.getAttribute("username") != null){
 				return newconfirmSearchRedir;
 			}
-			map.addAttribute("searchType", "bgc");
+			
 			return redirLogin;
 			
 		}
@@ -321,7 +329,12 @@ public class NewSearchForm extends AbstractFunnelController {
 		public void setBgcState(String bgcState) {
 			this.bgcState = bgcState;
 		}
-		
+		public String getBgcSsn() {
+			return bgcSsn;
+		}
+		public void setBgcSsn(String bgcSsn) {
+			this.bgcSsn = bgcSsn;
+		}
 		public String getBgcFirstName() {
 			return bgcFirstName;
 		}
@@ -420,6 +433,7 @@ public class NewSearchForm extends AbstractFunnelController {
 			validateStringEmptyMsg("bgcFirstName",  cmd.getBgcFirstName(), errors,  2, 50, regexBasicExtended, "First Name", "Enter in Subject's First Name");
 			//validateString("bgcLastName",  cmd.getBgcLastName(), errors,  3, 50, regexBasicSpace, "Last Name");
 			validateStringEmptyMsg("bgcLastName",  cmd.getBgcLastName(), errors,  2, 50, regexBasicExtended, "Last Name", "Enter in Subject's Last Name");
+			validateStringEmptyMsg("bgcSsn",  cmd.getBgcSsn(), errors,  2, 9, regexBasicExtended, "SSN Numebr", "Enter in Subject's SSN");
 			validateString("bgcPurpose",   cmd.getBgcPurpose(), errors,  3, 50, regexBasicExtended, "Purpose");
 			//validateStringEmptyMsg("bgcPurpose",  cmd.getBgcPurpose(), errors,  2, 50, regexBasicSpace, "Purpose", "Enter in Subject's Purpose");
 			if (cmd.getNationwideSearch() == false) {
@@ -427,14 +441,14 @@ public class NewSearchForm extends AbstractFunnelController {
 			}
 			
 			// figure out dob
-			if (cmd.getBgcDobRange()) {
+			/*if (cmd.getBgcDobRange()) {
 				// validate year range
 				validateInteger("bgcDobRangeBaseYear", cmd.getBgcDobRangeBaseYear(), errors, 1900, 1999, "Year of Birth");
 				validateInteger("bgcDobRangeFuzz", cmd.getBgcDobRangeFuzz(), errors, 0, 3, "Year of Fuzz");
 				
 				
-			} else {
-				
+			} else {*/
+			if (cmd.getBgcDobYear() != 0 || cmd.getBgcDobMonth() != 0 || cmd.getBgcDobDay() != 0) {	
 				// validate exact date
 				Calendar cal = Calendar.getInstance();
 				cal.setLenient(false);
@@ -444,8 +458,8 @@ public class NewSearchForm extends AbstractFunnelController {
 				} catch (Exception e) {
 					errors.reject("invalid-date", "The date of birth you entered is invalid.");
 				}	
-							
-			}
+			}				
+			//}
 
 			// check additional options
 			validateStringEmptyOk("bgcMiddleInitial", cmd.getBgcMiddleInitial(), errors, 1, 1, regexLettersOnly, "Middle Initial");

@@ -2,6 +2,8 @@ package springapp.web.funnel;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.TreeMap;
 
@@ -160,6 +162,8 @@ import springapp.service.user.UserManager;
 	//new Criminal upgrade pages 
 	// form views
 	
+	protected static final String newvwCriminalSearchRedir = "redirect:selectSearch.do";
+	protected static final String newvwCriminalSearchHome = "funnel/SearchHome";
 	//protected static final String vwSearchBGCFull = "funnel/SearchBGCFull";
 	protected static final String newvwSearchBusiness = "funnel/NewBusinessSearch";
 	protected static final String newvwSearchRedir = "redirect:newSearch.do";
@@ -239,7 +243,7 @@ import springapp.service.user.UserManager;
 	// email stuff
 	protected static final String emailFromThankYou = "thank-you@searchsystems.net";
 	protected static final String emailFromNoReply = "no-reply@searchsystems.net";
-	protected static final String emailToAdmin = "ram.dvk@gmail.com";
+	protected static final String emailToAdmin = "tjkoster@searchsystems.net";
 	protected static final String emailFromSkipTrace = "skip-trace@searchsystems.net";
 	
 	protected static final String tplThankYou = "springapp/web/funnel/ThankYouEmailTemplate.vm";
@@ -253,7 +257,7 @@ import springapp.service.user.UserManager;
 	// static lookups, useful across classes
 	protected static final TreeMap<Integer,String> dobMonths = new TreeMap<Integer,String>();
 	protected static final TreeMap<Integer,String> dobDays = new TreeMap<Integer,String>();
-	protected static final TreeMap<Integer,String> dobYears = new TreeMap<Integer,String>();
+	protected static final TreeMap<Integer,String> dobYears = new TreeMap<Integer,String>(Collections.reverseOrder());
 	protected static final HashMap<String,String> usStates = new HashMap<String,String>();
 	protected static final HashMap<Integer,String> countryISOCodesById = new HashMap<Integer,String>();
 	protected static final TreeMap<Integer,String> cardExpirationMonths = new TreeMap<Integer,String>();
@@ -510,7 +514,7 @@ protected final void populateAllUSState() {
 		}
 	}
 	protected final void populateDobYears() {
-		for (int i=1900; i<=1996; i++) {
+		for (int i=2000; i>=1917; i--) {
 			dobYears.put(i, String.valueOf(i));
 		}
 	}
@@ -588,9 +592,9 @@ protected final void populateAllUSState() {
 		msg.setTo(emailTo);
 		msg.setSubject(subject);
 		 
-	     String text = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, velocityTemplate, map);
-    
-		msg.setText(text);
+	    String text = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, velocityTemplate, map);
+	    logger.info("Sender text " + text);
+    	msg.setText(text);
 		try {
 			logger.info("sender Started to send");
 			mailSender.send(msg); 

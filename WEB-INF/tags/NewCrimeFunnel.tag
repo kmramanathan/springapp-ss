@@ -88,32 +88,33 @@ text-decoration:none!important;
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 	<tr>
 	<td rowspan="2" valign="middle">
-    <a href="http://publicrecords.searchsystems.net/"><img src="images/common/updated-logo.png" width="293" height="40" /></a>
+    <a href="http://dev.searchsystems.net/"><img src="images/common/updated-logo.png" width="293" height="40" /></a>
       <!--// masthead begins //-->
   
      
       </td>
       
-      <% if(member) { %>  
+     <% if(member) { %>  
       <td style="color:#ffffff;" align="right"><div align="right">Welcome <strong><%=username%></strong></div></td>
       <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  width="80"><a href="https://members.searchsystems.net/login.php?username=<%=username%>" style="text-decoration: none;font-size:14px;  padding:5px 0px 10px 0px;  color:#003366; ">My Account</a>
       </td><td width="30"  style="background:#fec226;font-size:14px;  color:#003366;" ><a href="logout.do" style="text-decoration: none;font-size:14px;   padding:5px 0px 10px 0px;  color:#003366; ">Logout</a> </td>
       
      <% } else { %> 
      <td align="right" width="50%">&nbsp;</td>
-	  <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  width="80"><a href="https://www.searchsystems.net/springapp/funnel/login.do" style="text-decoration: none;font-size:14px;  padding:5px 0px 10px 0px;  color:#003366; ">My Account</a>
+	  <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  width="80"><a href="https://www.dev.searchsystems.net/springapp/funnel/login.do" style="text-decoration: none;font-size:14px;  padding:5px 0px 10px 0px;  color:#003366; ">My Account</a>
       </td><td width="40"  style="background:#fec226;font-size:14px;  color:#003366;" ><a href="login.do" style="text-decoration: none;font-size:14px;   padding:5px 0px 10px 0px;  color:#003366; ">Log In</a> </td>
      <% } %>
 
  </tr>
  <tr><td valign="top" colspan="3"><div class="homenav">
-			<a href="http://publicrecords.searchsystems.net/" class="homelink">Home Page</a> 
+			<a href="http://dev.searchsystems.net/" class="homelink">Home Page</a> 
 		| <a href="/springapp/premium" class="homelink">Premium Databases</a>
-		| <a href="http://publicrecords.searchsystems.net/contact.php">Contact</a></div>
+		| <a href="http://dev.searchsystems.net/contact.php">Contact</a></div>
 	</td>
 </tr>
  </table>
- <div id="orangetopbar">&nbsp;</div>
+ 
+ <div style="background:#ff9900;height:26px;border-top:1px solid #000">&nbsp;</div>
  <!--// masthead ends //-->
 
       <!--// main content area begins //-->
@@ -138,14 +139,14 @@ text-decoration:none!important;
    
 <!--// footer begins //-->
 <div style="clear: both; height: 30px;"></div></div>
-
-
-<div class="footer" style="text-align: center;">Copyright &copy; 1997-2016 Search Systems, Inc. All rights reserved.
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<div class="footer">Copyright &copy; 1997- <fmt:formatDate pattern="yyyy" value="${now}" /> Search Systems, Inc. All rights reserved.
 <address>SearchSystems.net, 2945 Townsgate Road, Suite 200, Westlake Village, California 91361</address>
 <address>Call Us at: 805-375-4041 | 
 <a href="http://publicrecords.searchsystems.net/privacypolicy.php">Privacy Policy</a>
 </address>
 </div>
+
 <!--// footer ends //-->
 	
 </center>     

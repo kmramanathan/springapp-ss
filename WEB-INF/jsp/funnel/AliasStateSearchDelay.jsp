@@ -1,3 +1,4 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@include file="/WEB-INF/jsp/include.jsp" %>
 
 <% 	boolean member = false;
@@ -9,7 +10,8 @@
 %>
 <html>
 <head>
-<title>Confirm Purchase</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>please wait</title>
 <style type="text/css">	
     @import url("/springapp/css/new-funnel.css");	    
 </style>
@@ -18,7 +20,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>please wait</title>
 <style type="text/css">
-<!--
+
 .style19 {font-family: Arial, Helvetica, sans-serif}
 .style20 {font-size: small}
 .style73 {	font-family: Arial, Helvetica, sans-serif;
@@ -31,27 +33,22 @@
 .style120 {color: #FF0000}
 .style121 {color: #003366; font-family: Arial, Helvetica, sans-serif;}
 .style102 {color: #003366}
--->
+.style104 {font-size: 0.8em;color: #003366;}
+#maintable{padding:0 100px 0 100px!important;}
+
 </style>
-<style type="text/css">
-		body, html {
-			margin:0;
-			padding:0;
-			overflow:hidden;
-			background-color:#ffffff;
-		}
-		.wrapper {
-			position:absolute;
-			top:24%;
-			left:50%;
-		}
-	</style>
-<!-- Include the heartcode canvasloader js file -->
-	<script src="http://heartcode-canvasloader.googlecode.com/files/heartcode-canvasloader-min-0.9.1.js"></script>
+
 <script language="javascript" type="text/javascript">
 function sendToResult()
 {
-	document.dummy.submit();	
+	setTimeout('document.images.delayGif.src = "/springapp/images/BJL/blue-animated-search.gif"', 200);
+	setTimeout('window.status = "Waiting for www.searchsystems.net..."', 200); 
+	document.dummy.submit();
+	setTimeout('document.images.delayGif.src = "/springapp/images/BJL/blue-animated-search.gif"', 200);
+	
+}
+function goBack(){
+	javascript:history.go(-1);
 }
 </script>
 
@@ -62,8 +59,7 @@ function sendToResult()
 		session.removeAttribute("charged");
 		response.sendRedirect("newConfirmSearch.do");
 }
-%>
-
+%> 
 
 <body onLoad="sendToResult();">
 
@@ -82,56 +78,39 @@ function sendToResult()
 
       <td  style="background:#fec226; border-right:1px solid #f0f0f0;"  height="35"  width="80"><a href="https://members.searchsystems.net/login.php?username=<%=username%>" style="text-decoration: none;font-size:14px;  color:#003366; ">My Account</a>
       </td><td width="30"  style="background:#fec226;font-size:14px;  color:#003366;" ><a href="logout.do" style="text-decoration: none;font-size:14px;  color:#003366; ">Logout</a> </td>
-      
-     
+          
  </tr>
- <tr><td colspan="4">&nbsp;</td> </tr>
- <tr><td colspan="4">&nbsp;</td> </tr>
+ <tr><td colspan="4">&nbsp;</td> </tr> 
  </table>
 
       <!--// masthead ends //-->
 
       <!--// main content area begins //-->
       
-    <table cellpadding="0" cellspacing="0" border="0" width="950" id="maintable">
-	<tr valign="top">    		
-        <!--// column one begins //--> 
-    <td width="868" height="210"><p>&nbsp;</p>
-		<!-- Create a div which will be the canvasloader wrapper -->	
-	<div id="canvasloader-container" class="wrapper"></div>		
-	<!-- This script creates a new CanvasLoader instance and places it in the wrapper div -->
-	<script type="text/javascript">
-		var cl = new CanvasLoader('canvasloader-container');
-		cl.setColor('#003366'); // default is '#000000'
-		cl.show(); // Hidden by default		
-		// This bit is only for positioning - not necessary
-		var loaderObj = document.getElementById("canvasLoader");
-  		loaderObj.style.position = "absolute";
-  		loaderObj.style["top"] = cl.getDiameter() * -0.5 + "px";
-  		loaderObj.style["left"] = cl.getDiameter() * -0.5 + "px";
-    </script>
-	<h4 align="center"><span class="style34d">Please do not refresh this screen or click your browser's Back button.</span></h4>
-	<h4 align="center"><span class="style34d">This may take a few minutes. We appreciate your patience. 
-	We are searching over 100 million records to find your results.</span></h4>
-	</td>
-    </tr> 
-	<tr>
-	<td>&nbsp;
-	</td>
-	</tr>      
-    </table>
-      
-        <!--// column one ends //--> 
-        
-        <!--// column two begins //-->     
-        <!--// column two begins //--> 
     
-   	 
-  </div>   
+    <table cellpadding="0" cellspacing="0" border="0" width="950"  id="maintable"><tr valign="top">
+    		
+        <!--// column one begins //--> <tr><td height="50">&nbsp;</td></tr>
+      
+ 
+	<tr>
+	<td><table width="850" border="0" cellspacing="0.5" cellpadding="0.5" align="center">
+	<tr>
+		<td colspan="3">
+				<h1 style="text-align:center;"> Your Search is Processing </h1>
+				<p align="center"><img name="delayGif" src="/springapp/images/BJL/blue-animated-search.gif" alt="searching" width="190" height="39"></p>
+				<h4 align="center"><span class="style34d">Please do not refresh this screen or click your browser's Back button.</span></h4> 
+				<h4 align="center"><span class="style34d">This may take few minutes.</span></h4> 
+				<h4 align="center"><span class="style34d">We appreciate your patinence. We are searching over 550 million local,<br/> county, 
+				state, national, and international records to find your results.</span></h4> 
+				 </td>
+	</tr>
+	</table>
+       
+  </div>
    
 <!--// footer begins //-->
-<div style="clear: both; height: 30px;"></div><div class="footer style19h style20h">Copyright &copy; 2015 SearchSystems.net. All rights reserved.</div>
-
+<div class="footer style19h style20h" style="text-align: center;">Copyright &copy; 2017 SearchSystems.net. All rights reserved.</div>
 <!--// footer ends //-->
 	
 </center></body>

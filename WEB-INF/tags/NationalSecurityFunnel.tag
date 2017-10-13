@@ -113,7 +113,7 @@ text-decoration:none!important;
 	</td>
 </tr>
  </table>
- <div id="orangetopbar">&nbsp;</div>
+ <div style="background:#ff9900;height:26px;border-top:1px solid #000">&nbsp;</div>
  <!--// masthead ends //-->
 
       <!--// main content area begins //-->
@@ -136,11 +136,12 @@ text-decoration:none!important;
    	  </tr></table>
   </div>
    
+   
 <!--// footer begins //-->
 <div style="clear: both; height: 30px;"></div></div>
 
-
-<div class="footer" style="text-align: center;">Copyright &copy; 1997-2016 Search Systems, Inc. All rights reserved.
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<div class="footer">Copyright &copy; 1997- <fmt:formatDate pattern="yyyy" value="${now}" /> Search Systems, Inc. All rights reserved.
 <address>SearchSystems.net, 2945 Townsgate Road, Suite 200, Westlake Village, California 91361</address>
 <address>Call Us at: 805-375-4041 | 
 <a href="http://publicrecords.searchsystems.net/privacypolicy.php">Privacy Policy</a>

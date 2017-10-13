@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import springapp.service.NeonValidator;
+import springapp.web.funnel.NewAliasSearchForm.AliasSearchFormCommand;
 
 
 @Controller
@@ -29,7 +30,7 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 	protected static final int CAMPAIGN_OLD_PRICES = 1018;
 	protected static final int CAMPAIGN_NEW_PRICES = 2559;
 	public void init() {
-		
+		populateBgcSearchPurposes();
 	}
 			
 	/*
@@ -73,6 +74,8 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 		cmd.setTest(test);
 		cmd.setNationwideSearch(nationwide);
 		cmd.setCampaignId(campaignId);
+		cmd.setFirstname("THOMAS");
+		cmd.setLastname("MCDERMOTT");
 		
 		map.addAttribute("command", cmd);	
 		return viewName;
@@ -84,10 +87,11 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 		cmd.setCrmnlDobDay(15);
 		cmd.setCrmnlDobMonth(5);
 		cmd.setCrmnlDobYear(1950);
+		cmd.setSsn("149587526");
 	}
 	
 	@RequestMapping(value = "/funnel/criminalSearch.do", method = RequestMethod.POST)
-	public String processEvictionSubmitFull(
+	public String processCriminalRecordSearchSubmitForPersonal(
 			HttpSession session,
 			ModelMap map,
 			@RequestParam(value="test",required=false) Boolean test,
@@ -98,6 +102,10 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 			Errors errors,
 			SessionStatus status) {
 		
+		session.setAttribute("CriminalSearchFormCommand", crmnlsf);
+		 
+		//CriminalSearchFormCommand crimfc=(CriminalSearchFormCommand) session.getAttribute("CriminalSearchFormCommand");
+		
 			// check campaign id here
 				if (campaignId == null) { campaignId = CAMPAIGN_OLD_PRICES; }
 				if (!(campaignId == CAMPAIGN_OLD_PRICES || campaignId == CAMPAIGN_NEW_PRICES)) 
@@ -105,7 +113,6 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 					return newvwError;
 				}
 				
-		crmnlsf.setDob(crmnlsf.getCrmnlDobMonth()+"/"+crmnlsf.getCrmnlDobDay() +"/"+ crmnlsf.getCrmnlDobYear());
 		return this.processSubmitProperty(session, map, crmnlsf, errors, status, vwDdnCriminalSearch);
 	}
 	
@@ -118,6 +125,9 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 			SessionStatus status,
 			String vwErrorReturn) {
 		
+		
+		if(crmnlsf.getState().equalsIgnoreCase("all"))
+			crmnlsf.setNationwideSearch(true);
 		
 		CriminalSearchFormValidator v = new CriminalSearchFormValidator();
 		v.validate(crmnlsf, errors);
@@ -149,7 +159,7 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 				break;
 			}
 			
-			if(crmnlsf.getState().equals("Natcrim"))
+			if(crmnlsf.getState().equals("all"))
 				crmnlsf.setPrice(new BigDecimal("14.95"));
 			else
 				crmnlsf.setPrice(new BigDecimal("9.95"));
@@ -157,6 +167,7 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 			logger.info("setting ddnCriminal & continuing" + crmnlsf.getPrice());			
 			session.removeAttribute("businessSearchFormCommand");
 			session.removeAttribute("registerFormCommand");
+			session.removeAttribute("aliasSearchFormCommand");
 			session.removeAttribute("bjlSearchFormCommand");
 			session.removeAttribute("corpIndSearchFormCommand");
 			session.removeAttribute("corpBusSearchFormCommand");
@@ -166,6 +177,7 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 			session.removeAttribute("RPAdresSearch");
 			//session.setAttribute("RPNameSearch", "RPName");
 			
+			map.addAttribute("searchType", "SSN Criminal Search");
 			
 			status.setComplete();
 			if(crmnlsf.getNewacc() == true)
@@ -177,16 +189,23 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 			if(session.getAttribute("username") != null){
 				return newconfirmSearchRedir;
 			}
-			map.addAttribute("searchType", "ddnCriminal");
+			
 			return redirLogin;
 		}	
 		}
 	//search delay interim page
-	@RequestMapping(value="/funnel/criminalSearchDelay.do")
-	public String RealPropDelay(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session)
+	@RequestMapping(value="/funnel/DDNCriminalStateDelay.do")
+	public String CriminalSearchDelay(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session)
 	{
-		return "funnel/PropertySearchDelay";
+		
+		return "funnel/CriminalStateSearchDelay";
+	}
+	@RequestMapping(value="/funnel/DDNCriminalNationalDelay.do")
+	public String CriminalNationSearchDelay(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session)
+	{
+		return "funnel/CriminalNationalSearchDelay";
 	}
 	
 
@@ -202,6 +221,13 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 		private String firstname;
 		private String lastname;
 		private String middlename;
+		private String middleInitial;
+		private Boolean matchMissingDates = true;
+
+		private String bgcPurpose;
+		
+		private Boolean firstNameExact  = true;
+		private Boolean lastNameExact  = true;
 		private String address;
 		private String state;
 		private String offense;
@@ -221,6 +247,7 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 		private String courtname;
 		private String dob;
 		private String ssn;
+		private Boolean bgcDobRange = false;
 		private Integer crmnlDobMonth = 0;
 		private Integer crmnlDobDay = 0;
 		private Integer crmnlDobYear = 0;
@@ -235,6 +262,8 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 		private Boolean nationwideSearch = true;
 		private String bgcState;
 		private Integer campaignId;
+		private String referenceCode;
+		
 		
 		
 		public BigDecimal getPrice() {
@@ -250,7 +279,14 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 		public void setTest(Boolean test) {
 			this.test = test;
 		}
-
+		
+		public Boolean getBgcDobRange() {
+			return bgcDobRange;
+		}
+		public void setBgcDobRange(Boolean bgcDobRange) {
+			this.bgcDobRange = bgcDobRange;
+		}
+		
 		public Boolean getNewacc() {
 			return newacc;
 		}
@@ -286,6 +322,13 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 			this.crmnlDobYear = crmnlDobYear;
 		}
 		
+
+		public String getBgcPurpose() {
+			return bgcPurpose;
+		}
+		public void setBgcPurpose(String bgcPurpose) {
+			this.bgcPurpose = bgcPurpose;
+		}
 		
 		public String getSsn() {
 			return ssn;
@@ -314,6 +357,36 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 		public void setMiddlename(String middlename) {
 			this.middlename = middlename;
 		}
+		
+		public String getMiddleInitial() {
+			return middleInitial;
+		}
+		public void setMiddleInitial(String middleInitial) {
+			this.middleInitial = middleInitial;
+		}
+		
+		public Boolean getMatchMissingDates() {
+			return matchMissingDates;
+		}
+		public void setMatchMissingDates(Boolean matchMissingDates) {
+			this.matchMissingDates = matchMissingDates;
+		}
+		
+		
+		public Boolean getfirstNameExact() {
+			return firstNameExact;
+		}
+		public void setfirstNameExact(Boolean firstNameExact) {
+			this.firstNameExact = firstNameExact;
+		}
+		public Boolean getlastNameExact() {
+			return lastNameExact;
+		}
+		public void setlastNameExact(Boolean lastNameExact) {
+			this.lastNameExact = lastNameExact;
+		}
+		
+		
 		public String getOffenderCount() {
 			return offenderCount;
 		}
@@ -447,6 +520,36 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 			this.campaignId = campaignId;
 		}
 		
+		public String getReferenceCode() {
+			return referenceCode;
+		}
+		public void setReferenceCode(String referenceCode) {
+			this.referenceCode = referenceCode;
+		}
+		
+	}
+	
+
+	// db lookups
+	protected static final LinkedHashMap<String,String> bgcSearchPurposes = new LinkedHashMap<String,String>();
+	
+	@ModelAttribute("bgcSearchPurposes")
+	public LinkedHashMap<String, String> getBgcSearchPurposes() {
+		return bgcSearchPurposes;
+	}
+	
+	protected final void populateBgcSearchPurposes() {
+		//bgcSearchPurposes.put("Personal",  "For personal use (non-FCRA).");
+		bgcSearchPurposes.put("Personal", "Personal Use Only");
+		bgcSearchPurposes.put("604.a1",    "Court order or subpoena. Section 604(a)(1)");
+		bgcSearchPurposes.put("604.a2",    "Instructed by consumer in writing. Section 604(a)(2)");
+		bgcSearchPurposes.put("604.a3b",   "Employment purposes with written permission. Section 604(a)(3)(B)");
+		bgcSearchPurposes.put("604.a3c",   "Consumer application for insurance. Section 604(a)(3)(C)");
+		bgcSearchPurposes.put("604.a3d",   "Business transaction initiated by consumer. Section 604(a)(3)(F)(i)");
+		bgcSearchPurposes.put("604.a3e",   "Determine if consumer meets terms of account. Section 604(a)(3)(F)(ii)");
+		bgcSearchPurposes.put("604.a3fi",  "Eligibility for a license or benefit. Section 604(a)(3)(D)");
+		bgcSearchPurposes.put("604.a3fii", "Use by potential investor, servicer, or insurer. Section 604(a)(3)(E)");
+		
 	}
 	
 	public class CriminalSearchFormValidator extends NeonValidator implements Validator {
@@ -459,10 +562,20 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 			
 			validateStringEmptyMsg("firstname",  cmd.getFirstname(), errors,  2, 50, regexBasicSpace, "First Name", "Enter in First Name");
 			validateStringEmptyMsg("lastname",  cmd.getLastname(), errors,  2, 50, regexBasicSpace, "First Name", "Enter in Last Name");
-					
-			//validateString("state",   cmd.getState(), errors,  2, 2, regexBasicNoSpace, "State");
+			//SSN number
+			//validateStringEmptyMsg("ssn",  cmd.getSsn(), errors,  2, 9, regexBasicExtended, "SSN Numebr", "Enter in Subject's SSN");
 			
-			}		
+			if (cmd.getCrmnlDobYear() != 0 || cmd.getCrmnlDobMonth() != 0 || cmd.getCrmnlDobDay() != 0) {
+				Calendar cal = Calendar.getInstance();
+				cal.setLenient(false);
+				try {
+					cal.set(cmd.getCrmnlDobYear(), cmd.getCrmnlDobMonth() - 1, cmd.getCrmnlDobDay());
+					cal.getTime();
+				} catch (Exception e) {
+					errors.reject("invalid-date", "The date of birth you entered is invalid.");
+				}
+			}
+		}
 	}
 	
 	

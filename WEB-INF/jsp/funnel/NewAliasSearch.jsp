@@ -224,7 +224,7 @@ function showTips()
                       	</td>
                       	<td >
                       	<span style="text-decoration: underline; color:#000;">
-                      	<a href="https://www.searchsystems.net/springapp/funnel/BestResultsGuide.html" class="style71 style819" style="font-size:14px!important;"> <strong>Search Tips </strong></a>
+                      	<a href="/springapp/funnel/AliasBestResultsGuide.html" class="style71 style819" style="font-size:14px!important;"> <strong>Search Tips </strong></a>
                       	</span>
                       	</td>
                       	<td colspan="2"><span class="style86" style="font-size:14px">Price: <strong>$19.95</strong> Nationwide or <strong>$14.95</strong>
@@ -382,17 +382,21 @@ function showTips()
                     <table width="100%" border="0" cellpadding="0" cellspacing="0">
                     	 <tr>
                         	<td colspan="2" width="75%">
-							<h3 class="style1111">The affordable professional system anyone can use.</h3>
-                        		<p class="style107 padd"><strong>Search our database of over 550 million records by name, birth date, and social security number for a subject's name and maiden name, married name, nickname, and aliases revealed by an address history.  FCRA Only.
-								<a href="https://www.searchsystems.net/springapp/funnel/ourDatabases.do" target="_blank">You can find our coverage area here</a>.</strong></p>
+							<!-- <h3 class="style1111">The affordable professional system anyone can use.</h3> -->
+                        		<p class="style107 padd"><strong>
+								Search our database of over 550 million felony, misdemeanor, traffic offense, court record, inmate, probation, parole record, and escapee records by name, birth date, 
+								and social security number. Our system uses the social security number to do a name history search to provide you with results for a subject's name, 
+								maiden name, married name, nickname, and aliases revealed by the name history.  FCRA Only. <br/><br/>
+								Not all records are available in every county or all states. Please check our coverage area for the region of your search to ensure you receive the best service we have to offer. 
+								<a href="/springapp/funnel/ourDatabases.do" target="_blank">You can find our coverage area here</a>.</strong></p>
                               <p class="padd"><strong>550 Million records! The largest criminal record database available online.<br>
 							  At $19.95 per nationwide search, this is the most information you can find for the lowest price on the Internet.</strong>
 							  
                                </p>  
                             </td>
                             <td colspan="2">
-							<p class="padd"><a href="https://www.searchsystems.net/springapp/funnel/ourDatabases.do" class="style107" target="_blank" style="font-size:14px">View Our  Coverage</a></p>
-                                  <p align="left" class="style107 padd"><a href="https://www.searchsystems.net/springapp/funnel/BestResultsGuide.html">Your Guide to Best Results</a></p>
+							<p class="padd"><a href="/springapp/funnel/ourDatabases.do" class="style107" target="_blank" style="font-size:14px">View Our  Coverage</a></p>
+                                  <p align="left" class="style107 padd"><a href="/springapp/funnel/AliasBestResultsGuide.html">Your Guide to Best Results</a></p>
                                   <p align="left" class="style107 padd"><a href="http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/">Search Criminal Records for Free</a></p>
                                   <p align="left" class="style107 padd"><a href="crim-premium-faq.html">Frequently Asked Questions</a></p>
                             	
@@ -402,8 +406,12 @@ function showTips()
                     </table>
                       
                       
-                       <p style="color:black;margin:0;padding:7px 0 7px 12px"><span class="style61" >All information retrieved from or through SearchSystems.net must be   utilized   in accordance with the <a href="https://www.searchsystems.net/springapp/legal/showAgreement.do?version=funnel" target="_blank">User Agreement</a> and all applicable state and federal   laws,   including the <a href="http://www.ftc.gov/os/statutes/fcra.htm" target="_blank">Fair Credit Reporting Act</a>;   any violation of these will be grounds for immediate termination of your   account without notice.</span></p>
-                        <p class="style61" style="color:black;margin:0;padding:0 0 0 12px">Please see our <a href="https://www.searchsystems.net/springapp/legal/showAgreement.do;jsessionid=3C4ACCF3A24B5DCBC8F329AF65C86039?version=disclaimer" target="_blank">disclaimer</a> and also our <a href="https://www.searchsystems.net/springapp/legal/showAgreement.do;jsessionid=3C4ACCF3A24B5DCBC8F329AF65C86039?version=disclaimer" target="_blank">Notice to California Employers or Employers screening   California residents</a>.</p>
+                       <p style="color:black;margin:0;padding:7px 0 7px 12px"><span class="style61" >All information retrieved from or through SearchSystems.net must be utilized in accordance with the 
+					   <a href="/springapp/legal/showAgreement.do?version=funnel" target="_blank">User Agreement</a> 
+					   and all applicable state and federal laws, including the <a href="http://www.ftc.gov/os/statutes/fcra.htm" target="_blank">Fair Credit Reporting Act</a>;   
+					   any violation of these will be grounds for immediate termination of your account without notice.</span></p>
+                        <p class="style61" style="color:black;margin:0;padding:0 0 0 12px">Please see our <a href="/springapp/legal/showAgreement.do;jsessionid=3C4ACCF3A24B5DCBC8F329AF65C86039?version=disclaimer" target="_blank">disclaimer</a> 
+						and also our <a href="/springapp/legal/showAgreement.do;jsessionid=3C4ACCF3A24B5DCBC8F329AF65C86039?version=disclaimer" target="_blank">Notice to California Employers or Employers screening   California residents</a>.</p>
                     </td>
                   </tr>
                 </table>

@@ -63,7 +63,7 @@
 <p>&nbsp;</p>
 <c:choose>
 <c:when test="${sessionScope.location eq 'all'}">
-<p style="color:#000; font-family:Arial, Helvetica, sans-serif;">We searched over 450 million criminal records nationwide and over 70 national and international terrorist and debarred persons databases and found NO criminal disposition records for your subject, based on your search criteria:</p>
+<p style="color:#000; font-family:Arial, Helvetica, sans-serif;">We searched over 550 million criminal records nationwide and over 100 national and international terrorist and debarred persons databases and found NO criminal disposition records for your subject, based on your search criteria:</p>
 </c:when>
 <c:otherwise>
 <p style="color:#000; font-family:  Arial, Helvetica, sans-serif;">We searched available criminal disposition records and did not find any records that matched your subject, based on your search criteria:</p>

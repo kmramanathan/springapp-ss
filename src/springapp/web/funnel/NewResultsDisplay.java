@@ -45,6 +45,7 @@ import springapp.manager.SpringAliasSearchManager;
 import springapp.manager.SpringBGCSearchManager;
 import springapp.manager.SpringEvictionSearchManager;
 import springapp.manager.SpringPropertySearchManager;
+import springapp.web.funnel.DDNCriminalSearchForm.CriminalSearchFormCommand;
 import springapp.web.funnel.NewAliasSearchForm.AliasSearchFormCommand;
 import springapp.web.funnel.NewSearchForm.SearchFormCommand;
 
@@ -106,7 +107,7 @@ public class NewResultsDisplay extends AbstractFunnelController {
 		if(download == null){download=false;}
 		if (!verifySession(session, test))
 		{
-			return landingHome;
+			//return landingHome;
 		}
 		Integer responseId = (Integer) session.getAttribute("responseId");
 		if (responseId == null) {
@@ -1220,20 +1221,39 @@ public class NewResultsDisplay extends AbstractFunnelController {
 			downloadAll = false;// || downloadAll == null
 		}
 		
-		List<CriminalResponseBean> eList = new ArrayList<CriminalResponseBean>();		
-		if(session.getAttribute("DDNResults")!= null)
+		List<CriminalResponseBean> eList = null;		
+		if(session.getAttribute("DDNResults") != null )
 		{
 			eList = (List<CriminalResponseBean>) session.getAttribute("DDNResults");
 			logger.info("DDN  criminal List Count----: "+ eList.size());
-			sResponse = session.getAttribute("DDNResults").toString();
+			
+			if(eList.size() > 0)
+			{
+				map.addAttribute("eList", eList);
+				map.addAttribute("eListsize", eList.size());	
+				sResponse = session.getAttribute("DDNResults").toString();
+			} else {
+				SearchFormCommand personalfc =(SearchFormCommand) session.getAttribute("searchFormCommand");
+				CriminalSearchFormCommand crimfc=(CriminalSearchFormCommand) session.getAttribute("CriminalSearchFormCommand");
+				
+				if(personalfc != null) {
+					session.setAttribute("firstName", personalfc.getBgcFirstName());
+					session.setAttribute("lastName", personalfc.getBgcLastName());
+					session.setAttribute("location", personalfc.getBgcState());
+					session.setAttribute("DOB", personalfc.getBgcDobMonth() + "/" +personalfc.getBgcDobDay() +"/"+ personalfc.getBgcDobYear());
+				}
+				else if(crimfc != null) {
+					session.setAttribute("firstName", crimfc.getFirstname());
+					session.setAttribute("lastName", crimfc.getLastname());
+					session.setAttribute("location", crimfc.getState());
+					session.setAttribute("DOB", crimfc.getCrmnlDobMonth() + "/" +crimfc.getCrmnlDobDay() +"/"+ crimfc.getCrmnlDobYear());
+				}
+				
+				return newzeroResultsView;
+			}
 		}
-		if(eList != null && eList.size() > 0)
-		{
-			map.addAttribute("eList", eList);
-			map.addAttribute("eListsize", eList.size());	
-			//logger.info("DDN  criminal List ResltDetaisl----: "+ eList.indexOf(1));
-		}		
-		Integer UserSearchId=(Integer) session.getAttribute("userSearchId");
+				
+		//Integer UserSearchId=(Integer) session.getAttribute("userSearchId");
 		
 		map.addAttribute("ddnResponseXML", sResponse);
 				

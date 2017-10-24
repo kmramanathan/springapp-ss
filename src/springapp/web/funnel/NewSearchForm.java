@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.NumberUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -151,10 +153,9 @@ public class NewSearchForm extends AbstractFunnelController {
 			Errors errors,
 			SessionStatus status,
 			String vwErrorReturn) {
-		logger.info("dobRange: " + sfc.getBgcDobRange());
-		logger.info("bgcFirstNameExact: " + sfc.getBgcFirstNameExact());
+		logger.info("FCRA Search - firstName: " + sfc.getBgcFirstName());
+		logger.info("FCRA Search - dob: " + sfc.getBgcDobMonth() + "/" + sfc.getBgcDobDay() + "/" + sfc.getBgcDobYear());
 		
-
 		if(sfc.getBgcState().equalsIgnoreCase("all"))
 			sfc.setNationwideSearch(true);
 
@@ -164,7 +165,11 @@ public class NewSearchForm extends AbstractFunnelController {
 			return vwErrorReturn;
 		} else {
 			logger.info("setting sfc & continuing");
-
+			if(session.getAttribute("CriminalSearchFormCommand") != null)
+			{
+				session.removeAttribute("CriminalSearchFormCommand");
+			}
+			
 			Integer campaignId = sfc.getCampaignId();
 			switch (campaignId) {
 			
@@ -184,25 +189,7 @@ public class NewSearchForm extends AbstractFunnelController {
 				}
 				break;
 			}
-			String state=sfc.getBgcState();
 			
-			if(state.equals("CA") || state.equals("IN") || state.equals("MO") || state.equals("HI") || state.equals("KS") || state.equals("MS") || state.equals("ND") || state.equals("NJ") || state.equals("NV") || state.equals("PA") || state.equals("RI") || state.equals("UT"))
-			{
-				Integer dobyear=sfc.getBgcDobYear();
-				
-				if(dobyear != 0 && sfc.getBgcDobRange() == false)
-				{
-					
-					sfc.setBgcDobRange(true);
-					sfc.setBgcDobRangeBaseYear(dobyear);
-					sfc.setBgcDobDay(0);
-					sfc.setBgcDobMonth(0);
-					sfc.setBgcDobYear(0);
-				}
-				
-			}
-			
-			session.setAttribute("searchFormCommand", sfc);	
 			session.removeAttribute("registerFormCommand");
 			session.removeAttribute("bjlSearchFormCommand");
 			session.removeAttribute("evictionSearchFormCommand");
@@ -211,6 +198,9 @@ public class NewSearchForm extends AbstractFunnelController {
 			session.removeAttribute("corpBusSearchFormCommand");
 			session.removeAttribute("nationSearchFormCommand");
 			session.removeAttribute("aliasSearchFormCommand");
+			session.removeAttribute("aliasSearchFormCommand");
+			session.removeAttribute("CriminalSearchFormCommand");
+			session.setAttribute("searchFormCommand", sfc);	
 			//status.setComplete();
 			
 			map.addAttribute("searchType", "bgc");
@@ -433,7 +423,7 @@ public class NewSearchForm extends AbstractFunnelController {
 			validateStringEmptyMsg("bgcFirstName",  cmd.getBgcFirstName(), errors,  2, 50, regexBasicExtended, "First Name", "Enter in Subject's First Name");
 			//validateString("bgcLastName",  cmd.getBgcLastName(), errors,  3, 50, regexBasicSpace, "Last Name");
 			validateStringEmptyMsg("bgcLastName",  cmd.getBgcLastName(), errors,  2, 50, regexBasicExtended, "Last Name", "Enter in Subject's Last Name");
-			validateStringEmptyMsg("bgcSsn",  cmd.getBgcSsn(), errors,  2, 9, regexBasicExtended, "SSN Numebr", "Enter in Subject's SSN");
+			//validateStringEmptyMsg("bgcSsn",  cmd.getBgcSsn(), errors,  2, 9, regexBasicExtended, "SSN Numebr", "Enter in Subject's SSN");
 			validateString("bgcPurpose",   cmd.getBgcPurpose(), errors,  3, 50, regexBasicExtended, "Purpose");
 			//validateStringEmptyMsg("bgcPurpose",  cmd.getBgcPurpose(), errors,  2, 50, regexBasicSpace, "Purpose", "Enter in Subject's Purpose");
 			if (cmd.getNationwideSearch() == false) {
@@ -448,7 +438,7 @@ public class NewSearchForm extends AbstractFunnelController {
 				
 				
 			} else {*/
-			if (cmd.getBgcDobYear() != 0 || cmd.getBgcDobMonth() != 0 || cmd.getBgcDobDay() != 0) {	
+			//if (cmd.getBgcDobYear() != 0 || cmd.getBgcDobMonth() != 0 || cmd.getBgcDobDay() != 0) {	
 				// validate exact date
 				Calendar cal = Calendar.getInstance();
 				cal.setLenient(false);
@@ -458,7 +448,11 @@ public class NewSearchForm extends AbstractFunnelController {
 				} catch (Exception e) {
 					errors.reject("invalid-date", "The date of birth you entered is invalid.");
 				}	
-			}				
+			//}
+			
+			/*if (cmd.getBgcSsn().length() != 0 && (cmd.getBgcSsn().length() != 9 || !org.apache.commons.lang.NumberUtils.isNumber(cmd.getBgcSsn()))) {
+				errors.reject("invalid-ssn", "The SSN entered should of type numeric and of 9 digit number.");
+			}*/
 			//}
 
 			// check additional options
@@ -479,7 +473,7 @@ public class NewSearchForm extends AbstractFunnelController {
 	
 	protected final void populateBgcSearchPurposes() {
 		//bgcSearchPurposes.put("Personal",  "For personal use (non-FCRA).");
-		bgcSearchPurposes.put("Personal", "Personal Use Only");
+		//bgcSearchPurposes.put("Personal", "Personal Use Only");
 		bgcSearchPurposes.put("604.a1",    "Court order or subpoena. Section 604(a)(1)");
 		bgcSearchPurposes.put("604.a2",    "Instructed by consumer in writing. Section 604(a)(2)");
 		bgcSearchPurposes.put("604.a3b",   "Employment purposes with written permission. Section 604(a)(3)(B)");

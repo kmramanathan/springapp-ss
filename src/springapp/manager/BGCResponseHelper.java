@@ -19,6 +19,10 @@ public class BGCResponseHelper {
 		return parseOffenders(eOffenders);
 	}
 	
+	public ArrayList<BGCOffenderMapHolder> parseResponseForDDN(Element eOffenders) {
+		return parseOffendersForDDN(eOffenders);
+	}
+	
 	public BGCOffenderMapHolder parseResponseSingle(Document xmlData) {
 //		//return parseOffenders(eOffender);
 		// process the results	
@@ -70,7 +74,18 @@ public class BGCResponseHelper {
 			list.add(mh);
 		}
 		return list;
-	}	
+	}
+	
+	protected ArrayList<BGCOffenderMapHolder> parseOffendersForDDN(Element eOffenders) {
+		ArrayList<BGCOffenderMapHolder> list = new ArrayList<BGCOffenderMapHolder>();
+		NodeList nlOffender = eOffenders.getElementsByTagName("Record");
+		for (int i = 0; i < nlOffender.getLength(); i++) {
+			Element eOffender = (Element) nlOffender.item(i);
+			BGCOffenderMapHolder mh = parseOffenderForDDN(eOffender);
+			list.add(mh);
+		}
+		return list;
+	}
 	
 	// parse a single offender
 	// offender has: identity, aliasNames, aliasDOBs, record
@@ -114,6 +129,52 @@ public class BGCResponseHelper {
 			mh.setListOffenses(null);
 		} else {
 			ArrayList<BGCOffenseBean> listOffenses = parseOffenses(eOffenses);
+			mh.setListOffenses(listOffenses);		
+		}		
+		
+		return mh;
+	}
+	
+	protected BGCOffenderMapHolder parseOffenderForDDN(Element e) {
+		BGCOffenderMapHolder mh = new BGCOffenderMapHolder();
+
+		Element eIdentity = (Element) e.getElementsByTagName("OnFileDetail").item(0);
+		
+		// parse personal data and address data
+		String[] personalNodes = {
+				"FirstName", "LastName", "MiddleName", "Address", "DOB", "Sex", "Race", "HairColor", "EyeColor", "PhotoURL", "Height", "Weight"
+			};
+		HashMap<String,String> mapPersonal = parseElementNodes(e, personalNodes);
+		
+		dumpMap("personal", mapPersonal);
+		mh.setMapPersonal(mapPersonal);
+
+		String[] addressNodes = {
+				"Address"
+			};
+		HashMap<String,String> mapAddress = parseElementNodes(e, personalNodes);
+		dumpMap("address", mapAddress);
+		mh.setMapAddress(mapAddress);
+		
+		// parse aliases
+		// aliases has: name
+		// name has: fields
+		/*Element eAliasNames = (Element) e.getElementsByTagName("aliasNames").item(0);
+		ArrayList<HashMap<String,String>> listAliases = parseAliases(eAliasNames);
+		mh.setListAliases(listAliases);*/
+		
+		// parse record
+		/*Element eRecord = (Element) e.getElementsByTagName("Count").item(0);
+		HashMap<String,String> mapRecord = parseRecord(eRecord);
+		dumpMap("record", mapRecord);
+		mh.setMapRecord(mapRecord);*/
+		
+		// parse offenses
+		Element eOffenses = (Element) e.getElementsByTagName("Count").item(0);
+		if (eOffenses == null) {
+			mh.setListOffenses(null);
+		} else {
+			ArrayList<BGCOffenseBean> listOffenses = parseOffensesForDDN(e);
 			mh.setListOffenses(listOffenses);		
 		}		
 		
@@ -207,6 +268,46 @@ public class BGCResponseHelper {
 				"arrestingAgency", "originatingAgency", "jurisdiction", "statute",
 				"plea", "courtDecision", "courtCosts", "fine", "offenseDate", "arrestDate",
 				"sentenceDate", "dispositionDate", "fileDate"
+		};
+		HashMap<String,String> map = parseElementNodes(e, nodes);
+		BGCOffenseBean bean = new BGCOffenseBean();		
+				
+		bean.setFine(       map.get("fine"));
+		bean.setPlea(       map.get("plea"));
+		bean.setStatute(    map.get("statute"));
+		bean.setSentence(   map.get("sentence"));
+		bean.setFileDate(   map.get("fileDate"));		
+		bean.setProbation(  map.get("probation"));
+		bean.setArrestDate( map.get("arrestDate"));
+		bean.setCourtCosts( map.get("courtCosts"));
+		
+		bean.setOffenseDate(   map.get("offenseDate"));
+		bean.setConfinement(   map.get("confinement"));
+		bean.setDescription(   map.get("description"));
+		bean.setDisposition(   map.get("disposition"));
+		bean.setSentenceDate(  map.get("sentenceDate"));
+		bean.setJurisdiction(  map.get("jurisdiction"));
+		bean.setCourtDecision( map.get("courtDecision"));
+		
+		bean.setDegreeOfOffense(   map.get("degreeOfOffense"));
+		bean.setDispositionDate(   map.get("dispositionDate"));
+		bean.setArrestingAgency(   map.get("arrestingAgency"));
+		bean.setOriginatingAgency( map.get("originatingAgency"));
+		
+		// need to parse supp here		
+		ArrayList<BGCOffenseSupplementBean> suppList = parseSupplements(e);
+		bean.setBGCOffenseSupplementBeans(suppList);
+		
+		return bean;
+	}
+	
+	
+	protected BGCOffenseBean parseOffenseForDDN(Element e) {
+		String[] nodes = {
+				"Offense", "disposition", "degreeOfOffense", "sentence", "probation", "confinement",
+				"arrestingAgency", "originatingAgency", "jurisdiction", "Statute",
+				"plea", "courtDecision", "courtCosts", "fine", "OffenseDate", "arrestDate",
+				"sentenceDate", "DispositionDate", "fileDate"
 		};
 		HashMap<String,String> map = parseElementNodes(e, nodes);
 		BGCOffenseBean bean = new BGCOffenseBean();		
@@ -348,6 +449,20 @@ public class BGCResponseHelper {
 		for (int i = 0; i < nlOffenses.getLength(); i++) {
 			Element eOffense = (Element) nlOffenses.item(i);	
 			BGCOffenseBean bean = parseOffense(eOffense);
+			list.add(bean);
+		}
+		
+		logger.info("parseOffenses: found " + list.size());
+		return list;
+	}
+	
+	protected ArrayList<BGCOffenseBean> parseOffensesForDDN(Element eOffenses) {
+		ArrayList<BGCOffenseBean> list = new ArrayList<BGCOffenseBean>();
+		
+		NodeList nlOffenses = eOffenses.getElementsByTagName("Count");
+		for (int i = 0; i < nlOffenses.getLength(); i++) {
+			Element eOffense = (Element) nlOffenses.item(i);	
+			BGCOffenseBean bean = parseOffenseForDDN(eOffense);
 			list.add(bean);
 		}
 		

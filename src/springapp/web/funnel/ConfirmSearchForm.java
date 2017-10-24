@@ -457,14 +457,12 @@ public class ConfirmSearchForm extends AbstractFunnelController {
 		// run search
 		int requestId = bgcManager.prepareSearch(u.getUserId(), 
 				sfc.getBgcFirstName(), sfc.getBgcMiddleInitial(), sfc.getBgcLastName(), 
-				sfc.getBgcFirstNameExact(), sfc.getBgcLastNameExact(), 
 				sfc.getBgcDobMonth(), sfc.getBgcDobDay(), sfc.getBgcDobYear(), 
-				sfc.getBgcDobRangeFuzz(), sfc.getBgcDobRange(), sfc.getBgcMatchMissingDates(), 
-				bgcTestProductId, false, jurisdiction, sfc.getBgcPurpose(), "");
+				0, bgcTestProductId, false, jurisdiction, sfc.getBgcPurpose(), "");
 		logger.info("requestId: " + requestId);
 		//session.setAttribute("bgcRequestId", requestId);
 					
-		BGCResponseBean response = bgcManager.runSearch(requestId);
+		BGCResponseBean response = bgcManager.runSearch(requestId, session);
 		int responseId = response.getBgcResponseId();
 		logger.info("responseId: " + responseId);
 

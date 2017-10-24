@@ -42,9 +42,9 @@ function showCriminalNationalDelay()
 		<tr><td><label><b>Your Search Request</b></label></td><td>&nbsp;</td></tr>
     	<tr><td><label>Name:</label></td><td><c:out value="${searchName}"/></td></tr>
 		<tr><td><label>Date of Birth:</label></td><td><c:out value="${searchDOB}"/></td></tr>
-		<c:if test="${searchSSN ne null && fn:length(searchSSN) == 9}">
+		<!--<c:if test="${searchSSN ne null && fn:length(searchSSN) == 9}">
 			<tr><td><label>SSN:</label></td><td><c:out value="${searchSSN}"/></td></tr>
-		</c:if>
+		</c:if>-->
 		<tr><td><label>Type:</label></td><td><c:out value="${searchType}"/></td></tr>
 		<tr><td><label>Price:</label></td><td>$<c:out value="${searchPrice}"/></td></tr>
 	</c:if>
@@ -61,7 +61,6 @@ function showCriminalNationalDelay()
 		<tr><td><label>Price:</label></td><td>$<c:out value="${searchPrice}"/></td></tr>
 	</c:if>
 
-	<tr><td><label>&nbsp;</label></td><td>&nbsp;</td></tr>
 	<tr><td><label>Credit Card Number</label></td><td>***${ccLast4}</td></tr>
 
 	</table>

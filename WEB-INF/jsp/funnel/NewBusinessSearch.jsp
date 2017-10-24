@@ -12,51 +12,7 @@ function shownote(a, b, c){
 	document.getElementById(b).style.display = "none";
 	document.getElementById(c).style.display = "none";
 }
-	function yearofbirth()
-	{
-		var yearbirth = document.crimeForm.bgcDobRangeBaseYear.value
-		if(yearbirth == 0)
-		{
-			document.getElementById("bgcDobRange1").checked=false;
-			document.crimeForm.bgcDobRange.checked = false;
-		}
-		else{
-			document.getElementById("bgcDobRange2").checked=true;
-			document.crimeForm.bgcDobRange.checked = true;
-		
-		}
-	}
-	function getstat(){
-		var stat = document.crimeForm.bgcState.value;
-		if(stat == "all"){
-			document.crimeForm.bgcMatchMissingDates.checked = false;
-		}
-		else if(stat == "DE"){
-			window.location.href= "http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/Delaware_Criminal_Records/";
-		}
-		else if(stat == "NY"){
-			window.location.href= "http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/New_York_Criminal_Records/";
-		}
-		else if(stat == "CO"){
-			window.location.href= "http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/Colorado_Criminal_Records/";
-		}
-		else if(stat == "MA"){
-			window.location.href= "http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/Massachusetts_Criminal_Records/";
-		}else if(stat == "SD"){
-			window.location.href= "http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/South_Dakota_Criminal_Records/";
-		}else if(stat == "WY"){
-			window.location.href= "http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/Wyoming_Criminal_Records/";
-		}else if(stat == "VT"){
-			window.location.href= "http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/Vermont_Criminal_Records/";
-		}else if(stat == "AL"){
-			window.location.href= "http://publicrecords.searchsystems.net/Free_Public_Records_by_Type_of_Record/Criminal_Records/Alabama_Criminal_Records/";
-		}else{
-			document.crimeForm.bgcMatchMissingDates.checked = true;
-		}
-		
-		
-	}
-	
+
 </script>
 
 <style type="text/css">
@@ -126,7 +82,7 @@ margin: 0;
 .padd{padding:0;margin:0}
 .style107 {font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #333333; }
 #datediv{display:none;color:red;position:absolute;width:250px;text-align:justify;font-size: 12px;margin-left:100px;margin-top:37px}
-#refdiv{display:none;color:red;position:absolute;width:250px;text-align:justify;font-size: 12px;margin-left:100px}
+#refdiv{display:none;color:red;position:absolute;width:250px;text-align:justify;font-size: 12px;}
 </style>
   <form:form name="crimeForm" method="post">
     <form:errors path="*" element="div" id="error" cssClass="error-box" />
@@ -142,8 +98,8 @@ margin: 0;
            <h3 class="style1111">Search over <strong>550</strong> <strong>Million</strong> <strong>criminal records</strong> nationwide!</h3>
            </td>
            </tr>
-           </table>
-	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+       </table>
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr valign="top">
             <td width="99%" >
            
@@ -194,13 +150,14 @@ margin: 0;
                             
                             </td>
                         </tr>
-                      
-                        
+                         </table>
+                     <table width="100%" border="0" bgcolor="#B4DDFE" cellpadding="0" cellspacing="0">    
                         <tr>
-                          <td>
-						     <div style="float:left;"> 
+						<td style="width: 110px;">&nbsp;</td>
+						<td width="250px" colspan="3">
+						    <div style="float:left;"> 
                            <p class="style71 style819">
-                            <strong>Date of   Birth</strong><br>
+                            <strong>Date of   Birth</strong><strong class="style72">*</strong><br>
                            </p>
                             
      						<form:select path="bgcDobMonth" cssClass="formfield1">
@@ -216,91 +173,71 @@ margin: 0;
 							<form:option value="0">Year</form:option>
 							<form:options items="${dobYears}"/>
 							</form:select>
-							</div>
-                          </td>
-                       
-                          <td>
-							<!--div style="margin-left:18px">
-							<p class="style71 style819">
-                            <form:radiobutton path="bgcDobRange" value="true" /><strong>Year of Birth</strong><strong class="style72">*</strong>
-                           </p>
-                            <form:select path="bgcDobRangeBaseYear" cssClass="formfield1" onchange="yearofbirth();">
-							<form:option value="0">Year</form:option>
-							<form:options items="${dobYears}"/>
-							</form:select>
-
-							within
-						<form:select path="bgcDobRangeFuzz" cssClass="formfield1">
-							<form:option value="0">0</form:option>
-							<form:option value="1">1</form:option>
-							<form:option value="2">2</form:option>
-							<form:option value="3">3</form:option>
-						</form:select>
-							years 
-							</div-->
-							<div>
+							
+							<div style="color:black;float:right;margin-left:80px;"><label for="bgcReferenceCode">Reference Code</label> 
+							<form:input path="bgcReferenceCode" cssClass="formfield" size="20" maxlength="20" />
+							<span class="style61"><img src="/springapp/img/Help.jpg" border="0" width="18" height="23" id="refbtn"></span></div>
+							
+							
+							<div style="display:none;">
 							  <p class="style71 style819"><strong>SSN</strong><strong class="style72">*</strong></p>
-                           <form:input path="bgcSsn" cssClass="formfield" size="9" maxlength="9" />&nbsp; 
+                           <form:input path="bgcSsn" cssClass="formfield" size="9" maxlength="9"  />&nbsp; 
 														
 							</div>
-							</td>
-                      
-                          <td class="style71" colspan="2" valign="top">
-                           <!--strong>Options</strong>                    
-                            <p style="color:black;margin:0;padding:0 0 0 12px">
-                              
-                              <form:checkbox path="bgcMatchMissingDates" cssClass="formfield" />
-                              <label for="bgcMatchMissingDates" class="style71">Include records where there is no date of birth</label>
-                              <span class="style61"><img src="/springapp/img/Help.jpg" border="0" width="18" height="23" id="datebtn"></span>
-                            </p>
-                           <div id="datediv" align="right">Not every reporting agency provides a full date of birth on every record. This feature gives you those records as well. CAUTION: These additional results may or may not be for your person because there is not an exact date of birth match.</div-->
-                           	
-                           	<p style="color:black;margin:0;padding:0px 0 0 8px"><label for="bgcReferenceCode">Reference Code</label> 
-							<form:input path="bgcReferenceCode" cssClass="formfield" size="20" maxlength="20" />
-							<span class="style61"><img src="/springapp/img/Help.jpg" border="0" width="18" height="23" id="refbtn"></span></p>
-							<div id="refdiv" align="right">You can enter an optional reference code for your own tracking purposes. The code will appear on your credit card billing statement or monthly invoice. (NOTE: Reference code may not be available for some credit cards.)</div>
-                        
-							</td>
+							</div>
+                          </td>
 							</tr>
 							<tr>
-							<td colspan="2">
+							<td style="width: 110px;">&nbsp;</td>
+							<td width="350px">
+							<div style="float: left;">
 							<p class="style71 style819"><strong>Purpose of your search</strong><span class="req"><strong>*</strong></span></p>
-							<div>
-								<form:select path="bgcPurpose" cssClass="formfield1">
-								<form:option value="">[Choose]</form:option>
-								<form:options items="${bgcSearchPurposes}"/>		
-								</form:select>
+								<div>
+									<form:select path="bgcPurpose" cssClass="formfield1">
+									<form:option value="">[Choose]</form:option>
+									<form:options items="${bgcSearchPurposes}"/>		
+									</form:select>
+								</div>
 							</div>
-							</td >
+							</td>
 							<td colspan="2">
 							 <!--p style="color:black;margin:0;padding:0px 0 0 8px"><label for="bgcReferenceCode">Reference Code</label> 
 							<form:input path="bgcReferenceCode" cssClass="formfield" size="20" maxlength="20" />
 							<span class="style61"><img src="/springapp/img/Help.jpg" border="0" width="18" height="23" id="refbtn"></span></p>
-							<div id="refdiv" align="right">You can enter an optional reference code for your own tracking purposes. The code will appear on your credit card billing statement or monthly invoice. (NOTE: Reference code may not be available for some credit cards.)</div-->
+							-->							             	
+							<div id="refdiv" align="right">You can enter an optional reference code for your own tracking purposes. The code will appear on your credit card billing statement or monthly invoice. (NOTE: Reference code may not be available for some credit cards.)</div>
 							&nbsp;
 							</td>
 							</tr>
 							<tr>
-							<td colspan="4">
-							<div style="float: left;padding-left:160px">
-								<p class="style71 style819">
-								
-								<form:radiobutton path="newacc" value="true"/>
-								<strong>I am a new customer</strong></p>
-                                <p class="style71 style819">
-                   				<form:radiobutton path="newacc" value="false"/>
-								<strong>I have an account</strong>
-                                </p>
+							<td style="width: 110px;">&nbsp;</td>
+							<td width="350px" colspan="2">
+							<div style="float: left;">
+								<div style="float: left;padding-left:10px">
+									<p class="style71 style819">
+									
+									<form:radiobutton path="newacc" value="true"/>
+									<strong>I am a new customer</strong></p>
+									<p class="style71 style819">
+									<form:radiobutton path="newacc" value="false"/>
+									<strong>I have an account</strong>
+									</p>
+								</div>
+								<div style="float:left;margin-left:50px;">
+								<p align="center">
+								  <input type="submit" name="button2" id="button2" value="Proceed" onclick="bgcredirCtrl(); return false;" style="cursor: pointer;">
+								</p>
+								</div>
 							</div>
-                            <div style="float: left;padding-left: 70px">
-                            <p align="center">
-                              <input type="submit" name="button2" id="button2" value="Proceed" onclick="bgcredirCtrl(); return false;" style="cursor: pointer;">
-                            </p></div>
                             </td>
-                        </tr>
+							<td>&nbsp;</td>
+						</tr>
                        
-                      </table>
-					  <script>
+                   
+					   </table>
+
+
+					<script>
 					  $(document).ready(function(){
 							$("#datediv").hide();
 							$("#datebtn").show();
@@ -324,8 +261,20 @@ margin: 0;
 						<!-- <h3 class="style1111">The affordable professional system anyone can use.</h3> -->	
                         		<p class="style107 padd"><strong>Search felonies, misdemeanors, traffic offenses, court records, inmate, probation, parole records, escapees, and more. Certain records are not available in all states. Please check our coverage area for the region of your search, to ensure you receive the best service we have to offer. 
 								<a href="/springapp/funnel/ourDatabases.do" target="_blank">You can find our coverage area here</a>.</strong></p>
-                              <p class="padd"><strong>550 Million records! The largest criminal record database available online.<br>
-							  At $14.95 per nationwide search, this is the most information you can find for the lowest price on the Internet.</strong>
+                              
+							  <p class="padd">
+							  This search is for FCRA compliant searches only, meaning that your search purpose must be by:<br/>
+							  Court order or subpoena;<br/>
+Instructed by consumer in writing;<br/>
+Employment purposes with written permission<br/>
+Consumer application for insurance;<br/>
+Business transaction initiated by consumer;<br/>
+Determine if consumer meets terms of account;<br/>
+Eligibility for a license or benefit; or<br/>
+Use by potential investor, servicer, or insurer.<br/>
+If your search does not meet any of these requirements or you are searching for records on yourself, then use the "Personal Search" option on the previous page.<br/>
+For more information on FCRA requirements and compliance, go <a href="https://www.gpo.gov/fdsys/pkg/USCODE-2011-title15/pdf/USCODE-2011-title15-chap41-subchapIII-sec1681b.pdf" target="_blank">here.</a><br/>
+
 							  
                                </p>  
                             </td>

@@ -74,8 +74,8 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 		cmd.setTest(test);
 		cmd.setNationwideSearch(nationwide);
 		cmd.setCampaignId(campaignId);
-		cmd.setFirstname("THOMAS");
-		cmd.setLastname("MCDERMOTT");
+		//cmd.setFirstname("THOMAS");
+		//cmd.setLastname("MCDERMOTT");
 		
 		map.addAttribute("command", cmd);	
 		return viewName;
@@ -124,10 +124,13 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 			Errors errors,
 			SessionStatus status,
 			String vwErrorReturn) {
-		
+		logger.info("Non-FCRA Search - firstName: " + crmnlsf.getFirstname());
+		logger.info("Non-FCRA Search - dob: " + crmnlsf.getCrmnlDobMonth() + "/" + crmnlsf.getCrmnlDobDay() + "/" + crmnlsf.getCrmnlDobYear());
 		
 		if(crmnlsf.getState().equalsIgnoreCase("all"))
 			crmnlsf.setNationwideSearch(true);
+		else
+			crmnlsf.setNationwideSearch(false);
 		
 		CriminalSearchFormValidator v = new CriminalSearchFormValidator();
 		v.validate(crmnlsf, errors);
@@ -164,7 +167,10 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 			else
 				crmnlsf.setPrice(new BigDecimal("9.95"));
 			
-			logger.info("setting ddnCriminal & continuing" + crmnlsf.getPrice());			
+			//crmnlsf.setBgcPurpose("Personal");
+			
+			logger.info("setting ddnCriminal & continuing" + crmnlsf.getPrice());
+			session.removeAttribute("searchFormCommand");
 			session.removeAttribute("businessSearchFormCommand");
 			session.removeAttribute("registerFormCommand");
 			session.removeAttribute("aliasSearchFormCommand");
@@ -541,14 +547,14 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 	protected final void populateBgcSearchPurposes() {
 		//bgcSearchPurposes.put("Personal",  "For personal use (non-FCRA).");
 		bgcSearchPurposes.put("Personal", "Personal Use Only");
-		bgcSearchPurposes.put("604.a1",    "Court order or subpoena. Section 604(a)(1)");
+		/*bgcSearchPurposes.put("604.a1",    "Court order or subpoena. Section 604(a)(1)");
 		bgcSearchPurposes.put("604.a2",    "Instructed by consumer in writing. Section 604(a)(2)");
 		bgcSearchPurposes.put("604.a3b",   "Employment purposes with written permission. Section 604(a)(3)(B)");
 		bgcSearchPurposes.put("604.a3c",   "Consumer application for insurance. Section 604(a)(3)(C)");
 		bgcSearchPurposes.put("604.a3d",   "Business transaction initiated by consumer. Section 604(a)(3)(F)(i)");
 		bgcSearchPurposes.put("604.a3e",   "Determine if consumer meets terms of account. Section 604(a)(3)(F)(ii)");
 		bgcSearchPurposes.put("604.a3fi",  "Eligibility for a license or benefit. Section 604(a)(3)(D)");
-		bgcSearchPurposes.put("604.a3fii", "Use by potential investor, servicer, or insurer. Section 604(a)(3)(E)");
+		bgcSearchPurposes.put("604.a3fii", "Use by potential investor, servicer, or insurer. Section 604(a)(3)(E)");*/
 		
 	}
 	
@@ -565,7 +571,7 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 			//SSN number
 			//validateStringEmptyMsg("ssn",  cmd.getSsn(), errors,  2, 9, regexBasicExtended, "SSN Numebr", "Enter in Subject's SSN");
 			
-			if (cmd.getCrmnlDobYear() != 0 || cmd.getCrmnlDobMonth() != 0 || cmd.getCrmnlDobDay() != 0) {
+			//if (cmd.getCrmnlDobYear() != 0 || cmd.getCrmnlDobMonth() != 0 || cmd.getCrmnlDobDay() != 0) {
 				Calendar cal = Calendar.getInstance();
 				cal.setLenient(false);
 				try {
@@ -574,7 +580,7 @@ public class DDNCriminalSearchForm extends AbstractFunnelController {
 				} catch (Exception e) {
 					errors.reject("invalid-date", "The date of birth you entered is invalid.");
 				}
-			}
+			//}
 		}
 	}
 	

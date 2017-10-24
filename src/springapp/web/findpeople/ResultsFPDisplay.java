@@ -262,15 +262,15 @@ public class ResultsFPDisplay extends AbstractFunnelController{
 		{
 			requestId = bgcManager.prepareSearch(u.getUserId(), 
 				bgResult.getProRpt().getFirstName(), "", bgResult.getProRpt().getLastName(), 
-				true, true, month, date, year, 0 , false, true, bgcTestProductId, false, jurisdiction, "Personal", "");
+				month, date, year, 0 , bgcTestProductId, false, jurisdiction, "Personal", "");
 		}
 		else{
 			requestId = bgcManager.prepareSearch(u.getUserId(), 
 					bgResult.getProRpt().getFirstName(), bgResult.getProRpt().getMiddleName(), bgResult.getProRpt().getLastName(), 
-					true, true, 0, 0, year, 3, true, true, bgcTestProductId, false, jurisdiction, "Personal", "");
+					0, 0, year, 3, bgcTestProductId, false, jurisdiction, "Personal", "");
 		}
 		logger.info("requestId: " + requestId);
-		BGCResponseBean response = bgcManager.runSearch(requestId);
+		BGCResponseBean response = bgcManager.runSearch(requestId, session);
 		int responseId = response.getBgcResponseId();
 		logger.info("responseId: " + responseId);
 		return responseId;

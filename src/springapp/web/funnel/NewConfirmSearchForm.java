@@ -636,46 +636,24 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			map.addAttribute("searchSsn", crimfc.getSsn());
 			map.addAttribute("searchDOB", crimfc.getCrmnlDobMonth() + "/" +crimfc.getCrmnlDobDay() +"/"+ crimfc.getCrmnlDobYear());
 			map.addAttribute("NationWide", crimfc.getNationwideSearch());
-			logger.info("Criminal_Search_: Get search INFO");
 			
-			boolean msg=false;
-			map.addAttribute("msg", msg);
-			
-			return newconfirmView;
+			logger.info("Personal search - Name: " + crimfc.getFirstname()+ " " + crimfc.getLastname() + "; Price: "
+					+ crimfc.getPrice() + "; State: " + crimfc.getState() + "; Nationsearch: " + crimfc.getNationwideSearch());
 		}
 		else if (personalfc != null) {
-			//upgrade by vivek 21--2011
-			
 			map.addAttribute("searchCriminal", true);
 			map.addAttribute("searchPrice", personalfc.getPrice());
 			map.addAttribute("searchType", getSearchTypeString(personalfc));
-			String searchName=personalfc.getBgcFirstName() + " " +personalfc.getBgcLastName();
+			String searchName=personalfc.getBgcFirstName() + " " + personalfc.getBgcLastName();
 			map.addAttribute("searchName", searchName);
-			String state=personalfc.getBgcState();
-			String searchDOB="";
-			boolean msg=false;
-				
-			/*if(personalfc.getBgcDobRange())
-			{
-				if(state.equals("CA") || state.equals("IN") || state.equals("MO") || state.equals("HI") || state.equals("KS") || state.equals("MS") || state.equals("ND") || state.equals("NJ") || state.equals("NV") || state.equals("PA") || state.equals("RI") || state.equals("UT"))
-				{
-					searchDOB = personalfc.getBgcDobRangeBaseYear() + " (within " + personalfc.getBgcDobRangeFuzz() + " years)";
-					msg=true;
-				}
-				else 
-				{
-					searchDOB = personalfc.getBgcDobRangeBaseYear() + " (within " + personalfc.getBgcDobRangeFuzz() + " years)";
-				}
-			}
-			else
-			{*/
-				searchDOB = personalfc.getBgcDobMonth() + "/" +personalfc.getBgcDobDay() +"/"+ personalfc.getBgcDobYear();
-			//}
-			map.addAttribute("msg", msg);
-			map.addAttribute("searchDOB", searchDOB);
+			map.addAttribute("searchState", personalfc.getBgcState());
+			map.addAttribute("searchDOB", personalfc.getBgcDobMonth() + "/" +personalfc.getBgcDobDay() +"/"+ personalfc.getBgcDobYear());
 			String searchSSN=personalfc.getBgcSsn();
 			map.addAttribute("searchSSN", searchSSN);
 			map.addAttribute("NationWide", personalfc.getNationwideSearch());
+			
+			logger.info("Personal search - Name: " + personalfc.getBgcFirstName() + " " + personalfc.getBgcLastName() + "; Price: "
+					+ personalfc.getPrice() + "; State: " + personalfc.getBgcState() + "; Nationsearch: " + personalfc.getNationwideSearch());
 		}
 		else if (aliasfc != null) {
 			map.addAttribute("searchCriminal", true);
@@ -803,7 +781,8 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 					//if(personalfc.getBgcSsn()!=null)
 						//return newSSNresultsRedir;
 					//else
-						return newresultsRedir;
+						//return newresultsRedir;
+					return newDDNResultDetails;
 					
 				} 
 				catch (SearchException te) 
@@ -1020,6 +999,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 					session.setAttribute("transactionId", t.getTransactionId());
 					session.setAttribute("searchPrice", crimfc.getPrice());
 					return newDDNResultDetails;
+					//return newresultsRedir;
 				}
 				catch (SearchException se) 
 				{					
@@ -2204,6 +2184,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 		
 		int productId = 4;
 		String jurisdiction;
+		logger.info("Newconfirm search Form - Criminal Search For FCRA => Nationwidesearch - " + sfc.getNationwideSearch() + "; State - " + sfc.getBgcState());
 		if (sfc.getNationwideSearch()) 
 		{			
 			jurisdiction = "Nationwide";
@@ -2213,7 +2194,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			jurisdiction = sfc.getBgcState();
 		}	
 
-		sfc.setBgcDobYear(sfc.getBgcDobRangeBaseYear());
+		//sfc.setBgcDobYear(sfc.getBgcDobRangeBaseYear());
 		int requestId=0;
 		//long ssnRequestId=0;
 		int responseId=0;
@@ -2230,15 +2211,16 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 		try {
 		requestId = bgcManager.prepareSearch(u.getUserId(), 
 				sfc.getBgcFirstName(), sfc.getBgcMiddleInitial(), sfc.getBgcLastName(), 
-				sfc.getBgcFirstNameExact(), sfc.getBgcLastNameExact(), 
-				sfc.getBgcDobMonth(), sfc.getBgcDobDay(), sfc.getBgcDobYear(), 
-				sfc.getBgcDobRangeFuzz(), sfc.getBgcDobRange(), sfc.getBgcMatchMissingDates(), 
+				//sfc.getBgcFirstNameExact(), sfc.getBgcLastNameExact(), 
+				sfc.getBgcDobMonth(), sfc.getBgcDobDay(), sfc.getBgcDobYear(),  Integer.parseInt(
+						(sfc.getBgcSsn() != null &&  sfc.getBgcSsn().trim().length() > 0 ? sfc.getBgcSsn() : "0")),
+				//sfc.getBgcDobRangeFuzz(), sfc.getBgcDobRange(), sfc.getBgcMatchMissingDates(), 
 				productId, false, jurisdiction, sfc.getBgcPurpose(), sfc.getBgcReferenceCode());
-		
+		logger.info("RequestId for DDN Criminal FCRA Search returned from the spring manager => " + requestId);
 
-		BGCResponseBean response = bgcManager.runSearch(requestId);
+		BGCResponseBean response = bgcManager.runSearch(requestId, session);
 		responseId = response.getBgcResponseId();
-		logger.info("responseId:--> " + responseId);
+		logger.info("ResponseId for DDN Criminal FCRA Search returned from the spring manager => " + responseId);
 
 		// record the txn id
 		bgcManager.setTransactionId(responseId, (int) t.getTransactionId());
@@ -2257,6 +2239,73 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 			throw new SearchException(e.getMessage());
 		}
 	}// End Criminal  Searches 
+	
+	//Run DDN Criminal Search 
+	protected int runDDNCriminalSearch(HttpSession session, ModelMap map, SessionStatus status, 
+			CriminalSearchFormCommand crimfc, Transaction t, User u) 
+	throws SearchException 
+	{
+		
+		if (crimfc.getTest()) 
+		{
+			return TEST_CRIMINAL_RESULT_ID;
+		}
+		
+		int productId = 4;
+		String jurisdiction;
+		logger.info("Newconfirm search Form => Nationwidesearch - " + crimfc.getNationwideSearch() + "; State - " + crimfc.getState());
+		if (crimfc.getNationwideSearch()) 
+		{			
+			jurisdiction = "Nationwide";
+		} 
+		else 
+		{
+			productId = 5;
+			jurisdiction = crimfc.getState();
+		}	
+
+		int requestId=0;
+		//long ssnRequestId=0;
+		int responseId=0;
+		//bgcSSNManager
+		/*if(sfc.getBgcSsn()!=null)
+		{
+			logger.info("NewCfrm lin 2078 SSN if");
+			ssnRequestId = bgcSSNSearchManager.queryFunnel(u.getUserId(),t.getTransactionId(),session,sfc); 
+			responseId= (int) ssnRequestId;
+			logger.info("NwCfrm ssnRequestId 2081+ssn"+ ssnRequestId);
+		}*/
+		//else
+		//{
+		try {
+		requestId = ddnCriminalManager.prepareSearch(u.getUserId(), 
+				crimfc.getFirstname(), crimfc.getMiddleInitial(), crimfc.getLastname(),
+				crimfc.getCrmnlDobMonth(), crimfc.getCrmnlDobDay(), crimfc.getCrmnlDobYear(), Integer.parseInt(
+						(crimfc.getSsn() != null &&  crimfc.getSsn().trim().length() > 0 ? crimfc.getSsn() : "0")), 
+				productId, false, jurisdiction, crimfc.getBgcPurpose(), crimfc.getReferenceCode());
+		logger.info("RequestId for DDN Criminal Personal Search returned from the spring manager => " + requestId);
+
+		BGCResponseBean response = ddnCriminalManager.runSearch(requestId, session);
+		responseId = response.getBgcResponseId();
+		logger.info("ResponseId for DDN Criminal Personal Search returned from the spring manager => " + responseId);
+		
+		// record the txn id
+		bgcManager.setTransactionId(responseId, (int) t.getTransactionId());
+				
+		//}
+		
+
+		// finalize charge?
+		// XXX todo
+		
+		//return resultsView;
+		return responseId;
+		} catch (Exception e) {
+			logger.error("Error in running ddn criminal search for personal records and before sending admin email - ", e);
+			sendSearchExceptionEmail(u.getFirstName(), t.getCcName(), t.getTransactionId(), t.getCcLastDigits());
+			throw new SearchException(e.getMessage());
+		}
+	}	
 	
 	// Begin Alias Search
 		protected int runAliasSearch(HttpSession session, ModelMap map, SessionStatus status, 
@@ -2324,6 +2373,7 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 				throw new SearchException(e.getMessage());
 			}
 		}// End Criminal  Searches 
+		
 	
 	//Begin Real Property Name search
 	
@@ -2454,29 +2504,6 @@ public class NewConfirmSearchForm extends AbstractFunnelController {
 		
 	}
 	
-	
-	//Run DDN Criminal Search 
-		protected int runDDNCriminalSearch(HttpSession session, ModelMap map, SessionStatus status, 
-				CriminalSearchFormCommand crimfc, Transaction t, User u) 
-		throws SearchException 
-		{
-			// check for test
-			logger.error("On Method__runDDNCriminalSearch::::");
-			if (crimfc.getTest()) {			
-				//return TEST_BJL_RESULT_ID;
-			}
-			int searchsubcategory=6;
-			//logger.error("runDDNCriminalSearch::::" + crimfc.getFirstname() + " nna"+ crimfc.getLastname() +" dob"+ crimfc.getDob() +"ssn"+  crimfc.getSsn() +"state"+crimfc.getState() );
-			// run query
-			long result = ddnCriminalManager.queryFunnel(u.getUserId(), searchsubcategory,t.getTransactionId(), 
-					crimfc.getFirstname(),crimfc.getLastname(), crimfc.getCrmnlDobMonth() + "/" +crimfc.getCrmnlDobDay() +"/"+ crimfc.getCrmnlDobYear(), crimfc.getSsn(),crimfc.getState(), session);
-			
-			//session.removeAttribute("RPNameSearch");
-			return (int) result;
-			
-		}
-		
-			
 	protected void sendSearchReceiptEmail (String customerName, String customerEmail, Transaction t, String description, String ccLast4) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		// add to map: search type, price, status, results, query fields?

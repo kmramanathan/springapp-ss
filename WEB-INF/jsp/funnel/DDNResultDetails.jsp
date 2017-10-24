@@ -30,6 +30,13 @@ margin:0;padding:2px 0 2px 0;
 }
 </style>
 
+<table width="866" align="center">
+
+<tbody><tr><td><div id="title" style="float:right; width:250px;height:50px;font-size:24px;"><a href="selectSearch.do">Back to Search Page</a>
+</div></td></tr>
+		
+ </tbody></table>
+
 		
  <table width="95%" align="center" cellpadding="0" cellspacing="0" class="realPropTable">
  <tr>

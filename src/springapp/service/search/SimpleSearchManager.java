@@ -64,10 +64,10 @@ public class SimpleSearchManager implements SearchManager {
 	}
 	
 	public void runTestSearch() throws TorqueException {
-		int reqId = bgcManager.prepareSearchTest();
+		/*int reqId = bgcManager.prepareSearchTest();
 		BGCResponseBean res = bgcManager.runSearch(reqId);
 		logger.info("found: " + res.getQuantityFound());
-		logger.info("returned: " + res.getQuantityReturned());
+		logger.info("returned: " + res.getQuantityReturned());*/
 	}
 	
 	public List<net.searchsystems.limestone.BGCRequest> getSearchesForUser(int userId) {

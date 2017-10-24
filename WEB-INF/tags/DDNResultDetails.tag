@@ -20,7 +20,7 @@
 	 <c:if test="${not empty obj.lastName}"> &nbsp; ${obj.lastName} </c:if>	
 	 <c:if test="${not empty obj.DOB}"><br/> DOB: &nbsp; ${obj.DOB} </c:if>
 	 <c:if test="${not empty obj.sex}"><br/> Sex: &nbsp; ${obj.sex} </c:if>
-	
+	 <c:if test="${not empty obj.verifiedBy}"><br/> Match Type: &nbsp; ${obj.verifiedBy} </c:if>
  </td>
 </tr>
 <tr>

@@ -9,10 +9,10 @@
 .styletable111{font-size: 13px}
 </style>
 <div id="formwrapper">
-<c:set var="fname" value="${firstName}" scope="session"/>
-<c:set var="lname" value="${lastName}" scope="session"/>
+<c:set var="firstName" value="${firstName}" scope="session"/>
+<c:set var="lastName" value="${lastName}" scope="session"/>
 <c:set var="location" value="${location}" scope="session"/>
-<c:set var="dob" value="${DOB}" scope="session"/>
+<c:set var="DOB" value="${DOB}" scope="session"/>
 <c:set var="aliasSearchFlag" value="${aliasSearchFlag}" scope="session"/>
 <c:set var="aliasSSN" value="${aliasSSN}" scope="session"/>
 <div style="color:red;">NOTE: We are not able to store these results for later viewing. Click the "Print Version" link below and then save or print your results.</div>

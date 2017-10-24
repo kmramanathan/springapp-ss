@@ -91,6 +91,16 @@ public class CriminalResponseBean implements Serializable {
 	@Column(name="FacilityCounty")
 	private String facilityCounty;
 	
+	@Column(name="MatchType")
+	private String matchType;
+	
+	
+	public String getMatchType() {
+		return matchType;
+	}
+	public void setMatchType(String matchType) {
+		this.matchType = matchType;
+	}
 	
 	public String getFirstName() {
 		return firstName;

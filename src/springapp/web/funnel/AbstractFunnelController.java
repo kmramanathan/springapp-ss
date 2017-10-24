@@ -147,7 +147,8 @@ import springapp.service.user.UserManager;
 	//vivek changes//
 	protected static final String landingHome = "redirect:https://www.searchsystems.net/springapp/premium";//https://premium.searchsystems.net/secure/search.php
 	//protected static final String logoutRedirect = "redirect:http://publicrecords.searchsystems.net/logout-new.php";
-	protected static final String logoutRedirect = "redirect:../../premium";
+	protected static final String logoutRedirect = "redirect:../premium";
+	protected static final String logoutNewRedirect = "redirect:/premium";
 	protected static final String logoutnewRedirect = "redirect:http://publicrecords.searchsystems.net/logout-new.php";
 	//Aug8-2014 - Udhay
 	protected static final String landingPremium = "redirect:https://www.searchsystems.net/springapp/premium";

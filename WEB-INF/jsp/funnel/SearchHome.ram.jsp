@@ -95,14 +95,13 @@ margin: 0;
             <td width="99%" >
            
                 <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                  <tr valign="top"> 
+                  <tr valign="top">
                     <td width="100%">
                    
                       <table width="100%" border="0" bgcolor="#B4DDFE" cellpadding="0" cellspacing="0">
                       <tr>
-                      	<td >
-						<!--<span class="style61"><strong class="style72">*</strong>
-                      	<span class="style91"> Required Field</span></span> -->
+                      	<td ><span class="style61"><strong class="style72">*</strong>
+                      	<span class="style91"> Required Field</span></span>
                       	</td>
                       	<td >
                       	 
@@ -114,28 +113,29 @@ margin: 0;
                       </tr>
 							<tr>
 							<td colspan="2">
-							<div style="float: left;">	
-								<form>	
-								<p class="style71 style819"><strong>Purpose of your search</strong><span class="req"> <!--<strong>*</strong>--></span>
-									<input type="radio" name="NonPersnlradio" id="NonPersnlradio" value="Nonpersonal" 
-									onclick ="radioNonPresnl();"/> 
-									<label for="NonPersnlradio"><strong>Business / Employment / FCRA use &nbsp;&nbsp; </strong></label>
-								</p>
-								<div style="float: left;padding-left:168px">	
+							<p class="style71 style819"><strong>Purpose of your search</strong><span class="req"><strong>*</strong></span></p>
+							<div>
+							
+							<div style="float: left;padding-left:160px">
 								<p class="style71 style819">
-									<input type="radio" name="personal" id="personal" value="personal"  onclick ="radioPresnl();"/> 
-									 <label for="personal"><strong> Personal Use Only &nbsp;&nbsp;  </strong></label>
+								<form>
+								<input type="radio" name="personal" id="personal" value="personal"  onclick ="radioPresnl();"/> 
+                      	  	 <label for="personal"><strong> Personal Use Only &nbsp;&nbsp;  </strong></label>
 								</p>
-								</div>	
-								</form>
-							</div>
-							<div style="clear: both;float: left;padding-left: 350px;">
+                                <p class="style71 style819">
+                   				<input type="radio" name="NonPersnlradio" id="NonPersnlradio" value="Nonpersonal" 
+                      	    onclick ="radioNonPresnl();"/> 
+                      	   <label for="NonPersnlradio"><strong>Non Personal &nbsp;&nbsp; </strong></label>
+                                </p>
+                                </form>
+							</div>				
+							<div style="float: left;padding-left: 70px">
                             <p align="center">
                               <input type="submit" name="button2" id="button2" value="Proceed" 
                               onclick="goToLocation();" style="cursor: pointer;">
                             </p></div>
                             
-							 
+							</div>
 							</td >
 							<td colspan="2">
 							
@@ -164,7 +164,7 @@ margin: 0;
 						}
 						function goToLocation()
 						{
-							if (document.getElementById('personal').checked)
+							if (document.getElementById('personal').checked)  //non FCRA search
 							{								
 								window.location = "/springapp/funnel/criminalSearch.do";
 							}
@@ -184,8 +184,8 @@ margin: 0;
 						<!-- <h3 class="style1111">The affordable professional system anyone can use.</h3> -->	
                         		<p class="style107 padd"><strong>Search felonies, misdemeanors, traffic offenses, court records, inmate, probation, parole records, escapees, and more. Certain records are not available in all states. Please check our coverage area for the region of your search, to ensure you receive the best service we have to offer. 
 								<a href="/springapp/funnel/ourDatabases.do" target="_blank">You can find our coverage area here</a>.</strong></p>
-                              <p class="padd"><strong>550 Million records! The largest criminal record database available online.<br></strong>
-							  <!--At $14.95 per nationwide search, this is the most information you can find for the lowest price on the Internet.-->
+                              <p class="padd"><strong>550 Million records! The largest criminal record database available online.<br>
+							  At $14.95 per nationwide search, this is the most information you can find for the lowest price on the Internet.</strong>
 							  
                                </p>  
                             </td>

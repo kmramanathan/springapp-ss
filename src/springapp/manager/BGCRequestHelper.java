@@ -526,6 +526,8 @@ public class BGCRequestHelper {
 	public Document doHttpPostQuery(String postURL, String xmlQuery) throws SearchException {
 		Document xmlData = null;
 		
+		boolean isDDNCriminalSearch = (postURL.indexOf("datadirectnow") != -1);
+		
 		HttpClient client = new HttpClient();
 		HttpClientParams params = client.getParams();
 		//new DefaultMethodRetryHandler(1);
@@ -542,14 +544,14 @@ public class BGCRequestHelper {
 		
 		PostMethod method = new PostMethod(postURL);
 		NameValuePair xmlPost[] = {
-			new NameValuePair("XML", xmlQuery)
+			new NameValuePair((isDDNCriminalSearch ? "REQUEST" : "XML"), xmlQuery)
 		};
 		method.setRequestBody(xmlPost);
 		method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(0, false));
 		
 		// attempt the check
 		try {
-			logger.debug("Attempting to run criminal search");
+			logger.debug("Attempting to run criminal search => " + method.toString());
 			
 			client.executeMethod(method);
 			
@@ -558,12 +560,14 @@ public class BGCRequestHelper {
 			String str=sr.replaceAll("&#0", "&#0;");
 			String s1=str.replaceAll("&#0;", "");
 			String s2=s1.replaceAll("&#x0;", "");
+			
 			// XXX enable this to get the raw response from BGC
-			logger.info("BGC response XML:"+s2);
+			logger.info("BGC response XML: => " + s2);
 		
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();		
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			xmlData = db.parse(new InputSource(new StringReader(s2)));
+			logger.info("XML Data after parsing => " + xmlData + "; Document Element Name => " + xmlData.getDocumentElement().getNodeName());
 			
 			Element eDoc = xmlData.getDocumentElement();
 			logger.info("orderId: " + eDoc.getAttribute("orderId"));			

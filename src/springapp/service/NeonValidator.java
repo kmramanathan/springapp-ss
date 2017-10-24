@@ -18,6 +18,7 @@ abstract public class NeonValidator implements Validator {
     protected static final String regexText = "^([-A-Za-z0-9 \r\n\"'`!?/@#$%^&*()_.,+-]+)$";
     protected static final String regexLettersOnly       = "^([A-Za-z]+)$";
     protected static final String regexNumeric      = "^([0-9]+)$";
+    protected static final String regexNumericSSN      = "^([0-9]{9})$";
     protected static final String regexNumericDashSpace = "^([-0-9 ]+)$";
     
     //newly added

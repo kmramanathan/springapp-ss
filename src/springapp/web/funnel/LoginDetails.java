@@ -600,9 +600,9 @@ public class LoginDetails extends AbstractFunnelController{
 		session.removeAttribute("userId");
 		session.removeAttribute("userEmail");
 		session.invalidate();
-		logger.info("Before logout - URL=> " + logoutRedirect);
+		logger.info("Before logout - URL=> " + logoutNewRedirect);
 		//session.removeAttribute("referrer");
-		return logoutRedirect;
+		return logoutNewRedirect;
 		
 	}
 	
